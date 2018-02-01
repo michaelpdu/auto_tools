@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<native_tamarin>
+
+<swf_format_check>
+    <incorrect_file_len_behavior>swf file len incorrect</incorrect_file_len_behavior>
+    <no_abc_in_swf>no abc tag in swf</no_abc_in_swf>
+</swf_format_check>
+
+<cpool_number_check>
+	<max_negative_number_count>8</max_negative_number_count>
+</cpool_number_check>
+
+<cpool_method_info_check>
+	<zero_method_behavior>method info count is 0</zero_method_behavior>
+	<max_valid_method_count>40</max_valid_method_count>
+	<valid_method_body_len>50</valid_method_body_len>
+	<max_valid_method_count_behavior>valid method info count larger than</max_valid_method_count_behavior>
+</cpool_method_info_check>
+
+<cpool_class_info_check>
+	<max_class_info_count>40</max_class_info_count>
+	<max_class_info_count_behavior>class info count larger than </max_class_info_count_behavior>
+</cpool_class_info_check>
+
+<cpool_const_string_check>
+	<match_string>
+		<plain>(?i)()()(?-i)||||||||||||||||||||||</plain>
+		<output_behavior>signiture_cve_2013_0634</output_behavior>
+	</match_string>
+
+	<match_string>
+		<plain>valueOf</plain>
+		<output_behavior>find_valueof_in_constant</output_behavior>
+	</match_string>
+
+	<match_string>
+		<plain>Vector</plain>
+		<output_behavior>find_vector_in_constant</output_behavior>
+	</match_string>
+
+	<match_string>
+		<plain>Capabilities</plain>
+		<output_behavior>find_capabilities_in_constant</output_behavior>
+	</match_string>
+
+	<match_string>
+		<plain>version</plain>
+		<output_behavior>find_version_in_constant</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<regex>^isWin$</regex>
+		<output_behavior>check_os_version_in_constant</output_behavior>
+	</match_string>
+    
+    <match_string>
+		<plain>VIRTUALPROTECT</plain>
+		<output_behavior>find_virtualprotect_in_constant</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<plain>document.createElement(\'script\')</plain>
+		<output_behavior>try to create script element in html</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<regex>createElement\(\"iframe\"\)[\w\W]{1,50}style\.visibility\s*=\s*\"hidden\"</regex>
+		<output_behavior>Find create hidden iframe jscode</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<plain>createElement(\"script\")</plain>
+		<output_behavior>Find create script jscode</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<plain>systemMemoryCall</plain>
+		<output_behavior>Find systemMemoryCall in constant string</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<plain>rtmp://</plain>
+		<output_behavior>Find rtmp in constant string</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<regex>flashtalking\.com</regex>
+		<output_behavior>Find famous url in constant string</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<plain>germanwing Headline Box Construction Kit</plain>
+		<output_behavior>Find normal evidence in constant string</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<plain>http://edpn.ebay.com</plain>
+		<output_behavior>Find normal evidence in constant string</output_behavior>
+	</match_string>
+	
+	<match_string>
+		<plain>MainContainer_fla:scrollbtn1_17</plain>
+		<output_behavior>Find normal evidence in constant string</output_behavior>
+	</match_string>
+
+	<match_string>
+		<plain>net.daum.affogato.bridge:ArticleTitleItemParamBridge</plain>
+		<output_behavior>Find normal evidence in constant string</output_behavior>
+	</match_string>
+
+	<match_string>
+		<plain>com.brightcove.api.modules</plain>
+		<output_behavior>Find normal evidence in constant string</output_behavior>
+	</match_string>
+
+	<match_string>
+		<plain>__animFactory_textField_2af2</plain>
+		<output_behavior>Find normal evidence in constant string</output_behavior>
+	</match_string>
+	
+    <!-- signature for filtering normal crash sample -->
+    <match_string>
+		<plain>boot_7876</plain>
+		<output_behavior>signature_normal_crash_001</output_behavior>
+    </match_string>
+
+    <match_string>
+		<plain>raised an error while executing the 'onError' handler</plain>
+		<output_behavior>signature_normal_crash_002</output_behavior>
+    </match_string>
+
+    <match_string>
+		<plain>com.smilebox.photoPicker.facebook</plain>
+		<output_behavior>Find normal evidence in constant string</output_behavior>
+    </match_string>
+
+    <match_string>
+		<plain>com.jumpeye.flashEff2.symbol.flip</plain>
+		<output_behavior>Find normal evidence in constant string</output_behavior>
+    </match_string>
+
+    <match_string>
+		<plain>opaqueBackground</plain>
+		<output_behavior>find_opaqueBackground_in_constant</output_behavior>
+    </match_string>
+
+    <match_string>
+		<plain>recreateTextLine</plain>
+		<output_behavior>find_recreateTextLine_in_constant</output_behavior>
+    </match_string>
+	
+    <match_string>
+		<plain>copyPixelsToByteArray</plain>
+		<output_behavior>find_copyPixelsToByteArray_in_constant</output_behavior>
+    </match_string>
+	
+	<match_string>
+		<plain>LocalConnection</plain>
+		<output_behavior>find_api_local_connection_in_constant</output_behavior>
+    </match_string>
+
+    <match_string>
+		<regex>payload</regex>
+		<output_behavior>find_payload_in_constant</output_behavior>
+    </match_string>
+	
+    <match_string>
+		<plain>createWorker</plain>
+		<output_behavior>find_createWorker_in_constant</output_behavior>
+    </match_string>
+	
+    <match_string>
+		<plain>createMessageChannel</plain>
+		<output_behavior>find_createMessageChannel_in_constant</output_behavior>
+    </match_string>
+	
+    <match_string>
+		<plain>domainMemory</plain>
+		<output_behavior>find_domainMemory_in_constant</output_behavior>
+    </match_string>
+	
+    <match_string>
+		<plain>exec</plain>
+		<output_behavior>find_exec_in_constant</output_behavior>
+    </match_string>
+
+    <match_string>
+		<plain>DeleteRangeTimelineOperation</plain>
+		<output_behavior>find_DeleteRangeTimelineOperation</output_behavior>
+    </match_string>	
+
+    <match_string>
+		<plain>Placement</plain>
+		<output_behavior>find_Placement_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>getDefinitionByName</plain>
+		<output_behavior>find_getDefinitionByName_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>ByteArrayAsset</plain>
+		<output_behavior>find_ByteArrayAsset_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>\bloadBytes\b</plain>
+		<output_behavior>find_loadBytes_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>\bbinaryData\b</plain>
+		<output_behavior>find_binaryData_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>addEventListener</plain>
+		<output_behavior>find_addEventListener_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>payloadUrl</plain>
+		<output_behavior>find_payloadUrl_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>payloadRc4Key</plain>
+		<output_behavior>find_payloadRc4Key_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>embedHtml</plain>
+		<output_behavior>find_embedHtml_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>exploitWrappers</plain>
+		<output_behavior>find_exploitWrappers_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>9090909090909090</plain>
+		<output_behavior>find_NOP_in_constant</output_behavior>
+    </match_string>
+	
+    <match_string>
+		<plain>com.d_project.qrcode</plain>
+		<output_behavior>find_com.d_project.qrcode_in_constant</output_behavior>
+    </match_string>
+    
+    <match_string>
+		<plain>pigg.blog.view</plain>
+		<output_behavior>find_pigg.blog.view_in_constant</output_behavior>
+    </match_string>
+    
+     
+</cpool_const_string_check>
+
+<abc_binary_check>
+	<match_hex_string>
+	    <hex_string>D2603840BA03140E</hex_string>
+	    <output_behavior>signiture_cve_2010_1297</output_behavior>
+	</match_hex_string>
+</abc_binary_check>
+
+</native_tamarin>

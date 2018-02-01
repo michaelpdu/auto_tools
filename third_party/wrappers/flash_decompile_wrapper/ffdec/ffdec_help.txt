@@ -1,0 +1,236 @@
+Commandline arguments:
+ 1) -help | --help | /?
+ ...shows commandline arguments (this help)
+ 2) <infile> [<infile2> <infile3> ...]
+ ...opens SWF file(s) with the decompiler GUI
+ 3) -proxy [-P<port>]
+  ...auto start proxy in the tray. Optional parameter -P specifies port for proxy. Defaults to 55555. 
+ 4) -export <itemtypes> <outdirectory> <infile_or_directory>
+  ...export <infile_or_directory> sources to <outdirectory>.
+  Exports all files from <infile_or_directory> when it is a folder.
+     Values for <itemtypes> parameter:
+        script - Scripts (Default format: ActionScript source)
+        image - Images (Default format: PNG/JPEG)
+        shape - Shapes (Default format: SVG)
+   morphshape - MorphShapes (Default format: SVG)
+        movie - Movies (Default format: FLV without sound)
+        font - Fonts (Default format: TTF)
+        frame - Frames (Default format: PNG)
+        sprite - Sprites (Default format: PNG)
+        button - Buttons (Default format: PNG)
+        sound - Sounds (Default format: MP3/WAV/FLV only sound)
+        binaryData - Binary data (Default format:  Raw data)
+        text - Texts (Default format: Plain text)
+        all - Every resource (but not FLA and XFL)
+        fla - Everything to FLA compressed format
+        xfl - Everything to uncompressed FLA format (XFL)
+   You can export multiple types of items by using colon ","
+      DO NOT PUT space between comma (,) and next value.
+
+ 5) -format <formats>
+  ...sets output formats for export
+    Values for <formats> parameter:
+         script:as - ActionScript source
+         script:pcode - ActionScript P-code
+         script:pcodehex - ActionScript P-code with hex
+         script:hex - ActionScript Hex only
+         shape:svg - SVG format for Shapes
+         shape:png - PNG format for Shapes
+         shape:canvas - HTML5 Canvas format for Shapes
+         shape:bmp - BMP format for Shapes
+         morphshape:svg - SVG format for MorphShapes
+         morphshape:canvas - HTML5 Canvas  format for MorphShapes
+         frame:png - PNG format for Frames
+         frame:gif - GIF format for Frames
+         frame:avi - AVI format for Frames
+         frame:svg - SVG format for Frames
+         frame:canvas - HTML5 Canvas format for Frames
+         frame:pdf - PDF format for Frames
+         frame:bmp - BMP format for Frames
+         sprite:png - PNG format for Sprites
+         sprite:gif - GIF format for Sprites
+         sprite:avi - AVI format for Sprites
+         sprite:svg - SVG format for Sprites
+         sprite:canvas - HTML5 Canvas format for Sprites
+         sprite:pdf - PDF format for Sprites
+         sprite:bmp - BMP format for Sprites
+         button:png - PNG format for Buttons
+         button:svg - SVG format for Buttons
+         button:bmp - BMP format for Buttons
+         image:png_gif_jpeg - PNG/GIF/JPEG format for Images
+         image:png - PNG format for Images
+         image:jpeg - JPEG format for Images
+         image:bmp - BMP format for Images
+         text:plain - Plain text format for Texts
+         text:formatted - Formatted text format for Texts
+         text:svg - SVG format for Texts
+         sound:mp3_wav_flv - MP3/WAV/FLV format for Sounds
+         sound:mp3_wav - MP3/WAV format for Sounds
+         sound:wav - WAV format for Sounds
+         sound:flv - FLV format for Sounds
+         font:ttf - TTF format for Fonts
+         font:woff - WOFF format for Fonts
+         fla:<flaversion> or xfl:<flaversion> - Specify FLA format version
+            - values for <flaversion>: cs5,cs5.5,cs6,cc
+      You can set multiple formats at once using comma (,)
+      DO NOT PUT space between comma (,) and next value.
+      The prefix with colon (:) is neccessary.
+ 6) -cli
+  ...Command line mode. Parses the SWFs without opening the GUI
+ 7) -select <ranges>
+  ...selects frames/pages for export
+    Example <ranges> formats:
+                      1-5
+                      2,3
+                      2-5,7,9-
+      DO NOT PUT space between comma (,) and next ramge.
+ 8) -selectid <ranges>
+  ...selects characters for export by character id
+     <ranges> format is same as in -select
+ 9) -selectclass <classnames>
+  ...selects scripts to export by class name (ActionScript 3 ONLY)
+     <classnames> format:
+                    com.example.MyClass
+                    com.example.+   (all classes in package "com.example")
+                    com.++,net.company.MyClass   (all classes in package "com" and all subpackages, class net.company.MyClass)
+      DO NOT PUT space between comma (,) and next class.
+ 10) -dumpSWF <infile>
+  ...dumps list of SWF tags to console
+ 11) -dumpAS2 <infile>
+  ...dumps list of AS1/2 sctipts to console
+ 12) -dumpAS3 <infile>
+  ...dumps list of AS3 sctipts to console
+ 13) -compress <infile> <outfile> [(zlib|lzma)]
+  ...Compress SWF <infile> and save it to <outfile>. If <infile> is already compressed, it will be re-compressed. Default compression method is ZLIB
+ 14) -decompress <infile> <outfile>
+  ...Decompress <infile> and save it to <outfile>
+ 15) -swf2xml <infile> <outfile>
+  ...Converts the <infile> SWF to <outfile> XML file
+ 16) -xml2swf <infile> <outfile>
+  ...Converts the <infile> XML to <outfile> SWF file
+ 17) -extract <infile> [-o <outpath>|<outfile>] [nocheck] [(all|biggest|smallest|first|last)]
+  ...Extracts SWF files from ZIP or other binary files
+  ...-o parameter should contain a file path when "biggest" or "first" parameter is specified
+  ...-o parameter should contain a folder path when no extaction mode or "all" parameter is specified
+ 18) -memorySearch (<processName1>|<processId1>) (<processName2>|<processId2>)...
+  ...Search SWF files in the memory
+ 19) -renameInvalidIdentifiers (typeNumber|randomWord) <infile> <outfile>
+  ...Renames the invalid identifiers in <infile> and save it to <outfile>
+ 20) -config key=value[,key2=value2][,key3=value3...] [other parameters]
+  ...Sets configuration values. Available keys[current setting]: decompile[true] parallelSpeedUp[true] internalFlashViewer[false] autoDeobfuscate[false] cacheOnDisk[false] cacheImages[false] overwriteExistingFiles[true] autoRenameIdentifiers[false] decimalAddress[false] showAllAddresses[false] smartNumberFormatting[false] enableScriptInitializerDisplay[false] resolveConstants[true] textExportSingleFile[false] scriptExportSingleFile[false] packJavaScripts[true] showMethodBodyId[false] getLocalNamesFromDebugInfo[true] ignoreCLikePackages[false] shapeImport.useNonSmoothedFill[false]
+    Values are boolean, you can use 0/1, true/false, on/off or yes/no.
+    If no other parameters passed, configuration is saved. Otherwise it is used only once.
+    DO NOT PUT space between comma (,) and next value.
+ 21) -onerror (abort|retryN|ignore)
+  ...error handling mode. "abort" stops the exporting, "retry" tries the exporting N times, "ignore" ignores the current file
+ 22) -timeout <N>
+  ...decompilation timeout for a single method in AS3 or single action in AS1/2 in seconds
+ 23) -exportTimeout <N>
+  ...total export timeout in seconds
+ 24) -exportFileTimeout <N>
+  ...export timeout for a single AS3 class in seconds
+ 25) -stat
+  ...show export performance statistics
+ 26) -flashpaper2pdf <infile> <outfile>
+  ...converts FlashPaper SWF file <infile> to PDF <outfile>. Use -zoom parameter to specify image quality.
+ 27) -zoom <N>
+ ...apply zoom during export
+ 28) -replace <infile> <outfile> (<characterId1>|<scriptName1>) <importDataFile1> [nofill] ([<format1>][<methodBodyIndex1>]) [(<characterId2>|<scriptName2>) <importDataFile2> [nofill] ([<format2>][<methodBodyIndex2>])]...
+ ...replaces the data of the specified BinaryData, Image, Shape, Text, DefineSound tag or Script
+ ...nofill parameter can be specified only for shape replace
+ ...<format> parameter can be specified for Image and Shape tags
+ ...valid formats: lossless, lossless2, jpeg2, jpeg3, jpeg4
+ ...<methodBodyIndexN> parameter should be specified if and only if the imported entity is an AS3 P-Code
+ 29) -replaceAlpha <infile> <outfile> <imageId1> <importDataFile1> [<imageId2> <importDataFile2>]...
+ ...replaces the alpha channel of the specified JPEG3 or JPEG4 tag
+ 30) -replaceCharacter <infile> <outfile> <characterId1> <newCharacterId1> [<characterId2> <newCharacterId2>]...
+ ...replaces a character tag with another chatacter tag from the same SWF
+ 31) -replaceCharacterId <infile> <outfile> <oldId1>,<newId1>,<oldId2>,<newId2>... or
+ 32) -replaceCharacterId <infile> <outfile> (pack|sort)
+ ...replaces the <oldId1> character id with <newId1>
+ ...pack: removes the spaces between the character ids (1,4,3 => 1,3,2)
+ ...sort: assigns increasing IDs to the chatacter tags + pack (1,4,3 => 1,2,3)
+    DO NOT PUT space between comma (,) and next value.
+ 33) -remove <infile> <outfile> <tagNo1> [<tagNo2>]...
+ ...removes a tag from the SWF
+ 34) -removeCharacter[WithDependencies] <infile> <outfile> <characterId1> [<characterId2>]...
+ ...removes a character tag from the SWF
+ 35) -importScript <infile> <outfile> <scriptsfolder>
+ ...imports scripts to <infile> and saves the result to <outfile>
+ 36) -deobfuscate <level> <infile> <outfile>
+  ...Deobfuscates AS3 P-code in <infile> and saves result to <outfile>
+  ...<level> can be one of: controlflow/3/max, traps/2, deadcode/1
+  ...WARNING: The deobfuscation result is still probably far enough to be openable by other decompilers.
+ 37) -enabledebugging [-injectas3|-generateswd] [-pcode] <infile> <outfile>
+  ...Enables debugging for <infile> and saves result to <outfile>
+  ...-injectas3 (optional) causes debugfile and debugline instructions to be injected into the code to match decompiled/pcode source.
+  ...-generateswd (optional) parameter creates SWD file needed for AS1/2 debugging. for <outfile.swf>, <outfile.swd> is generated
+  ...-pcode (optional) parameter specified after -injectas3 or -generateswd causes lines to be handled as lines in P-code => All P-code lines are injected, etc.
+  ...WARNING: Injected/SWD script filenames may be different than from standard compiler
+ 38) -custom <customparameter1> [<customparameter2>]...
+  ...Forwards all parameters after the -custom parameter to the plugins
+ 39) -doc -type <type> [-out <outfile>] [-format <format>] [-locale <locale>]
+  ...Generate documentation
+  ...-type <type> Selects documentation type
+  ...<type> can be currently only: as3.pcode.instructions for list of ActionScript3 AVM2 instructions
+  ...-out <outfile> (optional) If specified, output is written to <outfile> instead of stdout
+  ...-format <format> (optional, html is default) Selects output format
+  ...<format> is currently only html
+  ...-locale <locale> (optional) Override default locale
+  ...<locale> is localization identifier, en for english for example
+  ...<format> is currently only html
+ 40) -getInstanceMetadata -instance <instanceName> [-outputFormat <outputFormat>] [-key <key> ] [-datafile <datafile>] <swffile>
+  ...reads instance metadata
+  ...-instance <instanceName>: name of instance to fetch metadata from
+  ...-outputFormat <outputFormat> (optional): format of output - one of: jslike|raw. Default is jslike.
+  ...- key <key> (optional): name of subkey to display. When present, only value from subkey <key> is shown, whole object value otherwise.
+  ...-datafile <datafile> (optional): File to write the data to. If ommited, stdout is used.
+  ...<swffile>: SWF file to read metadata from
+ 41) -setInstanceMetadata -instance <instanceName>  [-inputFormat <inputFormat>] [-key <key> ] [-value <value> | -datafile <datafile>] [-outfile <outFile>] <swffile>
+  ...adds metadata to instance
+  ...-instance <instanceName>: name of instance to replace data in
+  ...-inputFormat <inputFormat>: format of input data - one of: jslike|raw. Default is jslike.
+  ...- key <key> (optional): name of subkey to use. When present, the value is set as object property with the <key> name.
+            Otherwise the value is set directly to the instance without any subkeys.
+  ...-value <value> (optional): value to set.
+  ...-datafile <datafile> (optional): value to set from file.
+  ...If no -value or -infile parameter present, the value to set is taken from stdin.
+  ...-outfile <outfile> (optional): Where to save resulting file. If ommited, original SWF file is overwritten.
+  ...<swffile>: SWF file to search instance in
+ 42) -removeInstanceMetadata -instance <instanceName> [-key <key> ] [-outfile <outFile>] <swffile>
+  ...removes metadata from instance
+  ...-instance <instanceName>: name of instance to remove data from
+  ...- key <key> (optional): name of subkey to remove. When present, only the value from subkey <key> of the AMF object is removed.
+            Otherwise all metadata are removed from the instance.
+  ...-outfile <outfile> (optional): Where to save resulting file. If ommited, original SWF file is overwritten.
+  ...<swffile>: SWF file to search instance in
+
+Examples:
+java -jar ffdec.jar myfile.swf
+java -jar ffdec.jar -proxy
+java -jar ffdec.jar -proxy -P1234
+java -jar ffdec.jar -export script "C:\decompiled" myfile.swf
+java -jar ffdec.jar -selectclass com.example.MyClass,com.example.SecondClass -export script "C:\decompiled" myfile.swf
+java -jar ffdec.jar -format script:pcode -export script "C:\decompiled" myfile.swf
+java -jar ffdec.jar -format script:pcode,text:plain -export script,text,image "C:\decompiled" myfile.swf
+java -jar ffdec.jar -format fla:cs5.5 -export fla "C:\sources\myfile.fla" myfile.swf
+java -jar ffdec.jar -onerror ignore -export script "C:\decompiled" myfile.swf
+java -jar ffdec.jar -onerror retry 5 -export script "C:\decompiled" myfile.swf
+java -jar ffdec.jar -cli myfile.swf
+java -jar ffdec.jar -dumpSWF myfile.swf
+java -jar ffdec.jar -compress myfile.swf myfilecomp.swf
+java -jar ffdec.jar -decompress myfile.swf myfiledec.swf
+java -jar ffdec.jar -config autoDeobfuscate=1,parallelSpeedUp=0 -export script "C:\decompiled" myfile.swf
+java -jar ffdec.jar -deobfuscate max myas3file_secure.swf myas3file.swf
+java -jar ffdec.jar -enabledebugging -injectas3 myas3file.swf myas3file_debug.swf
+java -jar ffdec.jar -enabledebugging -generateswd myas2file.swf myas2file_debug.swf
+java -jar ffdec.jar -doc -type as3.pcode.instructions -format html
+java -jar ffdec.jar -doc -type as3.pcode.instructions -format html -locale en -out as3_docs_en.html
+java -jar ffdec.jar -getInstanceMetadata -instance myobj -key keyone myfile.swf
+java -jar ffdec.jar -getInstanceMetadata -instance myobj2 -outputFormat raw -outfile out.amf myfile.swf
+java -jar ffdec.jar -setInstanceMetadata -instance myobj -key mykey -value 1234 myfile.swf
+java -jar ffdec.jar -setInstanceMetadata -instance myobj -key my -inputFormat raw -datafile value.amf -outfile modified.swf myfile.swf
+java -jar ffdec.jar -removeInstanceMetadata -instance myobj -key mykey -outfile result.swf myfile.swf
+java -jar ffdec.jar -removeInstanceMetadata -instance myobj myfile.swf
+
+Instead of "java -jar ffdec.jar" you can use ffdec.bat on Windows, ffdec.sh on Linux/MacOs

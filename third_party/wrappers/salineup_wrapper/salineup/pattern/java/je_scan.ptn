@@ -1,0 +1,196 @@
+1||instance hashset||0||13||1||java/util/hashset/<init>||10||
+2||getmididevice||0||13||1||javax/sound/midi/midisystem/getmididevice||10||
+3||getenginebyname||5||1301||1||javax/script/scriptenginemanager/getenginebyname||10||
+4||atomicreferencearray||0||13||1||java/util/concurrent/atomic/atomicreferencearray||10||
+5||classloaderasparameter||10||1302||1||ljava/lang/classloader;||10||
+6||suspiciousstring:sun.awt.suntoolkit||0||13||1||sun.awt.suntoolkit||10||
+7||call rmiconnectionimpl.creatembean||10||1303||1||javax/management/remote/rmi/rmiconnectionimpl/creatembean||10||
+8||call rmiconnectionimpl.querymbeans||10||1303||1||javax/management/remote/rmi/rmiconnectionimpl/querymbeans||10||
+9||call writableraster.setpixels||0||13||1||java/awt/image/writableraster/setpixels||10||
+10||call soundbankreader.getsoundbank||0||13||1||javax/sound/midi/midisystem/getsoundbank||10||
+11||.exeurl||20||100||1||$RE:[\s]*(http[s]{0,1}|ftp|file)://.*\.exe[\s]*||10||
+13||call exec||10||2||1||java/lang/runtime/exec||10||
+14||call setsecuritymanager||20||7||1||java/lang/system/setsecuritymanager||10||
+15||call doprivileged||10||6||1||java/security/accesscontroller/doprivileged||10||
+16||fileoutputstream.init||5||1||1||java/io/fileoutputstream/<init>||10||
+17||instance url||10||3||1||java/net/url/<init>||10||
+18||instance jlist||0||13||1||javax/swing/jlist/<init>||10||
+19||instance objectinputstream||5||1304||1||java/io/objectinputstream/<init>||10||
+20||readobject||5||1304||1||java/io/objectinputstream/readobject||10||
+21||openurl||10||3||1||java/net/url/openconnection||10||
+22||inputurl||10||3||1||java/net/urlconnection/getinputstream||10||
+23||fileoutputstream.write||5||1||1||java/io/fileoutputstream/write||10||
+24||opensequencer||5||13||1||javax/sound/midi/sequencer/open||10||
+25||setsequencer||5||13||1||javax/sound/midi/sequencer/setsequence||10||
+26||addsequencereventlistener||5||1305||1||javax/sound/midi/sequencer/addcontrollereventlistener||10||
+29||gc||0||13||1||java/lang/runtime/gc||10||
+30||heapsprayshellcode||20||10||1||$RE:[\s\S]*\\u[\da-fA-F]{3,4}\\u[\da-fA-F]{3,4}[\s\S]*||10||
+31||suspiciousstring:.exe||10||2||1||$RE:[\s\S]*.exe||10||
+32||havethread||-10||4||1||java/lang/thread/<init>||10||
+33||suspiciousstring:fakeoraclejava||20||11||1||oracle java||10||
+34||applet||0||14||1||java/applet/applet/<init>||10||
+35||invokecurrentthread||0||13||1||java/lang/thread/currentthread||10||
+36||suspiciousstring:setsecuritymanager||10||7||1||setsecuritymanager||10||
+37||eval||5||1306||1||java/beans/expression/<init>||10||
+38||addtouicomponet||0||13||1||add(ljava/awt/component;)ljava/awt/component;||10||
+39||evaljscode||0||13||1||javax/script/scriptengine/eval||10||
+41||parseint||0||13||1||java/lang/integer/parseint||10||
+42||intbuffer.put||0||13||1||java/nio/intbuffer/put||10||
+44||getclass||0||13||1||java/lang/object/getclass||10||
+45||getclassloader||10||1307||1||java/lang/class/getclassloader||10||
+48||instancestatement||0||13||1||java/beans/statement/<init>||10||
+49||instanceaccesscontrolcontext||20||1308||1||java/security/accesscontrolcontext/<init>||10||
+50||instanceallpermission||20||6||1||java/security/allpermission/<init>||10||
+51||instancepermission||10||6||1||java/security/permission/<init>||10||
+52||instanceprotectiondomain.init||10||6||1||java/security/protectiondomain/<init>||10||
+53||threadsleep||0||13||1||java/lang/thread/sleep(j)v||10||
+54||suspiciousstring:tmpdir||5||11||1||java.io.tmpdir||10||
+55||suspiciousstring:acc||5||11||1||acc||10||
+56||suspiciousstring:getfield||0||11||1||getfield||10||
+57||suspiciousstring:osname||2||11||1||os.name||10||
+58||suspiciousstring:window||2||11||1||window||10||
+59||suspiciousstring:system||2||11||1||system||10||
+61||aced00057372||20||14||1||$RE:[\s\S]*ced[\s\S]{3}57372[\s\S]*||10||
+62||bitcoin||40||101||1||bitcoin||10||
+63||instancestringbuilder||0||9||1||java/lang/stringbuilder/<init>||10||
+64||getenginebyextension||0||13||1||javax/script/scriptenginemanager/getenginebyextension||10||
+65||blacklist.1||500||200||1||tevufcp(ljava/lang/object;)lcagessaggarsagaze/ill||10||
+66||blacklist.2||500||200||1||ilap(ljava/lang/object;)lvialslwei/asylums||10||
+67||blacklist.3||500||200||1||hajepkf(ljava/net/url;[ljava/security/cert/certificate;ljava/security/permissions;)||10||
+68||blacklist.4||500||200||1||googlea(lgooglea/googlea;)lgooglea/googled||10||
+69||hipcrime's newsbuster||500||200||1||hipcrime's newsbuster||10||
+70||blacklist.5||500||200||1||npjelvytye(ljava/lang/class;iljavax/swing/jlist;iljava/lang/class;ljavax/swing/jlist;ljava/lang/string;ljava/lang/object;)||10||
+71||specific:||0||13||1||mail2news@basement.replay.com||10||
+72||specific:||0||13||1||winter.news.erols.com||10||
+73||specific:||0||13||1||#s26, #praha2k, #poc, #globalized||10||
+74||specific:||0||13||1||imf.org, worldbank.org, bis.org (bank for international settlements), fsforum.org||10||
+75||specific:||0||13||1||borg spam assimilators||10||
+76||specific:||0||13||1||bustersentence()ljava/lang/string||10||
+77||specific:||0||13||1||henrietta k. thomas||10||
+78||context class||0||1001||1||sun.org.mozilla.javascript.internal.context||10||
+79||generatedclassloader class||0||1001||1||sun.org.mozilla.javascript.internal.generatedclassloader||10||
+80||createclassloader||0||1002||1||createclassloader||10||
+81||defineclass||0||1002||1||defineclass||10||
+82||newinstance||0||1003||1||newinstance()||10||
+83||introspector.elementfromcomplex||0||1004||1||introspector.elementfromcomplex||10||
+84||mbeaninstantiator class||0||1001||1||com.sun.jmx.mbeanserver.mbeaninstantiator||10||
+85||enter||0||1002||1||enter||10||
+86||specific:offset||0||1005||1||50000000||10||
+87||bufferedimage class||0||1006||1||java/awt/image/bufferedimage||10||
+88||colorspace class||0||1006||1||java/awt/color/colorspace||10||
+89||colormodel class||0||1006||1||$RE:(l)?java/awt/image/colormodel||10||
+90||filteredimagesource.init||0||1007||1||java/awt/image/filteredimagesource/<init>(ljava/awt/image/imageproducer;ljava/awt/image/imagefilter;)v||10||
+91||url.init||0||1008||1||java/net/url/<init>(ljava/lang/string;)v||10||
+92||servicemanager.lookup||0||1009||1||javax/jnlp/servicemanager/lookup(ljava/lang/string;)ljava/lang/object;||10||
+93||utf8||0||1010||1||-j-djava.security.policy=||10||
+94||utf8||0||1011||1||javax.jnlp.basicservice||10||
+95||protectiondomain.init||0||1012||1||java/security/protectiondomain/<init>(ljava/security/codesource;ljava/security/permissioncollection;)v||10||
+96||urlclassloader.init||0||1013||1||java/net/urlclassloader/<init>([ljava/net/url;)v||10||
+97||method.invoke||0||1014||1||java/lang/reflect/method/invoke(ljava/lang/object;[ljava/lang/object;)ljava/lang/object;||10||
+98||forname||0||1015||1||java/lang/class/forname(ljava/lang/string;)ljava/lang/class;||10||
+99||classnotfoundexception.getmessage||0||1016||1||java/lang/classnotfoundexception/getmessage()ljava/lang/string;||10||
+100||noclassdeffounderror.init||0||1017||1||java/lang/noclassdeffounderror/<init>(ljava/lang/string;)v||10||
+101||class.getresourceasstream||0||1018||1||java/lang/class/getresourceasstream(ljava/lang/string;)ljava/io/inputstream;||10||
+102||genericconstructor.create||0||1019||1||com/sun/org/glassfish/gmbal/util/genericconstructor/create([ljava/lang/object;)ljava/lang/object;||10||
+103||imageconsumer.setpixels||0||1020||1||java/awt/image/imageconsumer/setpixels(iiiiljava/awt/image/colormodel;[bii)v||10||
+104||import classloader||10||1307||1||java/lang/classloader||10||
+105||import protectiondomain||10||6||1||java/security/protectiondomain||10||
+106||import url||10||3||1||java/net/url||10||
+107||field.get||10||1070||1||java/lang/reflect/field/get||10||
+108||invokeexact||10||1080||1||java/lang/invoke/methodhandle/invokeexact||10||
+109||type field of double class||10||1090||1||java/lang/double/type||10||
+110||field.set||10||1100||1||java/lang/reflect/field/set||10||
+111||call getsecuritymanager||10||1110||1||java/lang/system/getsecuritymanager||10||
+112||import indexcolormodel||0||1120||1||java/awt/image/indexcolormodel||10||
+113||setcolormodel||0||1130||1||java/awt/image/imageconsumer/setcolormodel||10||
+114||setdimensions||0||1140||1||java/awt/image/imageconsumer/setdimensions||10||
+115||setpixels||0||1150||1||java/awt/image/imageconsumer/setpixels||10||
+116||reverse||0||1160||1||reverse()ljava/lang/stringbuffer||10||
+117||charat||0||1170||1||java/lang/string/charat||10||
+118||canvas.init||0||1180||1||java/awt/canvas/<init>||10||
+119||dimension.init||0||1190||1||java/awt/dimension/<init>||10||
+120||color.init||0||1200||1||java/awt/color/<init>||10||
+121||tolowercase||0||1210||1||tolowercase()ljava/lang/string||10||
+122||touppercase||0||1220||1||touppercase()ljava/lang/string||10||
+123||getcodebase||0||1230||1||java/applet/applet/getcodebase()ljava/net/url||10||
+124||createdbyfoxxy||0||1240||1||java/createdbyfoxxy(ljava/lang/string;)ljava/lang/stringbuilder||10||
+125||substring||0||1250||1||java/lang/string/substring||10||
+126||random.init||0||1260||1||java/util/random/<init>||10||
+127||replaceall||0||1270||1||java/lang/string/replaceall(ljava/lang/string;ljava/lang/string;)ljava/lang/string||10||
+128||getparameter||0||1280||1||getparameter(ljava/lang/string;)ljava/lang/string;||10||
+129||getproperty||0||1290||1||getproperty(ljava/lang/string;)ljava/lang/string;||10||
+130||indexof||0||1300||1||indexof(ljava/lang/string;)i||10||
+131||jmxmbeanserverbuilder.newmbeanserver||0||1310||1||com/sun/jmx/mbeanserver/jmxmbeanserverbuilder/newmbeanserver||10||
+132||concat||0||1320||1||java/lang/string/concat(ljava/lang/string;)ljava/lang/string||10||
+133||getmethod||0||1330||1||java/lang/class/getmethod(ljava/lang/string;[ljava/lang/class;)ljava/lang/reflect/method||10||
+134||mbeaninstantiator.findclass||0||1340||1||com/sun/jmx/mbeanserver/mbeaninstantiator/findclass||10||
+135||jmxmbeanserver.getmbeaninstantiator||0||1350||1||com/sun/jmx/mbeanserver/jmxmbeanserver/getmbeaninstantiator||10||
+136||lookup.findvirtual||0||1370||1||java/lang/invoke/methodhandles$lookup/findvirtual||10||
+137||suspiciousstring:linux||2||11||1||linux||10||
+138||suspiciousstring:unix||2||11||1||unix||10||
+139||suspiciousstring:mac||2||11||1||mac||10||
+140||startswith||0||1400||1||startswith(ljava/lang/string;)z||10||
+141||getdocumentbase||0||1410||1||java/applet/applet/getdocumentbase()ljava/net/url||10||
+142||bytearrayoutputstream.init||5||1420||1||java/io/bytearrayoutputstream/<init>||10||
+143||getappletcontext||0||1430||1||getappletcontext()ljava/applet/appletcontext||10||
+144||getconstructor||0||1440||1||java/lang/class/getconstructor||10||
+145||constructor.newinstance||0||1450||1||java/lang/reflect/constructor/newinstance||10||
+146||array.newinstance||0||1460||1||java/lang/reflect/array/newinstance||10||
+147||import certificate||0||1470||1||java/security/cert/certificate||10||
+148||suspiciousstring:hw||2||1480||1||hw||10||
+149||introspector.getbeaninfo||0||1490||1||java/beans/introspector/getbeaninfo||10||
+150||class.newinstance||0||1500||1||java/lang/class/newinstance||10||
+151||introspector.elementfromcomplex||0||1510||1||com/sun/jmx/mbeanserver/introspector/elementfromcomplex||10||
+152||jmxmbeanserver.newmbeanserver||0||1520||1||com/sun/jmx/mbeanserver/jmxmbeanserver/newmbeanserver||10||
+153||memoryimagesource class||0||1530||1||java/awt/image/memoryimagesource||10||
+154||instanceprotectiondomain||0||1540||1||java/security/protectiondomain||10||
+155||script.eval||0||1550||1||eval(ljava/lang/string;)ljava/lang/object||10||
+156||scriptengine||0||1560||1||javax/script/scriptengine||10||
+157||string.setsecuritymanager||0||1570||1||$RE:[\s\S]*java\.lang\.system\.setsecuritymanager\(null\)||10||
+158||suspiciousstring:deserialization.a||0||1580||1||aced0005757200135b4c6a6176612e6c616e672e4f62||10||
+159||suspiciousstring:deserialization.b||0||1590||1||6a6563743b90ce589f1073296c020000787000000002||10||
+160||suspiciousstring:deserialization.c||0||1600||1||757200095b4c612e48656c703bfe2c941188b6e5ff02||10||
+161||suspiciousstring:deserialization.d||0||1610||1||000078700000000170737200306a6176612e7574696c||10||
+162||suspiciousstring:codehex||2||1620||1||codehex||10||
+163||suspiciousstring:defineandcreate||2||1630||1||defineandcreate||10||
+164||regex.pattern.compile||2||1640||1||java/util/regex/pattern/compile||10||
+165||regex.pattern.matcher||2||1650||1||java/util/regex/pattern/matcher||10||
+166||import permissiondataset||2||1660||1||com/ms/security/permissiondataset||10||
+167||permissiondataset.setfullytrusted||2||1670||1||setfullytrusted||10||
+168||import componentsamplemodel||2||1680||1||java/awt/image/componentsamplemodel||10||
+169||import colorconvertop||2||1690||1||java/awt/image/colorconvertop||10||
+170||suspiciousstring:fox.java||2||1700||1||fox.java||10||
+171||suspiciousstring:gut.java||2||1710||1||gut.java||10||
+172||suspiciousstring:vat.java||2||1720||1||vat.java||10||
+173||metasploit.payload||2||1730||1||metasploit.payload||10||
+174||suspiciousstring:fuckkasp11111||2||1740||1||fuckkasp11111||10||
+175||suspiciousclass:n2n2n2n3c||2||1750||1||n2n2n2n3c||10||
+176||suspiciousclass:n2n2n2n3a||2||1760||1||n2n2n2n3a||10||
+177||suspiciousclass:n2n2n2n3d||2||1770||1||n2n2n2n3d||10||
+178||import serializable||2||1780||1||java/io/serializable||10||
+200||staticmainmethod||0||4||1||$RE:public static main\([Ljava/lang/String;\)[\s\S]*||10||
+201||appletinit||0||4||1||$RE:java/applet/Applet/<init>[\s\S]*||10||
+202||line_count||-1||202||2||*||1000||
+203||method_count||-1||203||2||*||10||
+204||readable_count||-200||204||2||>||20||
+205||instance componentcolormodel||0||2050||1||java/awt/image/componentcolormodel/<init>(ljava/awt/color/colorspace;[izzii)v||10||
+206||instance icc_colorspace||0||2060||1||java/awt/color/icc_colorspace/<init>(ljava/awt/color/icc_profile;)v||10||
+207||suspiciousstring:iscompatibleraster||0||2070||1||iscompatibleraster||10||
+208||instance affinetransformop||0||2080||1||java/awt/image/affinetransformop/<init>(ljava/awt/geom/affinetransform;ljava/awt/renderinghints;)v||10||
+209||call invocationhandler.invoke||0||2090||1||java/lang/reflect/invocationhandler/invoke(ljava/lang/object;ljava/lang/reflect/method;[ljava/lang/object;)ljava/lang/object;||10||
+210||import provider||0||2100||1||com/sun/tracing/provider||10||
+211||call createwritableraster||0||2110||1||java/awt/image/raster/createwritableraster||10||
+212||call lookupop.filter||0||2120||1||java/awt/image/lookupop/filter(ljava/awt/image/bufferedimage;ljava/awt/image/bufferedimage;)ljava/awt/image/bufferedimage;||10||
+213||getdeclaredconstructor||0||2130||1||java/lang/class/getdeclaredconstructor([ljava/lang/class;)ljava/lang/reflect/constructor;||10||
+214||param colormodelandsamplemodel||0||2140||1||(iiiiljava/awt/image/colormodel;ljava/awt/image/samplemodel;)v||10||
+215||javafxtruecolor.init||0||2150||1||javafxtruecolor/init(ljava/net/url;)v||10||
+216||call findstaticsetter||0||2160||1||java/lang/invoke/methodhandles$lookup/findstaticsetter(ljava/lang/class;ljava/lang/string;ljava/lang/class;)ljava/lang/invoke/methodhandle;||10||
+217||re.writableraster||0||2170||1||$RE:j.{0,5}a.{0,5}v.{0,5}a.{0,5}\..{0,5}a.{0,5}w.{0,5}t.{0,5}\..{0,5}i.{0,5}m.{0,5}a.{0,5}g.{0,5}e.{0,5}\..{0,5}w.{0,5}r.{0,5}i.{0,5}t.{0,5}a.{0,5}b.{0,5}l.{0,5}e.{0,5}r.{0,5}a.{0,5}s.{0,5}t.{0,5}e.{0,5}r||10||
+218||re.alphacomposite||0||2180||1||$RE:j.{0,5}a.{0,5}v.{0,5}a.{0,5}\..{0,5}a.{0,5}w.{0,5}t.{0,5}\..{0,5}a.{0,5}l.{0,5}p.{0,5}h.{0,5}a.{0,5}c.{0,5}o.{0,5}m.{0,5}p.{0,5}o.{0,5}s.{0,5}i.{0,5}t.{0,5}e||10||
+219||re.samplemodel||0||2190||1||$RE:j.{0,5}a.{0,5}v.{0,5}a.{0,5}\..{0,5}a.{0,5}w.{0,5}t.{0,5}\..{0,5}i.{0,5}m.{0,5}a.{0,5}g.{0,5}e.{0,5}\..{0,5}s.{0,5}a.{0,5}m.{0,5}p.{0,5}l.{0,5}e.{0,5}m.{0,5}o.{0,5}d.{0,5}e.{0,5}l||10||
+220||re.compositecontext||0||2200||1||$RE:j.{0,5}a.{0,5}v.{0,5}a.{0,5}\..{0,5}a.{0,5}w.{0,5}t.{0,5}\..{0,5}c.{0,5}o.{0,5}m.{0,5}p.{0,5}o.{0,5}s.{0,5}i.{0,5}t.{0,5}e.{0,5}c.{0,5}o.{0,5}n.{0,5}t.{0,5}e.{0,5}x.{0,5}t||10||
+221||suspiciousstring:disablesecuritymanager||0||2210||1||disablesecuritymanager||10||
+222||import privilegedexceptionaction||0||2220||1||java/security/privilegedexceptionaction||10||
+223||import integer.type||0||2230||1||java/lang/integer/type||10||
+224||call mediatracker.addimage||0||2240||1||java/awt/mediatracker/addimage(ljava/awt/image;i)v||10||
+225||call mediatracker.removeimage||0||2250||1||java/awt/mediatracker/removeimage(ljava/awt/image;)v||10||

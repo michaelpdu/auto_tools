@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<xmlpattern version="2.0.0.1011">
+
+<basic>
+    <baseline>0</baseline>
+    <suspicious>10</suspicious>
+    <malicious>20</malicious>
+</basic>
+
+<rule-set category="pdf-format-exploit">
+    <rule name="exploit.cve-2011-2462" weight="20" description="Adobe Universal 3D memory corruption exploit" >
+        <pre-match>
+            <match>u3d_checker_cve_2011_2462</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2010-0188" weight="20" description="libtiff integer overflow exploit" capture="1">
+        <pre-match>
+            <match>tiff_checker_cve_2010_0188</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2010-0188.gen" weight="20" description="libtiff integer overflow exploit" capture="1">
+        <pre-match>
+            <match>.rawvalue</match>
+        </pre-match>
+        <search>
+            <regexp>sukq|qwe123ba|TU0A</regexp>
+        </search>
+    </rule>
+
+    <rule name="pdf.exploit.cve-2010-0188.reg.A" weight="20" description="libtiff integer overflow exploit" capture="1">
+        <pre-match>
+            <match>tiff_content</match>
+        </pre-match>
+        <search>
+            <regexp>(4\+Pj){50,100}</regexp>
+        </search>
+    </rule>
+
+    <rule name="pdf.exploit.cve-2010-0188.reg.B" weight="20" description="libtiff integer overflow exploit">
+        <pre-match>
+            <match>tiff_conten</match>
+        </pre-match>
+        <search>
+            <regexp>(MDAw){50,100}</regexp>
+        </search>
+    </rule>
+
+    <rule name="pdf.exploit.cve-2010-0188.reg.C" weight="20" description="libtiff integer overflow exploit">
+        <pre-match>
+            <match>tiff_content</match>
+        </pre-match>
+        <search>
+            <regexp>(CQkJ){50,100}</regexp>
+        </search>
+    </rule>
+
+    <rule name="exploit.cve-2010-0188.eval.abcdef" weight="20" description="libtiff integer overflow exploit" capture="1">
+        <pre-match>
+            <match>eval content</match>
+        </pre-match>
+        <search>
+            <regexp>t_p.{1,5}n_bbgle9t_p.{1,10}aaa.{1,5}bbb.{1,5}ccc.{1,5}ddd.{1,5}eee.{1,5}fff</regexp>
+        </search>
+    </rule>
+
+    <rule name="exploit.cve-2010-0188.js.sig.a" weight="20" description="libtiff integer overflow exploit" capture="1">
+        <pre-match>
+            <match>string.prototype.slice</match>
+        </pre-match>
+        <search>
+            <regexp>function.{1,20}\{var.{1,20}cie.{1,20}t4vy3</regexp>
+        </search>
+    </rule>
+
+    <rule name="exploit.cve-2010-2883" weight="20" description="CoolType SING table buffer overflow exploit" >
+        <pre-match>
+            <match>ttf_checker_cve_2010_2883</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2012-0754" weight="20" description="Adobe Flash Player cprt atom buffer overflow exploit" >
+        <pre-match>
+            <match>mp4_checker_cve_2012_0754</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2010-1240" weight="20" description="Windows Command to start an application">
+        <pre-match>
+            <match>module name="PARSER"</match>
+        </pre-match>
+        <search>
+            <regexp>/F\s=\scmd\.exe,.*\/P\s=.*start</regexp>
+        </search>
+    </rule>
+
+    <rule name="exploit.cve-2009-3953" weight="20" description="U3D.CLODProgressiveMeshDeclaration array boundary issue">
+        <pre-match>
+            <match>u3d_CLODProgressiveMeshContinuation</match>
+        </pre-match>
+        <search>
+            <regexp>0c004e6e7a42414677684e726870(0){20,50}(10000000){10,}</regexp>
+        </search>
+    </rule>
+
+    <rule name="exploit.generic.xref" weight="0" description="xref offset is larger than file size">
+        <pre-match>
+            <match>warning</match>
+        </pre-match>
+        <search>
+            <match>XRefOffset is larger than file size</match>
+        </search>
+    </rule>
+    
+    <rule name="pdf.exploit.generic.xref.eval" weight="0" description="xref offset is larger than file size and find eval calling" feedback="1" capture="1">
+        <pre-match>
+            <match>warning</match>
+        </pre-match>
+        <search>
+            <match>XRefOffset is larger than file size</match>
+            <match>eval_access</match>
+        </search>
+    </rule>
+
+    <rule name="pdf.exploit.eof.script" weight="0" description="scripts at the end of EOF" feedback="1" capture="1">
+        <pre-match>
+            <match>eof_script>matched</match>
+        </pre-match>
+    </rule>
+
+    <rule name="pdf.exploit.pdf_info.script" weight="0" description="scripts in pdf info object" feedback="1">
+        <pre-match>
+            <match>find script in pdf info</match>
+        </pre-match>
+    </rule>
+
+    <rule name="pdf.exploit.embedded_flash" weight="0" description="embedded flash in pdf" feedback="1">
+        <pre-match>
+            <match>find flash in this pdf file</match>
+        </pre-match>
+    </rule>
+
+    <rule name="pdf.exploit.openaction.mal_uri" weight="0" description="malicious uri in openaction object" feedback="1">
+        <pre-match>
+            <match>malicious_url</match>
+        </pre-match>
+        <search>
+            <regexp>www\.seguridadyaltura\.com</regexp>
+        </search>
+    </rule>
+    <rule name="pdf.exploit.payload.generic" weight="20" description="pdf exploit payload">
+        <pre-match>
+            <match>javascript</match>
+        </pre-match>
+        <search>
+            <regexp>(?=.*?Date)(?=.*?date.getFullYear)(?=.*?replace)(?=.*?2011).+</regexp>
+        </search>
+    </rule>
+    <rule name="exploit.cve-2007-3896" weight="20" description="pdf URI exploit" feedback="0.1">
+        <pre-match>
+            <match>URI</match>
+        </pre-match>
+        <search>
+            <regexp>(?=.*?mailto\:)(?=.*?\%)(?=.*?windows\/system32).+</regexp>
+        </search>
+    </rule>
+</rule-set>
+
+<rule-set category="rtf-format-exploit">
+    <rule name="exploit.cve-2010-3333" weight="20" description="RTF pFragments Buffer Overflow" >
+        <pre-match>
+            <match>rtf_checker_cve_2010_3333</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2012-0158" weight="20" description="MSComCtl Buffer Overflow" >
+        <pre-match>
+            <match>rtf_checker_cve_2012_0158</match>
+            <match>ole_checker_cve_2012_0158</match>
+        </pre-match>
+    </rule>
+</rule-set>
+
+<rule-set category="word-binary-format-exploit">
+    <rule name="exploit.cve-2006-2492" weight="20" description="" >
+        <pre-match>
+            <match>doc_checker_cve_2006_2492</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2006-3647" weight="20" description="" >
+        <pre-match>
+            <match>doc_checker_cve_2006_3647</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2006-6456" weight="20" description="" >
+        <pre-match>
+            <match>doc_checker_cve_2006_6456</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2007-0870" weight="20" description="" >
+        <pre-match>
+            <match>doc_checker_cve_2007_0870</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2007-0515" weight="20" description="" >
+        <pre-match>
+            <match>doc_checker_cve_2007_0515W</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2008-2244" weight="20" description="" >
+        <pre-match>
+            <match>doc_checker_cve_2008_2244</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2008-4841" weight="20" description="" >
+        <pre-match>
+            <match>doc_checker_cve_2008_4841</match>
+        </pre-match>
+    </rule>
+</rule-set>
+
+<rule-set category="excel-binary-format-exploit">
+    <rule name="exploit.cve-2007-0671" weight="20" description="" >
+        <pre-match>
+            <match>xls_checker_cve_2007_0671</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2008-0081" weight="20" description="" >
+        <pre-match>
+            <match>xls_checker_cve_2008_0081</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2009-0328" weight="20" description="" >
+        <pre-match>
+            <match>xls_checker_cve_2009_0328</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2009-3129" weight="20" description="" >
+        <pre-match>
+            <match>xls_checker_cve_2009_3129</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2010-0822" weight="20" description="" >
+        <pre-match>
+            <match>xls_checker_cve_2010_0822</match>
+        </pre-match>
+    </rule>
+</rule-set>
+
+<rule-set category="pdf-javascript-exploit">
+    <rule name="exploit.cve-2008-2992" weight="20" description="Adobe JavaScript util.printf buffer overflow exploit" >
+        <pre-match>
+            <match>js_checker_cve_2008_2992</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2008-0655" weight="20" description="Adobe JavaScript Collab.collectEmailInfo buffer overflow exploit" >
+        <pre-match>
+            <match>js_checker_cve_2008_0655</match>
+            <match>collab.collectEmailInfo</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2009-0927" weight="20" description="Adobe JavaScript getAnnots buffer overflow exploit" >
+        <pre-match>
+            <match>js_checker_cve_2009_0927</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2010-0491" weight="20" description="Adobe JavaScript printSeps memory corruption exploit" >
+        <pre-match>
+            <match>js_checker_cve_2010_0491</match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2009-1492" weight="20" description="Adobe JavaScript getAnnots buffer overflow exploit" >
+        <pre-match>
+            <match>js_checker_cve_2009_1492</match>
+        </pre-match>
+    </rule>
+
+    <rule name="pdf.exploit.cve-2009-1492.A" weight="0" description="Adobe JavaScript getAnnots buffer overflow exploit" feedback="1">
+        <pre-match>
+            <match>app.doc.syncAnnotScan</match>
+            <match>app.doc.getAnnots</match>
+        </pre-match>
+    </rule>
+
+    <rule name="generic.heapspray.A" weight="20" description="Detected JavaScript HeapSpray" >
+        <pre-match>
+            <match>concatshellcode</match>
+        </pre-match>
+    </rule>
+
+    <rule name="generic.heapspray.B" weight="20" description="Detected JavaScript HeapSpray" >
+        <pre-match>
+            <match>concatheapsprayslicecode</match>
+        </pre-match>
+    </rule> 
+
+    <rule name="generic.StackOverflow.A" weight="0" description="Detected JavaScript StackOverflow" feedback="1">
+        <pre-match>
+            <match>rangeerror: maximum call stack size exceeded</match>
+        </pre-match>
+    </rule> 
+
+    <rule name="pdf.exploit.cve-2013-3346" weight="0" description="CVE-2013-3346" feedback="1">
+        <pre-match>
+            <match>rangeerror: maximum call stack size exceeded</match>
+        </pre-match>
+        <search>
+            <match>Q=~[];</match>
+        </search>
+    </rule> 
+
+    <rule name="generic.script_in_annot" weight="20" description="Hide Encoded code in annot" >
+        <pre-match>
+            <match>get_annots_access</match>
+        </pre-match>
+        <search>
+            <match>eval_access</match>
+        </search>
+    </rule>
+
+    <rule name="generic.script_in_page" weight="20" description="Hide Encoded code in page" >
+        <pre-match>
+            <match>get_page_nth_word_access</match>
+            <match>get_page_num_words_access</match>
+        </pre-match>
+        <search>
+            <match>eval_access</match>
+        </search>
+    </rule>
+
+    <rule name="exploit.cve-2009-4324.A" weight="20" description="Adobe JavaScript media.newPlayer use-after-free exploit" >
+        <pre-match>
+            <match>js_checker_cve_2009_4324</match>
+        </pre-match>
+        <search>
+        </search>
+    </rule>
+
+    <rule name="exploit.cve-2009-4324.B" weight="0" description="Adobe JavaScript media.newPlayer use-after-free exploit" feedback="1">
+        <pre-match>
+            <match>media</match>
+        </pre-match>
+        <search>
+            <match>printd</match>
+            <match>module name="JAVASCRIPT"</match>
+        </search>
+    </rule>
+
+    <rule name="shellcode_detection" weight="20" description="Detected shellcode" >
+        <pre-match>
+            <match><![CDATA[</shellcode>]]></match>
+        </pre-match>
+    </rule>
+
+    <rule name="shellcode_detection.B" weight="20" description="Detected shellcode" >
+        <pre-match>
+            <match><![CDATA[find shellcode]]></match>
+        </pre-match>
+    </rule>
+    
+    <rule name="generic.getURL" weight="20" description="Get malicious URL" feedback="1">
+        <pre-match>
+            <match><![CDATA[geturl access]]></match>
+        </pre-match>
+        <search>
+            <match>unescape_access_but_not_shellcode</match>
+        </search>
+    </rule>
+    
+    <rule name="pdf.generic.dropper" weight="20" description="Dropper trojan" >
+        <pre-match>
+            <match>WIN_CMD</match>
+        </pre-match>
+        <search>
+            <match>cmd</match>
+            <regexp>\.pdf|WScript\.Shell</regexp>
+        </search>
+    </rule>
+    
+    <rule name="drop_file" weight="20" description="Detected drop file behavior" >
+        <pre-match>
+            <match><![CDATA[<behavior name="DropFile">]]></match>
+        </pre-match>
+    </rule>
+
+    <rule name="url_download" weight="20" description="Detected url download behavior" >
+        <pre-match>
+            <match><![CDATA[<behavior name="URLDownloadToFile">]]></match>
+        </pre-match>
+    </rule>
+
+    <rule name="exploit.cve-2013-0640" weight="20" description="XFA form api exploitation">
+        <pre-match>
+            <match><![CDATA[xfa_resolveNode]]></match>
+        </pre-match>
+        <search>
+            <regexp>xfa\[\d\]\.form\[\d]\.form\d\[\d\]\.#pageset\[\d\]\.page\d\[\d\]\.#subform\[\d\]\.field\d{1,3}\[\d\]\.#ui\[\d\](\.#choicelist\[\d\])?</regexp>
+        </search>
+    </rule>
+
+    <rule name="getterViewVersion.shellcode" weight="20" description="getter viewversion and do shellcode" capture="1">
+        <pre-match>
+            <match><![CDATA[eval_access]]></match>
+            <match><![CDATA[getter viewerversion]]></match>
+        </pre-match>
+        <search>
+            <match>_docode_shellcode_report</match>
+        </search>
+    </rule>
+
+    <rule name="getterViewVersion.eval.unescape" weight="20" description="getter viewversion and do shellcode" capture="1">
+        <pre-match>
+            <match><![CDATA[eval_acces]]></match>
+            <match><![CDATA[getter viewerversio]]></match>
+        </pre-match>
+        <search>
+            <match>unescape_access_but_not_shellcode</match>
+        </search>
+    </rule>
+
+    <rule name="exploit.cve-2013-2550" weight="20" description="integer underflow when executing a specially crafted regular expression in JavaScript">
+        <pre-match>
+            <match><![CDATA[getpagenthword]]></match>
+        </pre-match>
+        <search>
+            <regexp>e\*d\*\(\(g\|h\)\{8,512\}\|\(\(i\|j\)\|\(k\|f\)\)\)(.{5,20})(\|a\*){20,100}</regexp>
+        </search>
+    </rule>
+
+    <rule name="pdf.exploit.gen.A" weight="0" description="" feedback="1">
+        <pre-match>
+            <match><![CDATA[getpagenthword]]></match>
+            <match><![CDATA[pagenum]]></match>
+            <match><![CDATA[eval]]></match>
+            <match><![CDATA[join]]></match>
+        </pre-match>
+        <search>
+            <regexp>app\[.*?\]\(.*?\);</regexp>
+        </search>
+    </rule>
+
+    <rule name="pdf.exploit.eof_script.check_cookie" weight="0" description="script in eof, check cookie for malicious behavior" feedback="1">
+        <pre-match>
+            <match>eof_script</match>
+        </pre-match>
+        <search>
+            <match>getter cookieenabled</match>
+            <match>getter document.cookie</match>
+        </search>
+    </rule>
+
+    <rule name="pdf.exploit.eof_script.check_cookie_create_iframe" weight="0" description="script in eof, check cookie for creating malicious iframe" feedback="1">
+        <pre-match>
+            <match>eof_script</match>
+        </pre-match>
+        <search>
+            <match>getter cookieenabled</match>
+            <match>getter document.cookie</match>
+            <match>document.createelement('iframe')</match>
+        </search>
+    </rule>
+
+    <rule name="pdf.exploit.pdf.eicar_test_file" weight="0" description="call exportDataObject to export a file and launch it" feedback="1">
+        <pre-match>
+            <match>call exportDataObject, nLaunch=2</match>
+        </pre-match>
+    </rule>
+
+    <rule name="pdf.exploit.eval.app_method_call" weight="0" description="call eval and call app.*" feedback="1">
+        <pre-match>
+            <match>eval_access</match>
+        </pre-match>
+        <search>
+            <regexp>app\.\w+</regexp>
+        </search>
+    </rule>
+
+    <rule name="pdf.exploit.cve-2013-2729" weight="20" description="check cve info" feedback="1">
+        <pre-match>
+            <match><![CDATA[javascript_namespace>util]]></match>
+            <match><![CDATA[javascript_namespace>spray]]></match>
+        </pre-match>
+        <search>
+            <regexp>(\\u4f4f){20}</regexp>
+            <regexp>addxfafield</regexp>
+        </search>
+    </rule>
+    
+    <rule name="pdf.exploit.cve-2013-2729.B" weight="0" description="check cve info" feedback="1">
+        <pre-match>
+            <match>javascript_namespace</match>
+        </pre-match>
+        <search>
+            <match>_docode_shellcode_report</match>
+        </search>
+    </rule>
+    
+    <rule name="pdf.exploit.cve-2013-2729.C" weight="20" description="check cve info" >
+        <pre-match>
+            <match>javascript_namespace</match>
+        </pre-match>
+        <search>
+            <match>eval_access</match>
+            <match>xfa_resolvenode</match>
+        </search>
+    </rule>
+    
+    <rule name="pdf.generic.javascript.A" weight="0" description="check shellcode info" feedback="0.5">
+        <pre-match>
+            <match><![CDATA[<javascript>]]></match>
+        </pre-match>
+        <search>
+            <regexp>(%[uU][0-9A-Fa-f]{4}){80}</regexp>
+        </search>
+    </rule>
+    <rule name="pdf.virus.xfa.data.unsafe" weight="20" description="check xfa.data info" feedback="0.5">
+        <pre-match>
+            <match><![CDATA[k94id5xi3_uopa2g]]></match>
+        </pre-match>
+    </rule>
+
+</rule-set>
+
+<rule-set category="generic-detection">
+    <rule name="generic.encrpyted_pe" weight="20" description="Embedded and Encrypted PE File" >
+        <pre-match>
+            <match><![CDATA[pe_encrypted="true"]]></match>
+        </pre-match>
+    </rule>
+
+    <rule name="generic.embedded_pe" weight="0" description="Embedded PE File" >
+        <pre-match>
+            <match><![CDATA[<embedded_file]]></match>
+        </pre-match>
+    </rule>
+
+    <rule name="generic.api_hash" weight="20" description="Find Hashed Windows API" >
+        <pre-match>
+            <match><![CDATA[</api_hash>]]></match>
+        </pre-match>
+    </rule>
+</rule-set>
+
+</xmlpattern>

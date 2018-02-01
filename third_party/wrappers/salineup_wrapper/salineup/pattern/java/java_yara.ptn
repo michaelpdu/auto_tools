@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlpattern version="2.05.0000">
+
+<yara>
+    <import type="java_constant_pool" path="pattern/java/JavaYara/je_constant_pool.yar" />
+    <import type="java_static_behavior" path="pattern/java/JavaYara/je_static_behavior.yar" />
+    <import type="java_behavior" path="pattern/java/JavaYara/je_behavior.yar" />
+</yara>
+
+
+<!-- Java Static Rules -->
+
+<!-- Java Static CVE Rules -->
+
+<rule name="JAVA.SPEC.CVE-2009-3867.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2009_3867_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2009-3867.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2009_3867_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2009-3867.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2009_3867_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2009-3867.SD" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2009_3867_D</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2009-3869.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2009_3869_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2010-0094.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2010_0094_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2010-0094.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2010_0094_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2010-0094.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2010_0094_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2010-0094.SD" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2010_0094_D</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2010-0840.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2010_0840_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2010-0842.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2010_0842_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2010-3563.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2010_3563_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2010-4452.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2010_4452_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2011-3544.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2011_3544_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2011-3544.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2011_3544_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2011-3544.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2011_3544_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2011-3544.SD" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2011_3544_D</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2011-3544.SE" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2011_3544_E</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-0507.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_0507_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-0507.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_0507_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-0507.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_0507_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-0507.SD" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_0507_D</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-0507.SE" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_0507_E</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-0507.SF" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_0507_F</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-4681.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_4681_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-5076.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_5076_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-5076.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_5076_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-5076.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2012_5076_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0422.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_0422_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0422.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_0422_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0422.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_0422_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0422.SD" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_0422_D</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0422.SE" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_0422_E</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0422.SF" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_0422_F</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0431.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_0431_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0431.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_0431_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0431.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_0431_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_1493_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_1493_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_1493_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.SD" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_1493_D</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.SE" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_1493_E</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.SF" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_1493_F</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.SG" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_1493_G</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.SH" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_1493_H</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.SI" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_1493_I</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2423.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2423_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2423.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2423_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2423.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2423_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2460.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2460_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2460.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2460_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2460.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2460_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2463.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2463_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2463.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2463_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2465.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2465_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2465.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2465_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2465.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2465_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2465.SD" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2465_D</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2465.SE" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2013_2465_E</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2007-2175.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_CVE_2007_2175_A</match>
+</rule>
+
+
+<!-- Java Static Generic Rules -->
+
+<rule name="JAVA.SIG.TypeConfusion.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_TYPECONFUSION_A</match>
+</rule>
+
+<rule name="JAVA.SIG.TypeConfusion.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_TYPECONFUSION_B</match>
+</rule>
+
+<rule name="JAVA.SIG.TypeConfusion.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_TYPECONFUSION_C</match>
+</rule>
+
+<rule name="JAVA.SIG.SecurityManager.SA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_SECURITYMANAGER_A</match>
+</rule>
+
+<rule name="JAVA.SIG.SecurityManager.SB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_SECURITYMANAGER_B</match>
+</rule>
+
+<rule name="JAVA.SIG.SecurityManager.SC" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_SECURITYMANAGER_C</match>
+</rule>
+
+<rule name="JAVA.SIG.SecurityManager.SD" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_SECURITYMANAGER_D</match>
+</rule>
+
+<rule name="JAVA.SIG.SecurityManager.SE" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_SECURITYMANAGER_E</match>
+</rule>
+
+<rule name="JAVA.SIG.SecurityManager.SF" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_SECURITYMANAGER_F</match>
+</rule>
+
+<rule name="JAVA.SIG.SecurityManager.SG" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_SECURITYMANAGER_G</match>
+</rule>
+
+<rule name="JAVA.SIG.SecurityManager.SH" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_SECURITYMANAGER_H</match>
+</rule>
+
+<rule name="JAVA.SIG.SecurityManager.SI" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_SECURITYMANAGER_I</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SA" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_A</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SB" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_B</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SC" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_C</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SD" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_D</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SE" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_E</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SF" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_F</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SG" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_G</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SH" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_H</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SI" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_I</match>
+</rule>
+
+<rule name="JAVA.SIG.Exec.SJ" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_EXEC_J</match>
+</rule>
+
+<rule name="JAVA.SIG.URL.SA" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_URL_A</match>
+</rule>
+
+<rule name="JAVA.SIG.URL.SB" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_URL_B</match>
+</rule>
+
+<rule name="JAVA.SIG.URL.SC" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_URL_C</match>
+</rule>
+
+<rule name="JAVA.SIG.URL.SD" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_URL_D</match>
+</rule>
+
+<rule name="JAVA.SIG.URL.SE" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_URL_E</match>
+</rule>
+
+<rule name="JAVA.SIG.URL.SF" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_URL_F</match>
+</rule>
+
+<rule name="JAVA.SIG.ClassLoader.SA" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_CLASSLOADER_A</match>
+</rule>
+
+<rule name="JAVA.SIG.ClassLoader.SB" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_CLASSLOADER_B</match>
+</rule>
+
+<rule name="JAVA.SIG.ClassLoader.SC" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_CLASSLOADER_C</match>
+</rule>
+
+<rule name="JAVA.SIG.ClassLoader.SD" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_CLASSLOADER_D</match>
+</rule>
+
+<rule name="JAVA.SIG.ClassLoader.SE" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_CLASSLOADER_E</match>
+</rule>
+
+<rule name="JAVA.SIG.ClassLoader.SF" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_CLASSLOADER_F</match>
+</rule>
+
+<rule name="JAVA.SIG.DefineClass.SA" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_DEFINECLASS_A</match>
+</rule>
+
+<rule name="JAVA.SIG.DefineClass.SB" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_DEFINECLASS_B</match>
+</rule>
+
+<rule name="JAVA.SIG.DefineClass.SC" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_DEFINECLASS_C</match>
+</rule>
+
+<rule name="JAVA.SIG.DefineClass.SD" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_DEFINECLASS_D</match>
+</rule>
+
+<rule name="JAVA.SIG.DefineClass.SE" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_DEFINECLASS_E</match>
+</rule>
+
+<rule name="JAVA.SIG.DefineClass.SF" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_DEFINECLASS_F</match>
+</rule>
+
+<rule name="JAVA.SIG.DefineClass.SG" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_DEFINECLASS_G</match>
+</rule>
+
+<rule name="JAVA.SIG.Metasploit.SA" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_METASPLOIT_A</match>
+</rule>
+
+<rule name="JAVA.SIG.Regex.SA" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_REGEX_A</match>
+</rule>
+
+<rule name="JAVA.SIG.ACC.SA" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_ACC_A</match>
+</rule>
+
+<rule name="JAVA.SIG.ACC.SB" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_HEU_ACC_B</match>
+</rule>
+
+<rule name="JAVA.SIG.String.SA" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_SIG_STRING_A</match>
+</rule>
+
+<rule name="JAVA.SIG.String.SB" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_SIG_STRING_B</match>
+</rule>
+
+<rule name="JAVA.SIG.String.SC" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_SIG_STRING_C</match>
+</rule>
+
+<rule name="JAVA.SIG.String.SD" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_SIG_STRING_D</match>
+</rule>
+
+<rule name="JAVA.SIG.String.SE" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_SIG_STRING_E</match>
+</rule>
+
+<rule name="JAVA.SIG.String.SF" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_SIG_STRING_F</match>
+</rule>
+
+<rule name="JAVA.SIG.HW.SA" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_SIG_HW_A</match>
+</rule>
+
+<rule name="JAVA.SIG.HW.SB" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_SIG_HW_B</match>
+</rule>
+
+<rule name="JAVA.SIG.HW.SC" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_STATIC_SIG_HW_C</match>
+</rule>
+
+
+
+
+
+<!-- Java Dynamic Rules -->
+
+<!-- Java Dynamic CVE Rules -->
+
+<rule name="JAVA.SPEC.CVE-2008-5353.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2008_5353_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2009-3867.DA" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_CVE_2009_3867_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2010-0094.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2010_0094_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2011-3544.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2011_3544_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-0507.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2012_0507_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-0507.DB" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2012_0507_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-0507.DC" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_CVE_2012_0507_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-1723.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2012_1723_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-4681.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2012_4681_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-5076.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2012_5076_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-0422.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2013_0422_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-1493.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2013_1493_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2423.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2013_2423_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2423.DB" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2013_2423_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2423.DC" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2013_2423_C</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2465.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2013_2465_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2470.DA" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_CVE_2013_2470_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2470.DB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_CVE_2013_2470_B</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2013-2471.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_CVE_2013_2471_A</match>
+</rule>
+
+
+
+<!-- Java Dynamic Generic Rules -->
+
+<rule name="JAVA.HEU.Trojan.DA" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_TROJAN_A</match>
+</rule>
+
+<rule name="JAVA.HEU.PermissionSet.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_PERMISSIONSET_A</match>
+</rule>
+
+<rule name="JAVA.HEU.JDBC.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_JDBC_A</match>
+</rule>
+
+<rule name="JAVA.HEU.JDBC.DB" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_JDBC_B</match>
+</rule>
+
+<rule name="JAVA.HEU.JDBC.DC" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_JDBC_C</match>
+</rule>
+
+<rule name="JAVA.HEU.ElementFromComplex.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_ELEMENTFROMCOMPLEX_A</match>
+</rule>
+
+<rule name="JAVA.HEU.WritableRaster.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_WRITABLERASTER_A</match>
+</rule>
+
+<rule name="JAVA.HEU.WritableRaster.DB" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_WRITABLERASTER_B</match>
+</rule>
+
+<rule name="JAVA.HEU.WritableRaster.DC" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_WRITABLERASTER_C</match>
+</rule>
+
+<rule name="JAVA.HEU.WritableRaster.DD" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_WRITABLERASTER_D</match>
+</rule>
+
+<rule name="JAVA.HEU.ClassLoader.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_CLASSLOADER_A</match>
+</rule>
+
+<rule name="JAVA.HEU.JSInternalContext.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_JSINTERNALCONTEXT_A</match>
+</rule>
+
+<rule name="JAVA.HEU.DeserializeObject.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_DESERIALIZEOBJECT_A</match>
+</rule>
+
+<rule name="JAVA.HEU.DeserializeObject.DB" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_DESERIALIZEOBJECT_B</match>
+</rule>
+
+<rule name="JAVA.HEU.DeserializeObject.DC" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_DESERIALIZEOBJECT_C</match>
+</rule>
+
+<rule name="JAVA.HEU.MethodLookup.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_METHODLOOKUP_A</match>
+</rule>
+
+<rule name="JAVA.HEU.NewInstance.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_NEWINSTANCE_A</match>
+</rule>
+
+<rule name="JAVA.HEU.HexEncode.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_HEXENCODE_A</match>
+</rule>
+
+<rule name="JAVA.HEU.HexEncode.DB" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_HEXENCODE_B</match>
+</rule>
+
+<rule name="JAVA.HEU.DoPriviledged.DA" confidence='heu_high' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_DOPRIVILEDGED_A</match>
+</rule>
+
+<rule name="JAVA.HEU.AllPermission.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_ALLPERMISSION_A</match>
+</rule>
+
+<rule name="JAVA.HEU.AllPermission.DB" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_ALLPERMISSION_B</match>
+</rule>
+
+<rule name="JAVA.HEU.File.DA" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_FILE_A</match>
+</rule>
+
+<rule name="JAVA.HEU.File.DB" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_FILE_B</match>
+</rule>
+
+<rule name="JAVA.HEU.DefineClass.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_DEFINECLASS_A</match>
+</rule>
+
+<rule name="JAVA.HEU.MethodReflect.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_METHODREFLECT_A</match>
+</rule>
+
+<rule name="JAVA.HEU.GetSystemProperty.DA" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_GETSYSTEMPROPERTY_A</match>
+</rule>
+
+<rule name="JAVA.HEU.SecurityManager.DA" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_SECURITYMANAGER_A</match>
+</rule>
+
+<rule name="JAVA.HEU.SecurityManager.DB" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_SECURITYMANAGER_B</match>
+</rule>
+
+<rule name="JAVA.HEU.SecurityManager.DC" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_SECURITYMANAGER_C</match>
+</rule>
+
+<rule name="JAVA.HEU.SecurityManager.DD" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_SECURITYMANAGER_D</match>
+</rule>
+
+<rule name="JAVA.HEU.SecurityManager.DE" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_SECURITYMANAGER_E</match>
+</rule>
+
+<rule name="JAVA.HEU.StaticSetter.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_STATICSETTER_A</match>
+</rule>
+
+<rule name="JAVA.HEU.StaticSetter.DB" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_STATICSETTER_B</match>
+</rule>
+
+<rule name="JAVA.HEU.URL.DA" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_URL_A</match>
+</rule>
+
+<rule name="JAVA.HEU.URL.DB" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_URL_B</match>
+</rule>
+
+<rule name="JAVA.HEU.URL.DC" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_URL_C</match>
+</rule>
+
+<rule name="JAVA.HEU.Exec.DA" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_EXEC_A</match>
+</rule>
+
+<rule name="JAVA.HEU.Exec.DB" confidence='heu_midium' fbtype='page' fbrate='0.0'>
+    <match>JAVA_DYN_HEU_EXEC_B</match>
+</rule>
+
+<rule name="JAVA.HEU.Exec.DC" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_EXEC_C</match>
+</rule>
+
+<rule name="JAVA.HEU.Exec.DD" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_EXEC_D</match>
+</rule>
+
+<rule name="JAVA.HEU.Exec.DE" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>JAVA_DYN_HEU_EXEC_E</match>
+</rule>
+
+
+
+</xmlpattern>

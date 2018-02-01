@@ -1,0 +1,59 @@
+count of Total class info count
+sum of Total class info count
+count of method info count
+sum of method info count
+count of Total valid method info count
+sum of Total valid method info count
+class info count smaller than ...
+class info count larger than ...
+method info count larger than ...
+valid method info count larger than ...
+big size string
+hex rate in string
+suspicious number
+count of analyzing one swf
+Find check flash version in constant string
+Find PE in binary data
+Find embedded swf
+Find Embedded Flash and Trigger LoadBytes
+Error in readTag
+ABC code size is small
+Find suspicious code in binary data
+Empty EndOfContent
+Find payload in constant string
+swf_parser_cve
+ttf_checker_cve
+Find check os version in constant string
+Find LocalConnection in constant string
+FileLoadingService
+Find create script jscode
+Find SWF in binary data
+parse constant pool error
+Total class info count is 0
+negative number count larger than max
+check_os_version_in_constant
+signiture_cve
+Heap Spray
+find_vector_in_constant
+find_ByteArrayAsset_in_constant
+find_version_in_constant
+find_capabilities_in_constant
+find_addEventListener_in_constant
+find_domainMemory_in_constant
+find_getDefinitionByName_in_constant
+find_createMessageChannel_in_constant
+find_createWorker_in_constant
+find_exec_in_constant
+find_payload_in_constant
+find_valueof_in_constant
+find_virtualprotect_in_constant
+find_opaqueBackground_in_constant
+find_recreateTextLine_in_constant
+find_Placement_in_constant
+findFocusManage
+find_api_local_connection_in_constant
+Find rtmp in constant string
+signature_normal_crash
+Find famous url in constant string
+Find normal evidence in constant string
+find_NOP_in_constant

@@ -1,0 +1,1506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlpattern version="2.05.0000">
+
+<yara>
+  <import type="html" path="pattern/html/html.yar" />
+  <import type="javascript_behavior" path="pattern/html/javascript_behavior.yar" />
+  <import type="javascript" path="pattern/html/javascript.yar" />
+  <import type="http_header" path="pattern/html/http_header.yar" />
+</yara>
+
+
+<rule name="JSRansom.DBG.ExpandEnvTemp.CharCodeAt" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_EXPANDENV_TEMP_CHARCODEAT</match>
+</rule>
+
+<rule name="JSRansom.DBG.CreateXObject.DCC" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CREATEXOBJECT_DCC</match>
+</rule>
+
+<rule name="JSRansom.DBG.CheckFileExists.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECK_FILE_EXISTS</match>
+</rule>
+
+<rule name="JSRansom.DBG.StdIn.Column.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_STDIN_COLUMN</match>
+</rule>
+
+<rule name="JSRansom.DBG.ScriptEngine.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CALL_SCRIPTENGINE</match>
+</rule>
+
+<rule name="JSRansom.DBG.CCON.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JS_CC_ON</match>
+</rule>
+
+<rule name="JSRansom.DBG.UnknownTypeof.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JS_UNKONWN_TYPEOF</match>
+</rule>
+
+<rule name="JSRansom.SIG.VBS.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JS_VBS_KEYWORDS</match>
+</rule>
+
+<rule name="JSRansom.HEU.HTTPDownloadSave.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_HTTP_DOWNLOAD_SAVE</match>
+</rule>
+
+<rule name="JSRansom.HEU.HTTPDownloadSaveAccessFakeBody.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_HTTP_DOWNLOAD_SAVE_ACCESS_FAKE_BODY</match>
+</rule>
+
+<rule name="JSRansom.HEU.HTTPDownloadSaveLoadContent.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_HTTP_DOWNLOAD_SAVE_LOAD_CONTENT</match>
+</rule>
+
+<rule name="JSRansom.HEU.HTTPDownloadSaveExec.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_HTTP_DOWNLOAD_SAVE_EXEC</match>
+</rule>
+
+<rule name="JSRansom.HEU.HTTPRequestADODB.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_HTTP_REQUEST_ADODB</match>
+</rule>
+
+<rule name="JSRansom.HEU.HTTPDownloadExec.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_HTTP_DOWNLOAD_EXEC</match>
+</rule>
+
+
+<rule name="JS.HEU.ShellCode.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_SHELLCODE_A</match>
+</rule>
+
+<rule name="JS.HEU.ShellCode.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_SHELLCODE_B</match>
+</rule>
+
+<rule name="JS.HEU.ShellCode.C" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_SHELLCODE_C</match>
+</rule>
+
+<rule name="JS.HEU.ShellCode.D" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_SHELLCODE_D</match>
+</rule>
+
+<rule name="JS.HEU.ShellCode.F" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+      <match>JSB_SHELLCODE_F</match>
+</rule>
+
+<rule name="JS.HEU.LikeAnglerEK.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_I</match>
+  <match>JSB_COLLECT_GARBAGE</match>
+  <match>JSB_UNESCAPEPARAMTOOLONG_A</match>
+</rule>
+
+<rule name="JS.HEU.LikeAngler.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_EK_DOCUMENT_SCRIPT_SETATTRIBUTE</match>
+  <or>
+    <match>JSB_CHECKAV_I</match>
+    <match>JSB_CHECKAV_E</match>
+  </or>
+</rule>
+
+<rule name="JS.HEU.LikeAngler.C" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_SIG_APPENDCHILD_PO565</match>
+    <match>JS_CHECK_AV_SIG_A</match>
+  </or>
+  <match>JS_CHECKAV_J</match>
+</rule>
+
+<rule name="JS.SIG.ShellCode.G" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_SHELLCODE_G</match>
+</rule>
+
+<rule name="JS.SIG.ShellCode.H" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_SHELLCODE_H</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.C" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JS_RISKACX_C</match>
+</rule>
+
+<rule name="JS.SIG.IframeHidden.D" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_RANDOMNUMBER_D</match>
+  <match>JSB_IFRAMEHIDDEN_D</match>
+</rule>
+
+<rule name="JS.SIG.Iframer.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_IFRAME_A</match>
+</rule>
+
+<rule name="JS.SIG.JsGenerateApplet.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_JSGENERATEAPPLET_A</match>
+</rule>
+
+<rule name="JS.SIG.HeapLib.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_HEAPLIB_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2013-1347" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2013_1347</match>
+</rule>
+
+<rule name="JS.HEU.HeapSpray.A" confidence='heu_low' fbtype='page' fbrate='0.01'>
+  <match>JS_HEAPSPRAY_A</match>
+</rule>
+
+<rule name="JS.HEU.HeapSpray.B" confidence='heu_low' fbtype='page' fbrate='0.01'>
+  <match>JS_HEAPSPRAY_B</match>
+</rule>
+
+<rule name="JS.HEU.HeapSpray.C" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_HEAPSPRAY_C</match>
+</rule>
+<rule name="JS.SIG.ROP.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_ROP_A</match>
+</rule>
+
+<rule name="JS.SIG.ROP.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_ROP_B</match>
+</rule>
+
+<rule name="JS.SIG.ROP.C" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_ROP_C</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2013-3893.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_CVE_2013_3893_A</match>
+    <match>JS_CVE_2013_3893_B</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2006-1016.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JSB_CVE_2006_1016_A</match>
+    <match>JS_CVE_2006_1016_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2011-0026.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2011_0026_A</match>
+</rule>
+
+//MS08-041
+<rule name="JS.SPEC.CVE-2008-2463.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2008_2463_B</match>
+</rule>
+
+//Java NPAPI plugin exploit
+<rule name="JS.SPEC.CVE-2010-1423.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>  
+    <match>JS_CVE_2010_1423_A</match>
+    <match>JSB_CVE_2010_1423_A</match>
+  </or>
+</rule>
+
+//Java NPAPI plugin exploit
+<rule name="JS.SPEC.CVE-2010-1423.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2010_1423_B</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-1534.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2009_1534_A</match>
+  <match>JSB_CVE_2009_1534_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-0806.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2010_0806_A</match>
+</rule>
+
+<!--
+<rule name="JS.SPEC.MS06-013.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_MS06_013_A</match>
+</rule>
+-->
+<rule name="JS.SIG.LongUnescape.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JS_LONGUNESCAPE_A</match>
+</rule>
+
+<rule name="JS.SIG.GENERIC.Z" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <or>  
+    <match>JS_GENERIC_Z</match>
+    <match>JSB_GENERIC_Z</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-4452.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2010_4452_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-1885.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>  
+    <match>JS_CVE_2010_1885_A</match>
+    <match>JSB_CVE_2010_1885_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-1885.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2010_1885_B</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-1885.D" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>  
+    <match>JS_CVE_2010_1885_D</match>
+    <match>JSB_CVE_2010_1885_D</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.BlackholeKit.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_BLACKHOLEKIT_A</match>
+    <match>JSB_BLACKHOLEKIT_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.BlackholeKit.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_BLACKHOLEKIT_B</match>
+</rule>
+
+<rule name="JS.SIG.BlackholeKit.F" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_BLACKHOLEKIT_F</match>
+    <match>JSB_BLACKHOLEKIT_F</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.BlackholeKit.G" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_BLACKHOLEKIT_G</match>
+    <match>JSB_BLACKHOLEKIT_G</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.BlackholeKit.H" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_BLACKHOLEKIT_H</match>
+    <match>JSB_BLACKHOLEKIT_H</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.BlackholeKit.K" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_BLACKHOLEKIT_K</match>
+</rule>
+
+<rule name="JS.SIG.BlackholeKit.L" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_BLACKHOLEKIT_L</match>
+</rule>
+
+<rule name="JS.SIG.CSS.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CSS_A</match>
+</rule>
+
+<rule name="JS.SIG.PhoenixKit.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_PHOENIXKIT_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2012-0003.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2012_0003_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2007-5660.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2007_5660_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-0950.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2009_0950_B</match>
+</rule>
+
+<rule name="JS.SPEC.2012-4792.G" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_2012_4792_G</match>
+</rule>
+
+<rule name="JS.SPEC.2012-4792.H" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_2012_4792_H</match>
+</rule>
+
+<rule name="JS.SIG.CoolEK.C" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_COOLEK_C</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2014-0322.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2014_0322_A</match>
+</rule>
+
+<rule name="VBS.SPEC.CVE-2014-6332.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_VBS_CVE_2014_6332_A</match>
+    <match>HTML_VBS_CVE_2014_6332_A</match>
+    <match>JSB_VBS_CVE_2014_6332_A</match>
+  </or>
+</rule>
+
+<rule name="VBS.SPEC.CVE-2014-6332.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_VBS_CVE_2014_6332_B</match>
+    <match>HTML_VBS_CVE_2014_6332_B</match>
+    <match>JSB_VBS_CVE_2014_6332_B</match>
+  </or>
+</rule>
+
+<rule name="VBS.SPEC.CVE-2014-6332.C" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_VBS_CVE_2014_6332_C</match>
+    <match>HTML_VBS_CVE_2014_6332_C</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.Styx.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_STYX_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2013-2551.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2013_2551_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2013-2551.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JSB_CVE_2013_2551_B</match>
+    <match>JS_CVE_2013_2551_B</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2013-3897.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2013_3897_A</match>
+  <match>JSB_CVE_2013_3897_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2011-2039.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2011_2039_A</match>
+</rule>
+
+<rule name="JS.SIG.Webhmi.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_WEBHMI_A</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_A</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.B" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_B</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.C" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_C</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.D" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_D</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.E" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_E</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.F" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_F</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.G" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_G</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.H" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_H</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.I" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_I</match>
+</rule>
+
+<rule name="JS.SIG.CheckAV.J" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JS_CHECKAV_J</match>
+</rule>
+
+<rule name="JS.SIG.GonDady.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_GONDADY_A</match>
+</rule>
+
+<rule name="JS.SIG.PDFinIframe.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_PDFINIFRAME_A</match>
+</rule>
+
+<rule name="JS.SIG.PDFinIframe.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_PDFINIFRAME_B</match>
+</rule>
+
+<rule name="JS.SIG.dmac.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_DMAC_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-0187.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2009_0187_A</match>
+    <match>JSB_CVE_2009_0187_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-1568.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2009_1568_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-3031.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2009_3031_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-3552.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2010_3552_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-3552.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2010_3552_B</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2007-3435.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_3435_A</match>
+    <match>JSB_CVE_2007_3435_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.OSVDB-64839.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_OSVDB_64839_A</match>
+    <match>JSB_OSVDB_64839_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-3867.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2009_3867_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-5353.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2008_5353_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-0805.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2010_0805_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-3747.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2010_3747_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-4452.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2010_4452_B</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-1885.C" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2010_1885_C</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-0950.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2009_0950_A</match>
+</rule>
+
+<rule name="JS.SIG.Incognito.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_INCOGNITO_A</match>
+</rule>
+
+<rule name="JS.SIG.Incognito.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_INCOGNITO_B</match>
+</rule>
+
+<rule name="JS.SIG.Incognito.C" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_INCOGNITO_C</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-1799.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2010_1799_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-2551.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2008_2551_A</match>
+</rule>
+
+<rule name="HTML.SIG.CVE-2008-2551.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2008_2551_B</match>
+    <match>JSB_CVE_2008_2551_B</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.IE8ZeroDayYMjf.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_IE8ZERODAYYMJF_A</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISKACX_B</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.D" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_RISKACX_D</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.E" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_RISKACX_E</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.F" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_RISKACX_F</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.G" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_RISKACX_G</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.H" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_RISKACX_H</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.I" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISKACX_I</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.J" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISKACX_J</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.K" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISKACX_K</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.L" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISKACX_L</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.M" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISKACX_M</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.N" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISKACX_N</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.O" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_RISKACX_O</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.P" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISKACX_P</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.Q" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISKACX_Q</match>
+  <match>JSB_UNESCAPEPARAMTOOLONG_A</match>
+</rule>
+
+<rule name="JS.SIG.FakeAlert.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JS_FAKEALERT_A</match>
+</rule>
+
+<rule name="JS.SIG.FakeAlert.B" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JS_FAKEALERT_B</match>
+</rule>
+
+<rule name="JS.SIG.FSOStartUp.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JSB_FSOSTARTUP_A</match>
+</rule>
+
+<rule name="JS.SIG.ObjLoadBinary.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JSB_OBJLOADBINARY_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2007-5601.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2007_5601_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2007-5601.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_5601_A</match>
+    <match>JSB_CVE_2007_5601_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.NIMDA.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JS_NIMDA_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-0075.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2009_0075_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-1136.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_CVE_2009_1136_A</match>
+    <match>JSB_CVE_2009_1136_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2009-1136.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JS_CVE_2009_1136_A</match>
+    <match>JSB_UNESCAPEPARAMTOOLONG_A</match>
+    <match>JSB_COLLECT_GARBAGE</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-0624.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_CVE_2008_0624_AB</match>
+    <match>JSB_CVE_2008_0624_AB</match>
+  </or>
+  <match>JSB_CVE_2008_0624_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2012-1889.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2012_1889_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-4844.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2008_4844_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2004-1043.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2004_1043_A</match>
+</rule>
+
+<rule name="JS.SIG.JAR.SmallWindowSize.C" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_SMALLWINDOWSIZE_C</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-4844.B" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2008_4844_B</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-4844.C" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2008_4844_C</match>
+    <match>JSB_CVE_2008_4844_C</match>
+  </or>
+</rule>
+<rule name="JS.SPEC.CVE-2008-3008.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2008_3008_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-1472.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2008_1472_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-1309.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2008_1309_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-0624.B" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2008_0624_B</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2008-0015.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2008_0015_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2007-5779.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_5779_A</match>
+    <match>JSB_CVE_2007_5779_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2007-4336.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2007_4336_A</match>
+</rule>
+
+<rule name="JS.SPEC.OSVDB-54706" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_OSVDB_54706</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2005-2265.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2005_2265_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2007-3147.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_3147_A</match>
+    <match>JSB_CVE_2007_3147_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2007-2222.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2007_2222_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2007-0018.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_0018_A</match>
+    <match>JSB_CVE_2007_0018_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.Neutrino-Exploit-Kit.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>Neutrino_Exploit_Kit_A</match>
+</rule>
+
+<rule name="JS.SIG.Angler-Exploit-Kit.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>Angler_Exploit_Kit_A</match>
+</rule>
+
+<rule name="JS.SIG.Magnitude-Exploit-Kit.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>Magnitude_Exploit_Kit_A</match>
+</rule>
+
+<rule name="JS.SIG.Rig-Exploit-Kit.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>Rig_Exploit_Kit_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2015-2425.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2015_2425_A</match>
+</rule>
+
+<rule name="JS.HEU.injected-iframe.A" confidence='heu_low' fbtype='page' fbrate='1.0'>
+  <match>HTML_INJECTED_IFRAME_A</match>
+</rule>
+
+<rule name="HTML.SPEC.CVE-2003-0344.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2003_0344_A</match>
+    <match>JSB_CVE_2003_0344_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SPEC.CVE-2007-0038.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_0038_A</match>
+    <match>JSB_CVE_2007_0038_A</match>
+  </or>
+</rule>
+
+<!--
+Removed by MD, this rule makes no sence for CVE-2010-0480, please refer to:
+https://www.rapid7.com/db/modules/exploit/windows/browser/ms10_026_avi_nsamplespersec
+
+For fixing SEG case, we'll remove this rule.
+TeamTrack: https://sbm.trendmicro.com/tmtrack/tmtrack.dll?View&I=516462&T=1000
+
+
+<rule name="HTML.SPEC.CVE-2010-0480.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2010_0480_A</match>
+    <match>JSB_CVE_2010_0480_A</match>
+  </or>
+</rule>
+-->
+
+<rule name="HTML.SPEC.CVE-2010-0483.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2010_0483_A</match>
+    <match>JSB_CVE_2010_0483_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SPEC.CVE-2005-4560.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+   <or>
+    <match>HTML_CVE_2005_4560_A</match>
+    <match>JSB_CVE_2005_4560_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SPEC.CVE-2013-0074.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2013_0074_A</match>
+    <match>JSB_CVE_2013_0074_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SPEC.CVE-2005-1790.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2005_1790_A</match>
+</rule>
+
+<rule name="JS.SIG.GENERIC.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_SIG_GENERIC_A</match>
+</rule>
+
+<rule name="JS.HEU.CVE-2012-3993.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2012_3993_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2008-4844.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2008_4844_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-0758.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2013_0758_A</match>
+  <match>JS_CVE_2013_0758_B</match>
+  <match>HTML_CVE_2013_0758_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-0758.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2013_0758_C</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-1710.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2013_1710_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2014-1510.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2014_1510_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2014-8636.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JS_CVE_2014_8636_A</match>
+  </or>
+</rule>
+
+<rule name="JSB.RISK-LANDINGPAGE.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_RISK_LANDINGPAGE_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2008-5492.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2008_5492_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2008-5711.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2008_5711_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-0215.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_0215_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-1612.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_1612_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-3028.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_3028_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-3033.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_3033_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-3693.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_3693_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2010-1818.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_QuickTime_ActiveX_A</match>
+  <match>JS_LONGUNESCAPE_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2010-3973.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_Microsoft_WMI_Administration_Tools_ActiveX_A</match>
+  <match>JSB_UNESCAPEPARAMTOOLONG_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2011-2404.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_HP_Easy_Printer_Care_XMLSimpleAccessor_ActiveX_A</match>
+  <match>JSB_UNESCAPEPARAMTOOLONG_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2011-2657.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2011_2657_A</match>
+</rule>
+
+
+<rule name="JS.SIG.CVE-2011-4786.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_HP_Easy_Printer_Care_XMLCacheMgr_ActiveX_A</match>
+  <match>JSB_UNESCAPEPARAMTOOLONG_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2012-0708.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2012_0708_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2012-2516.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2012_2516_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2012-4177.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2012_4177_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2012-4598.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2012_4598_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-0108.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2013_0108_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-1559.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2013_1559_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-4798.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2013_4798_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2014-2364.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2014_2364_A</match>
+</rule>
+
+<rule name="JS.SIG.HONEYWELL-TEAM-EXEC.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_HONEYWELL_TEMA_EXEC_A</match>
+</rule>
+
+<rule name="JS.SIG.SYNACTIS-CONNECTTOSYNACTIS-BOF.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_SYNACTIS_CONNECTTOSYNACTIS_BOF_A</match>
+</rule>
+
+<rule name="JS.SIG.X360-VIDEO-PLAYER-SET-TEXT-BOF.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_X360_VIDEO_PLAYER_SET_TEXT_BOF_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2006-3961.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2006_3961_A</match>
+    <match>JSB_CVE_2006_3961_A</match>
+  </or>
+</rule>
+
+<rule name="JS.HEU.AVENTAIL-EPI-ACTIVEX.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_AVENTAIL_EPI_ACTIVEX_A</match>
+    <match>JSB_AVENTAIL_EPI_ACTIVEX_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.CISCO-PLAYERPT-SETSOURCE.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CISCO_PLAYERPT_SETSOURCE_A</match>
+    <match>JSB_CISCO_PLAYERPT_SETSOURCE_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.CVE-2003-1336.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2003_1336_A</match>
+    <match>JSB_CVE_2003_1336_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.CVE-2004-0636.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2004_0636_A</match>
+    <match>JSB_CVE_2004_0636_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.CVE-2006-2086.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2006_2086_A</match>
+    <match>JSB_CVE_2006_2086_A</match>
+  </or>
+</rule>
+
+<rule name="JS.HEU.CVE-2006-5198.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2006_5198_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2006-5650.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2006_5650_A</match>
+</rule>
+
+<rule name="JS.HEU.CVE-2006-6707.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2006_6707_A</match>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-0325.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_0325_A</match>
+    <match>JSB_CVE_2007_0325_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-0348.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_0348_A</match>
+    <match>JSB_CVE_2007_0348_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-1689.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_1689_A</match>
+    <match>JSB_CVE_2007_1689_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-2918.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_2918_A</match>
+    <match>JSB_CVE_2007_2918_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-2987.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_2987_A</match>
+    <match>JSB_CVE_2007_2987_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-3605.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_3605_A</match>
+    <match>JSB_CVE_2007_3605_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-4515.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_4515_A</match>
+    <match>JSB_CVE_2007_4515_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-5107.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_5107_A</match>
+    <match>JSB_CVE_2007_5107_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-5603.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_5603_A</match>
+    <match>JSB_CVE_2007_5603_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-5660.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_5660_A</match>
+    <match>JSB_CVE_2007_5660_B</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2007-6530.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2007_6530_A</match>
+    <match>JSB_CVE_2007_6530_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2008-0492.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2008_0492_A</match>
+    <match>JSB_CVE_2008_0492_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2008-1724.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2008_1724_A</match>
+    <match>JSB_CVE_2008_1724_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2008-2683.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2008_2683_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2008-2683.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2008_2683_A</match>
+  <match>JSB_CVE_2008_2683_A</match>
+</rule>
+<rule name="HTML.SIG.CVE-2008-4385.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2008_4385_A</match>
+    <match>JSB_CVE_2008_4385_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2008-4388.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2008_4388_A</match>
+    <match>JSB_CVE_2008_4388_A</match>
+  </or>
+</rule>
+
+<rule name="HTML.SIG.CVE-2008-4830.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2008_4830_A</match>
+    <match>JSB_CVE_2008_4830_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.CVE-2008-3878.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2008_3878_A</match>
+  <match>JSB_CVE_2008_3878_A</match>
+</rule>
+
+<rule name="HTML.SIG.CVE-2009-2011.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2009_2011_A</match>
+</rule>
+
+<rule name="HTML.SIG.CVE-2009-4850.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2009_4850_A</match>
+</rule>
+
+<rule name="HTML.SIG.CVE-2011-1774.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2011_1774_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2011-2039.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2011_2039_B</match>
+</rule>
+
+<rule name="HTML.SIG.CVE-2013-2827.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2013_2827_A</match>
+</rule>
+
+<rule name="HTML.SIG.CVE-2009-0323.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2009_0323_A</match>
+</rule>
+
+<rule name="HTML.SIG.CVE-2012-2174.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2012_2174_A</match>
+</rule>
+
+
+<rule name="JS.SIG.X360-VIDEO-PLAYER.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_X360_VIDEO_PLAYER_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-0323.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_0323_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-1568.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_1568_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-2011.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_2011_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-3031.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_3031_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2009-4850.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2009_4850_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2010-1799.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2010_1799_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2010-3747.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2010_3747_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2011-1774.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2011_1774_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2012-2174.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2012_2174_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-2827.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2013_2827_A</match>
+</rule>
+
+<rule name="JS.SIG.GREENDAM-URL.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_GREENDAM_URL_A</match>
+</rule>
+
+<rule name="JS.SIG.REAL-ARCADE-INSTALLERDLG.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JSB_REAL_ARCADE_INSTALLERDLG_A</match>
+    <match>HTML_REAL_ARCADE_INSTALLERDLG_A</match>
+  </or>
+</rule>
+
+
+<rule name="JS.SIG.CVE-2013-1017.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_HEAPSPRAY_A</match>
+  <or>
+	<match>HTML_EMBED_MOV_A</match>
+	<match>JSB_EMBED_MOV_A</match>
+  </or>
+</rule>
+
+
+<rule name="JS.SIG.CVE-2006-3677.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2006_3677_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2006-4777.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JSB_CVE_2006_4777_A</match>
+    <match>JSB_CVE_2006_4777_B</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.CVE-2011-0065.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JSB_CVE_2011_0065_A </match>
+    <match>HTML_CVE_2011_0065_A</match>
+    <match>JSB_CVE_2011_0065_B</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.CVE-2011-0065.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>JS_CVE_2011_0065_A </match>
+</rule>
+
+
+<rule name="JS.SIG.CVE-2011-3658.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2011_3658_A </match>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-1690.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2013_1690_A </match>
+</rule>
+
+<rule name="JS.SIG.CVE-2011-0073.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2011_0073_A </match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2010-3971.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2010_3971_A</match>
+  <match>JS_LONGUNESCAPE_A</match>
+  <match>JSB_UNESCAPEPARAMTOOLONG_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2011-1996.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2011_1996_A</match>
+  <match>JSB_CVE_2013_3897_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2012-0003.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2012_0003_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2012-1876.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_CVE_2012_1876_A</match>
+    <match>JSB_CVE_2012_1876_A</match>
+  </or>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-0025.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2013_0025_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2013-3184.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2013_3184_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2014-0307.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CVE_2014_0307_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2012-4969.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_CVE_2012_4969_A</match>
+</rule>
+
+<rule name="JS.SIG.CVE-2011-2950.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2011_2950_A</match>
+</rule>
+
+<rule name="JS.SIG.EK-Page.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_EK_PAGE_A</match>
+</rule>
+
+<rule name="JS.SIG.EK-Page.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_EK_PAGE_B</match>
+  <match>JSB_EK_PAGE_B</match>
+</rule>
+
+<rule name="JS.SIG.MAXTHON-HISTORY-XCS.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_MAXTHON_HISTORY_XCS</match>
+</rule>
+
+<rule name="JS.SIG.AM_TEAM.EK-Page.C" confidence='heu_midium' fbtype='page' fbrate='0.2'>
+  <match>JS_AM_TEAM_EK_PAGE_C</match>
+  <match>JSB_CHECKAV_I</match>
+</rule>
+
+<rule name="JS.SIG.AM_TEAM.Comment-Autoflash.A" confidence='heu_midium' fbtype='page' fbrate='0.2'>
+  <match>JS_AM_TEAM_RISK_AUTOFLASH_A</match>
+</rule>
+
+<rule name="JS.SIG.RiskAcX.R" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JS_RISKACX_R</match>
+</rule>
+
+<rule name="JS.SIG.AM_TEAM.JARLOADER.A" confidence='heu_midium' fbtype='page' fbrate='0.2'>
+  <match>JS_AM_TEAM_LANDING_JAR_A</match>
+</rule>
+
+<rule name="JS.SIG.AM_TEAM.MULTIDOTURL.A" confidence='heu_midium' fbtype='page' fbrate='0.2'>
+  <match>HTML_AM_TEAM_FLASHMULTIDOT_A</match>
+  <match>JSB_AM_TEAM_IFRAMEMULTIDOT_A</match>
+</rule>
+
+<rule name="JS.SIG.AM_TEAM.LANDING_FLASHRUN.A" confidence='heu_midium' fbtype='page' fbrate='0.2'>
+  <match>JS_AM_TEAM_FLASHRUN_FUFD_A</match>
+</rule>
+
+<rule name="HTML.SPEC.CVE-2015-2419.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>HTML_CVE_2015_2419_A</match>
+  <match>JSB_CHECK_SCRIPT_ENGINE_A</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2015-2419.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>JSB_CHECK_SCRIPT_ENGINE_A</match>
+    <match>JS_SIG_ASSEMBLY</match>
+  </or>
+  <match>JS_SIG_COLLECTGARBAGE</match>
+  <match>JS_CVE_2015_2419_A_STRINGIFY</match>
+</rule>
+
+<rule name="JS.SPEC.CVE-2015-2419.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_SIG_COLLECTGARBAGE</match>
+  <match>JS_SIG_VERSION_KEY</match>
+  <match>JSB_CHECK_SCRIPT_ENGINE_A</match>
+</rule>
+
+<rule name="JS.SIG.KaiXinEK.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_KAIXIN_EK_A</match>
+</rule>
+
+<rule name="JS.SIG.NuclearEK.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_NUCLEAR_EK_A</match>
+</rule>
+
+<rule name="JS.SIG.NuclearEK.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_CHECKAV_J</match>
+  <match>JSB_CHECK_ENV_A</match>
+</rule>
+
+<rule name="JS.SIG.UnknownEK.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+  <match>JSB_UNKNOWN_EK_A</match>
+</rule>
+
+<rule name="JS.HEU.CHECK.PLATFORM.LOAD.SWF.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JS_CHECK_PLATFORM_LOAD_SWF_A_1</match>
+  <match>JS_CHECK_PLATFORM_LOAD_SWF_A_2</match>
+</rule>
+
+<rule name="JS.DBG.KaiXin.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_DBG_KAIXIN_A</match>
+</rule>
+
+<rule name="JS.DBG.KaiXin.B" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JSB_DBG_KAIXIN_B</match>
+</rule>
+
+<rule name="JS.DBG.CheckVersionRedirect.A" confidence='monitor' fbtype='page' fbrate='0.5'>
+  <match>JS_CHECK_VERSION_AND_REDIRECT_A</match>
+</rule>
+
+<rule name="VBS.SIG.Obfuscation.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_VBS_OBFUSCATION_A</match>
+</rule>
+
+<rule name="VBS.SIG.Obfuscation.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_VBS_OBFUSCATION_B</match>
+</rule>
+
+<rule name="HTML.SIG.AM_TEAM.LOCREPLACE.A" confidence='monitor' fbtype='page' fbrate='0.2'>
+  <match>HTML_AM_TEAM_SPACES_TAGS_A</match>
+  <match>JSB_AM_TEAM_LOCREPLACE_A</match>
+</rule>
+
+<rule name="HTML.SIG.AM_TEAM.MULTIVARFLASH.A" confidence='monitor' fbtype='page' fbrate='0.2'>
+  <match>HTML_AM_TEAM_MULTIVAR_FLASH_A</match>
+</rule>
+
+<rule name="VBS.AM_TEAM.REVERSEVBS.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>HTML_AM_TEAM_REVERSEVBS_A</match>
+</rule>
+
+<rule name="JSB.SIG.AM_TEAM.SHARELOC.A" confidence='monitor' fbtype='page' fbrate='0.2'>
+  <match>JS_CHECK_VERSION_AND_REDIRECT_A</match>
+  <match>JSB_AM_TEAM_SHARELOC_A</match>
+</rule>
+
+<rule name="JSB.SIG.AM_TEAM.IFWINDOW.A" confidence='monitor' fbtype='page' fbrate='0.2'>
+  <match>JS_CHECKAV_J</match>
+  <match>JSB_AM_TEAM_IFWINDOW_A</match>
+  <match>JSB_AM_TEAM_IFWINDOW_B</match>
+</rule>
+
+<rule name="JSB.AM_TEAM.SILVERSHELL.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JS_HEAPSPRAY_B</match>
+  <match>JSB_AM_TEAM_SILVERSLED_A</match>
+</rule>
+
+<rule name="HTML.SIG.AM_TEAM.SWFLOADFRAME.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>HTML_SWFLOADFRAME_A</match>
+</rule>
+
+<rule name="HTML.SIG.AM_TEAM.SCRIPTDROPPER.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>HTML_SCRIPTDROPPER_A</match>
+</rule>
+
+<rule name="VBS.SPEC.CVE-2016-0189.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <or>
+    <match>HTML_VBS_CVE_2016_0189_A_exploit</match>
+    <match>JS_VBS_CVE_2016_0189_A_exploit</match>
+    <match>JSB_VBS_CVE_2016_0189_A_exploit</match>
+  </or>
+  <or>
+    <match>JS_VBS_CVE_2016_0189_A_valueof_fuzz</match>
+    <match>JS_VBS_CVE_2016_0189_A_valueof</match>
+    </or>
+</rule>
+
+<rule name="HTML.SIG.OBFUSCATION.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>HTML_SIG_OBFUSCATION_A</match>
+  <match>JS_CHECKAV_J</match>
+</rule>
+
+<rule name="JS.SIG.FLASHSHELL.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_SIG_FLASHSHELL</match>
+</rule>
+
+<rule name="JS.SIG.FLASHSHELL.B" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JS_SIG_FLASHSHELL</match>
+</rule>
+
+<rule name="JS.SIG.SILVERSHELL.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+  <match>JSB_SIG_SILVERSHELL</match>
+</rule>
+
+<rule name="VBS.SIG.OBFUSCATION.A" confidence='monitor' fbtype='page' fbrate='0.5'>
+  <match>JS_VBS_OBFUSCATION</match>
+</rule>
+
+<!-- begin scam site -->
+<!-- WRS Rule 1 -->
+<rule name="HTML.SIG.SCAM_SITE_MYFUNCTION.A" confidence='monitor' fbtype='page' fbrate='0.2'>
+  <match>HTML_SIG_SCAM_SITE_MYFUNCTION_A</match>
+</rule>
+
+<!-- WRS Rule 3 -->
+<rule name="HTML.SIG.SCAM_SITE_SENDKEY.A" confidence='monitor' fbtype='page' fbrate='0.2'>
+  <match>HTML_SIG_SCAM_SITE_SENDKEY_A</match>
+</rule>
+
+<!-- WRS Rule 5 -->
+<rule name="HTML.SIG.SCAM_SITE_INTERVAL.A" confidence='monitor' fbtype='page' fbrate='0.1'>
+  <match>JS_SIG_SCAM_SITE_INTERVAL_A</match>
+  <match>HTML_SIG_SCAM_SITE_CALL_A</match>
+</rule>
+
+<!-- WRS Rule 9 -->
+<rule name="HTML.SIG.SCAM_SITE_FOXBTN.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>HTML_SIG_SCAM_SITE_FOXBTN_A</match>
+</rule>
+
+<!-- WRS Rule 4 -->
+<rule name="HTML.SIG.SCAM_SITE_AUTOPLAY.A" confidence='monitor' fbtype='page' fbrate='0.1'>
+    <match>HTML_SIG_SCAM_SITE_AUTOPLAY_A</match>
+    <match>JS_SIG_SCAM_SITE_ALERT_A</match>
+</rule>
+
+<!-- WRS Rule 11 -->
+<rule name="HTML.SIG.SCAM_SITE_AUTOPLAY.B" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>HTML_SIG_SCAM_SITE_AUTOPLAY_A</match>
+    <match>JS_SIG_SCAM_SITE_INTERVAL_B</match>
+</rule>
+
+<!-- WRS Rule 12 -->
+<rule name="HTML.SIG.SCAM_SITE_TWOFUNCTION.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+  <match>JS_SIG_SCAM_SITE_TWOFUNCTION_A</match>
+</rule>
+<!-- end scam site -->
+</xmlpattern>

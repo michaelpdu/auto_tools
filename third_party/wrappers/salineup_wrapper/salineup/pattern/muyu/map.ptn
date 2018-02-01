@@ -1,0 +1,706 @@
+﻿/////////////////////////////////////////////////////////////////////////////////////
+//
+// version = 1.0.1011
+// the file is case-sensitive for key words
+// all keywords must be low-case
+// words is only valid between "start" and "end" tag
+// if "end" tag is not defined, should in the range 1024 of "start" tag
+//
+/////////////////////////////////////////////////////////////////////////////////
+[meta]
+start=<meta:meta
+end=</meta>
+words="Play Free Online Games, fun games, puzzle games, action games, sports games":olgames_words
+words="Battle.net Account Login":blizzard_words
+words="RuneScape - MMORPG - The No.1 Free Online Multiplayer Game":runescape_words
+words="http://www.miniclip.com/content/game-icons/medium/runescape13.jpg":runescape13_icon
+words="Free Web Hosting Area provides unmetered traffic and free web space for domain":feha_meta
+words="https://www.facebook.com/images/fb_icon_325x325.png":fb_lg_me
+words="www.facebook.com%2Fgroups%2F160681023963896%2F":fbgr_lg
+words="www.facebook.com%2Fsettings%3Fref%3Dmb&amp":fbse_me
+words="using visa, using my visa, using your visa":visumv_me
+words="online banking sign in, rbc, royal bank of canada, rbc financial":roybk_me
+
+[title]
+start=<title>:tt
+end=</title>
+words=周年,qq,淘宝,淘我喜欢,非常6+1,个人客户,paypal,游戏,交易,网上支付,网上银行,中国银行,工商银行,建设银行,深发:深圳发展银行,深圳发展银行,招商银行,光大银行,广发:广东发展银行,广东发展银行,农业银行,民生银行,交通银行,南京银行,江苏银行,雅虎,快乐大本营,快递,EMS,邮政,新浪,海通,&#x6d77;&#x901a;:海通,国金,南航,南方航空,东航,东方航空,国航,方正,华林,安信,国信,中信证券,招商,华泰证券,齐鲁,国泰君安,广发,光大,银河,长江,东方,申银万国,宏源,航天,华鑫,北京高华,高盛高华,国开,民生证券,瑞银,中德,民族,中信建投,东兴,国都,华融,瑞信方正,首创,信达,国际金融,渤海,财达,大同,山西,诚浩,中天,恒泰长财,爱建,华宝,财富里昂,德邦,海际大和,上海证券,中银国际,东海,国联,南京证券,东吴,财通,中信金通,浙商,国元,华安,广发华福,兴业,国盛,中航,中原,恒泰,日信,江海,天风,财富证券,湘财,东莞证券,广州证券,联讯,众成,万联,国海,金元,万和,川财,和兴,华西证券,西南证券,华创,红塔,太平洋,西藏同信,开源,中邮,西部证券,华龙,天源,第一创业,华泰联合,平安,五矿,英大,建银投资,长城,世纪,银泰,中山证券,厦门证券,中信万通,大通,福建海峡银行,上海农商银行,彩票,曾道人:六合彩,白小姐心水论坛:六合彩,单双王:六合彩,上海商業銀行,"wing lung bank":永隆銀行,創興銀行,建設銀行,creditos,facebook,visa,mastercard,orkut,alliance&amp;leicester:leicester,craigslist," ebay":ebay,"bank of america":bankofamerica,santander,華南網路銀行,中信银行,"ASB FastNet":asb,"ASB Securities":asb,登陆,&#24037;&#21830;&#38134;&#34892;,"Yahoo!"
+words="TAM Linhas":tam,Remax,"Bradesco Pessoa":bradesco,Halifax,"HSBC Bank":hsbc,"HSBC Global":hsbc,"Co-operative Bank":coobank,"AOL Mail: Simple, Free, Fun":aolmail
+words="Premiada Cielo":premiadacielo,"Vendas Cielo":vendascielo,"Cielo - Compra de Ouro":cielocompra,"Habbo - Crie seu Habbo, construa seu Quarto":sulakett,"Wells Fargo Home Page":WellsFargo
+words="[bb.com.br]":brbanktitle,"HSBC Oman - Internet Banking - Logon":hsbclogon,"Chase Personal Banking Investments":chaseinvest,"Lloyds TSB":Lloyds TSB  
+words="De Malas Prontas":mastertitle,"Login - PayPaŀ":loginpaypal,"PayPal - Privatkunden - PayPal":paypalPrivatkunden,"Opdater din konto":updateaccount,"Poste Italiane":posteitaliane
+words="Log in to online banking":natwest  
+words="St.George Internet Banking":stgeorge
+words="RE/MAX":remax
+words="Send Money, Pay Online or Set Up a Merchant Account":paypal_words
+words="Gmail: Email from Google":goomail,"Google Docs - Online documents":googledocs
+words="AOL Help":aolhelp
+words="AOL.com - Welcome to AOL":aolcom
+words="Wells Fargo":wellsfargo
+words="Credit Card | Account Update":visa_cc_update
+words="Beskyt dit kredikort":netdan,"Sikker nettbetaling":netdan,"steam community":steam_c
+words=trulia,"Coldwell Banker":cwb,"Banco Bradesco":bradesco
+words="Chase Online - Logon":chaselogon
+words="Home | Interbank - El tiempo vale mas que el dinero":interbank_el
+words="Chase OnlineSM - Logon Form":chase_onlinelog
+words="000webhost.com - free web hosting provider":webhost_tit
+words="Realtor - Home Listings":realtor_tt
+words="Google Docs":goodoc_tt
+words="My Account - AOL Help":aol_help
+words="Outlanders Inc":outlandinc_tt
+words="站点创建成功!本页面由wdcp系统自动生成":wdcp_tt
+words="World of Warcraft Account Login":blizzard_lo_tt
+words="Online Banking Membership Verification":santander_tt
+words="Bradesco S/A":bradesco_tt
+words="Index of /wp-content/themes/eshop/library/includes/affiliates":wordpre_wp_tt
+words="CenturyLink:centurylk_lo_tt
+words="Centurylink.net/Upgrade":centurylk_up_tt
+words="Cielo Fidelidade":cielo_tt_f
+words="Forbidden":fwha_tt
+words="Encurtador de URL - Lince.in":lince_tt
+words="Cielo: Nada supera essa":ciena_tt
+words="Welcome to Facebook - Log In, Sign Up or Learn More":fb_lg_tt
+words="Welcome to Facebook — Log in, sign up or learn more":fb_lg_tts
+words="Webmail Verification":hotmai_tt
+words="Web Admin Reactivation Form":homail_tt
+words="Email Upgrade Page":emailup_tt
+words="Update Your User Details":updaup_tt
+words="Verify Your e-mail Account":verymai_tt
+words="Assistente de Sincroniza":assde_tt
+words="Bem Vindo":bemv_tt
+words="Suspended card":suscd_tt
+words="Opdater din konto PBS  - NETS":netpbs_ttf
+words="Oppdatere kontoen PBS - NETS":netpbs_tts
+words="Buyer Protection Program":ebabp_tt
+words="eBay one of the UK's largest shopping destina":ebyuk_tt
+words="Pay Online, Transfer Money or Accept Card Payments Online":payotm_tt
+words="Logon to NetBank":natbklg_tt
+words="Credit Cards, Rewards, Banking and Loans":disccr_tt
+words="Yahoo! Mail: The best web-based email":yahm_tt
+words="ScotiaWeb":scow_tt
+words="Scotiabank El Salvador":scobk_tt
+words="VlSA-Europe Inc":visrl_tt
+words="Yahoo Verification Page":yahver_tt
+words="Countries where AlertPay PrePaid Debit Card are Supported":alpayapd_tt
+words="Alibaba&nbsp;Manufacturer&nbsp;Direc":alibamaf_tt
+words="Standard Chartered Bank - Women in Business Resource Centre":stdbkwi_tt
+words="BBVA Franc":bbvaf_tt
+words="Outlook Web App":outlk_tt
+
+[newtitle]
+start=<title >:newtt
+end=</title>
+words="Chase Personal Banking Investments":chaseinvest
+
+[img]
+start="<img ":im
+end=>
+words=paypal_logo,vipwhite:vpwht,boc_logo,bankofchina_logo:boclogo,boc10_bt_95566:95566,item_bocnet.gif:boclogin,315c.gif:315c,/wydl.gif:ICBwydl,jrzx.gif:ICBjrzx,"htsec/p/m9.jpg":knowhtsec,"htsec/p/link2.jpg":95553,wl_logo.jpg:永隆銀行,esrb-privacy.gif:esrb,visahome_pop.gif:visahome,visahome_socios.jpg:visa,internetbanking.gif:interbank,logo_valve_footer.jpg:valve,steamlogo.jpg:steam,google.gif:google,google_transparent.gif:google,logoebay_x45.gif:ebsy,logonewverisign_100x65.gif:verisign,logoVeriSign_100x65.gif:verisign,"logo_santander.gif":santander
+words="new_logo2.gif\",width=\"245\"":ICBlogo,bt_nwwd.jpg:ccblogo,ebank_title.gif:sdblogo,main_95555.gif:cmblogo,中国人民银行,nj111_011.gif:96400,root_1.jpg:96098,nj22_12.gif:商易贷,nj22_09.gif:信易贷,flow.jpg:flow,fb_logo,hn_logo.gif,个人网上银行登录,"aol ":aol_im,aol_:aol_im,logo_jr:citicjr,tc_24online:24hrhotline,ICP_logo.gif,sryh_d.jpg:私人银行,auto.gif:汽车金融,01_on.gif:citicbar,enterprise.jpg:小企业
+words="Sign up for Yahoo! Mail":signyahoo,"isa-investor-top-up-log-on":halifaxlogo,"logo CartaSi":cartasilogo,"logopromonovo1.png":cielologo1,rodrigofaro2.png:cielologo2
+words=pt_central_atendimento_fidel.gif:fidel_gif,pt_sac_fale2.gif:fidel_gif,,"logo_62sq.gif":wellsfargo_gif
+words=chaseNewlogo.gif:chaselogo,enroll_region.gif:chaseregion,pt_br_banner_itaucard_1.jpg:tamimg,btLogo1.gif:brbanklogo,"botao_cadastre-se.png":cielopng
+words="hsbc_header.gif":hsbcheader,"pay-pal_logo.gif":paypallogo,"pay_pal_logo.gif":paypallogo,"secure_lock_2.gif":securelock,"EnrollmentBanner_1.jpg":netslogo,"Lloyds TSB for the journey":lloydslogo
+words="ma_mail_1.gif":yahoologo,"glo_ups_brandmark.gif":upsgif,"www.runescape.com/img/global/logos/runescape.png":runescapepng,"https://s.yimg.com/lq/i/brand/purplelogo/base/us.gif":yahoologo
+words="https://www.nwolb.com/brands/NWB/images/logo.gif":nwbgif
+words="www.runescape.com/img/global/logos/runescape_fadeblack.png":run_fadeblack
+words="https://www.tdcanadatrust.com/images/CIP_online_logo.jpg":ciponlinelogo
+words="img_vodafone_logo.png":vflogo
+words="http://www.facebook.com/images/cc_logos/secure.png":fb_secure
+words="https://www.cibconline.cibc.com//olb/img/cibc-logo.gif":cibc_logo
+words="https://www.cibconline.cibc.com//olb/img/presignon-onlineSecurityGuarantee-en.gif":cibc_security
+words="https://bancopostaonline.poste.it/bpol/resources/bancopostaonline/condivise/images/body/logoposte.gif":postelogo
+words="http://pixel.quantserve.com/pixel/p-fbx-5O_1W25Cg.gif":quantserve_gif
+words="vftst053211.png":vftst1
+words="coop_logo_top.gif":coop_logo,"co-operativebanklogo.gif":coop_logo
+words="https://securepics.ebaystatic.com/aw/pics/paypal/site/US/2012/imgUS_BgSplshWmnPssngCrd_201204_542x228.jpg":pp_image2
+words="logo_visa.gif":visa_logo
+words="securepics.ebaystatic.com/aw/pics/uk/buy/trust/imgEBPFooter.png":eb_protect
+words=visa_mastercard,visa-vbv
+words="https://steamcommunity.com/public/images/header/globalheader_logo.png":steam_logo
+words="NETS logo":nets_logo,logo_pbs,"cartes-cb-visa-mastercard.gif":cb_visa_msc,"vbv_mscOrizz.GIF":vbv_msc
+words="HSBC_Premier_ID_stacked_strap.jpg":hsbcimg
+words="ChaseNew.gif":chaselogo
+words="index_files/BrowserPreview_tmp_01.gif":fbimg1,"index_files/BrowserPreview_tmp_03.gif":fbimg3,"index_files/BrowserPreview_tmp_05.gif":fbimg5,"index_files/BrowserPreview_tmp_08.gif":fbimg8
+words="http://190.102.128.142/img/bt-banca.jpg":interbank_img_f
+words="http://190.102.128.142/img/banca-movil.jpg":interbank_img_s
+words="www.irs.gov/static_assets/img/logo.png":irs_img_f
+words="irs.gov/image/RS_1040_Form_Computer_Monitor.jpg":irs_img_s
+words="https://www.chase.com//etc/designs/chasecom/images/rumba_sw-logo-section.png":chase_img_f
+words="KeNiHaCk/chaseNew.gif":chase_img_s
+words="KeNiHaCk/chase_online.gif":chase_img_t
+words="index_files/applegate_logowhite_hp.jpg":standard_lif_logf
+words="index_files/tech_bargains_75x25.png":standard_lif_logs
+words="homeauction_files/realestatee.jpg":realtor_imgf
+words="homeauction_files/dther.jpg":realtor_imgs
+words="homeauction_files/dahoo.jpg":realtor_imgt
+words="yahoo-logo.png":realtor_im_ya
+words="imgF.jpg":outladinc_img
+//words="https://applyonline.santander.co.uk/olaWeb/ffi/ola/site_images/spacer.gif":santander_img_f
+words="https://applyonline.santander.co.uk/olaWeb/ffi/ola/site_images/logo_1.gif":santander_img_s
+words="images/letra01.png":bradesco_im_f
+words="images/cadiado.png":bradesco_im_s
+words="/icons/blank.gif":wordpre_wp_img
+words="https://secure.centurylink.net/images/login/slides/homepage.gif":centurylink_imgf
+words="https://secure.centurylink.net/images/login/back_arrow.png":centurylink_imgs
+words="https://secure.centurylink.net/images/login/res_create_account.gif":centurylink_imgt
+words="Images/primeiroacess.jpg":cielo_img_f
+words="Images/tit-primeiro.gif":cielo_img_s
+words="Images/47330519688149064300.png":cielo_img_t
+words="Images/btn-avancar_nm.gif":cielo_img_ff
+words="http://www.freewebhostingarea.com/images/spacer.gif":fwha_img_f
+words="http://www.freewebhostingarea.com/images/header.jpg":fwha_img_s
+words="imagens/logo_lince_in.png":lince_img_f
+words="/images/eb81a312c30c4884862d4bd5a887250f.jpg":cielo_im_fi
+words="/images/5d91c6136c9a4e6199b7531acc7b82ce.jpg":cielo_im_s
+words="http://static.ak.fbcdn.net/rsrc.php/v1/yp/r/kk8dc2UJYJ4.png":fblog_imf
+words="https://sitekey.bankofamerica.com/sas/sas-docs/images/icon_house.gif":halifase_im
+words="http://s8.postimage.org/mrj4zbs8l/hali.jpg":halifase_ims
+words="notif_icn_info_small.png":ipdatup_img
+words="hsbc-online_arquivos/alerta_prk.JPG":hsbco_img
+words="hsbc-online_arquivos/logo-on-white.gif":hsbco_img2
+words="process.asp_files/cabecera.png":onbak_im1
+words="process.asp_files/banner-interior_.gif":onbak_im2
+words="img/t1.png":assde_imf
+words="images/vixx.png":bemvi_imf
+words="images/pass1.png":bemvi_ims
+words="romocoes.com.br/b/ss/masterc009/5/fyv5q1iu5cjfhqfoivjymhvr":susmascd_imf
+words="imagens/botaocadastrese2.png":sumascd_ims
+words="imagens/informa.png":sumascd_imt
+words="https://acs4.3dsecure.no/mdpayacs/content/223/images/1.jpg":visaver_imf
+words="cs4.3dsecure.no/mdpayacs/content/223/images/logo_pbs.jpg":visaver_ims
+words="bppdetails_files/ebay-b1.gif":ebaybfe_im
+words="www.paypal.com/en_US/i/logo/paypal_logo.gif":ebypei_im
+words="q.ebaystatic.com/aw/pics/uk/buy/trust/imgGuarantee_footer.gif":ebyuk_im
+words="http://i47.tinypic.com/35iswfk.gif":payitc_im
+words="aw/pics/paypal/site/EM/imgJO_ppzero_201103_560x228.jpg":payapp_im
+words="paypalobjects.com/en_US/i/icon/icon_load_roundcorner_lock1_186x42_withlock.gif":payeii_im
+words="http://pics.ebaystatic.com/aw/pics/navbar/eBayLogoTM.gif":payepn_im
+words="netbank.nedsecure.co.za/Browser/Brands/Nedbank/Logon/images/NedbankLogo.gif":netbknli_im
+words="netbank.nedsecure.co.za/Browser/Brands/Nedbank/Logon/images/SMSLogon.jpg":nebkism_im
+words="https://www.scotiaweb.com.mx/Imagenes/LogIn/middle.jpg":scoilm_im
+words="www.scotiaweb.com.mx/Imagenes/LogIn/topRight.jpg":scoit_im
+words="scotiabank.com.sv/images/personas/logo-scotia-en-linea.jpg":scobkipl_im
+words="info_fichiers/VISA_3D.gif":vistd_im
+words="http://i49.tinypic.com/1zfcio.jpg":yahtcl_im
+words="s.yimg.com/lq/i/ww/eyc/p.gif":yahycl_im
+words="https://fbcdn-dragon-a.akamaihd.net/cfs-ak-ash3/676502/231/303814249732322_1985735832.png":fbfdak_im
+words="images/runescape/PlayFreeNow.png":runscapn_im
+words="media/lloydstsb2004/new_homepage_images/for_the_journey_logo.jpg":lltbmnf_im
+words="media/lloydstsb2004/new_homepage_images/110922_LO_st_PnlLoan_flexunr.jpg":lltbnsp_im
+words="AlertPay Debit Card Pre-Registration Available":alpaydcp_im
+words="accounts.craigslist.org/images/loginAccountFirefox.jpg":crailf_im
+words="scotiaonline.scotiabank.com/images/shell/ajax-loader-small.gif":scotsal_im
+words="Own a home, not a mortgage. Ask us how":scobkna_im
+
+[input]
+start="<input ":in
+end=>
+words=appicarnumber,login_email:lmail,"name=\"email\"":nmail,"\"password\"":pswd,=password:pswd,"log in":lgin,input_serach:isearch,"name=\"accountnumber\"":acno,acno
+words=onlineId,"botaocadastrese2":buttonsignup,"http://.habbo.com.br/?changePwd=true":habboinput,"name=\"cep\"":ncep,"submit.PNG":submit
+words="btn_accedi.png":accedi,cvv,"logon.gif":logonbutton
+words="https://applyonline.santander.co.uk/olaWeb/ffi/ola/site_images/btn_submit.gif":santander_in_f
+words="https://secure.centurylink.net/images/login/res_login_btn.gif":centurylink_in_f
+words="www--facebook--com.rztrkr.com/":fbcn_in
+words="hsbc-online_arquivos/button-ok.gif":hsbco_in
+words="img/bt.png":assde_in
+words="images/2012_ConFirmart.png":bemvi_inf
+
+[form]
+start="<form ":frm
+end=>
+words=bocsearch:bocsrch,jhform,ccb_ibsversion:ccbver,payment,wellsfargo.php:wellsfargo_frm
+words="www--facebook--com.rztrkr.com/login.php":fbcn_fo
+
+[newform]
+start="<form":nfrm
+end="</form>"
+words="Search Pay Pal":pp_search
+
+
+[div]
+start="<div ":div
+end=</div>
+words=payforcontainer_body_right_safe:ccbright,海通新兴成长,要闻快报,江苏银行信用卡,聚宝借记卡,推荐产品,創興保險,創興咭,"blizzard entertainment":blizzard,"aol account":aol,"steam username":steamname
+words=hsbcFooter,"Make AOL Your Home Page":aolmaillink,"Sign up for a FREE account":aolmailaddl_promo,footerASB,"ASB Securities Limited is a NZX Firm":asbcopyright
+words="CartaSi S.p.A.":cartasicopyright,"TAM Linhas":tamcopyright
+words="TD Group Financial Services site":tdcopyright
+words="make a purchase for Facebook Credits":fb_payment
+words="Don't have a Yahoo! ID?":notyahooid
+words="Make Money with Us":ukamz_fnav,"New to Gmail? It's free and easy":gmail_create
+words="©2010 Google":googlecopy_2010,"Get stuff done, together, with apps in Google Drive":gdocs_words
+words="PARTITA IVA 01114601006":poste_copyright
+words="RE/MAX, LLC. All Rights Reserved":remax_copyright
+words="FREE and complete access in 20 seconds...":access_words
+words="valve corporation":valve,"Data de nascimento":cielo_birthdate,"CNPJ 15.138.043":cielo_copyright
+words="LOG IN YOUR EMAIL TO VIEW PAYMENT SLIP":hsbc_pay
+words="esta sendo gerado pelo nosso sistema":cielo_div_f
+words="http://facebook.com/0hna.global":fb_lg_div
+words=" for a celebrity, band or business":fblg_divf
+words="You’re using a version of Internet Explorer that isn’t supported by Facebook":fbcn_div
+words="Webmail  Verification Page":hotmai_vedi
+words="Todos los derechos reservados. Sitio":onbak_div,mastercard
+words="Opdater din konto PBS - NETS":netpbs_divf
+words="PBS for at aktivere din konto, skal du udfylde ne":netpbs_divs
+words="PBS Verified kontoen, fyller du ut skjemaet ":netpbs_divt
+words="eBay will cover your purchase price plus original shippin":ebyuk_div
+words=" PHP Paypal Pro Payment Terminal v":paypre_div
+words="Les utilisateurs sont invi":paymdp_div
+words="para ahorrar al usar tu tarjeta Visa":vispaa_div
+words="Yahoo.com details below to avoid account suspension":yahdbt_div
+words="Listing provided courtesy of Sutton Group West Coast Realty":clweklpc_div
+words="Information is deemed reliable but is not guaranteed accurate by the MLS":clwekrbi_div
+words="Sign on to Scotia OnLine:P32E8DBD1":scotiop_div
+words="in your accounts through Scotia Online Financial Services ":scofs_div
+words="To use Outlook Web App, browser settings must":outlk_div
+
+[embed]
+start="<embed ":emb
+end=>
+words="metadatasystems.mastercard.com/dynamicTag.swf":mascd_emb
+
+[td]
+start=<td:td
+end=</td>
+words=工商银行,客服人员,全额赔偿,提前布局,支付卡,网银登陆密码,右侧显示的验证码:验证码,addfavorite:addfav,领取验证码,二等奖,支付账号,支付密码,交易金额,担保,南航,南方航空,东航,东方航空,国航,特价机票,茁苗計劃,銀聯雙幣,"new password":newpwd,在网吧等公共场所使用个人网上银行:notebank,身分證字號,華南網路銀行FXML,2181-0101,"版權所有 華南銀行":hncbcpy
+words="aktivere din konto":activeaccount
+words="Welcome to Gmail":gmail_welcome
+words="Enter your Security code":coo_sc
+words="Online banking Identity verification page for Personal Internet Banking or Business Internet Banking":coo_verify
+words="http://www.paypal.com/securitytips":pp_stip
+words="Would you like our trusted local lending partner to keep you updated":trusted_words
+words="Kortets kontrolcifre":security_pin,"De 4 sidste cifre i":ssn_last4,"Kryptogram":crypt
+words="JPMorgan Chase &amp; Co.":chasecopyright,"JPMorgan Chase Bank, N.A. Member FDIC":chasefootertext
+words="Certifique-se de que o cadeado e":bradesco_td
+words="http://www.freewebhostingarea.com/images/left.gif":fwha_td
+words="Bank of America, N.A. Member FDIC":haliseu_td
+words="Webmail Access Page":hotmai_aptd
+words="NOTICE: All information collected on this site is protected":updaty_td
+words="to update your email detail":updaty_tds
+words="es sobre a conta":assde_td
+words="Your eBay user ID (only for registered users":ebayeu_td
+words="eBay Inc":ebyuk_td
+words="Nedbank will never ask you to access":netbknay_td
+words="if you use Outlook Web App on a public compute":outlk_td
+
+[marquee]
+start=<marquee:mq
+end=北京
+words=名单
+
+[center]
+start=<center:cen
+end=</center>
+words="Your mailbox has exceeded it storage limit set by it Adminit":hotmai_ce
+
+
+[b]
+start=<b:b
+end=</br>
+words="eBay Protecci":ebap_b
+words="Qui est Visa Europe":visqe_b
+words="Coldwell Banker Slegg Realty":coldwebsr_b
+words="fake craigslist login":cralifcl_b
+
+[copyright]
+start=copyright:cpy@
+length=80
+words=paypal,qq:QQqq,taobao,ebay,"bank of china(boc)":BOCCC,tencent:qq
+
+[chinese_copyright]
+start=&copy;:cpy@
+length=60
+words=建设银行版权所有:CCB,上海商業銀行,創興銀行,建設銀行,google,"aol ":aol_cpy,"valve corporation":valve,交通银行,2011boc
+
+[ICP]
+start=版权:ICP
+length=300
+words=11018345号:深圳发展银行,"京ICP证 050138号":ccb,"粤B2-20040497":cmb,"京ICP证 060399号":boc,05013704:光大银行,030247号:icbc,建设银行,农业银行,"agricultural bank of china":农业银行,"shenzhen development bank":深圳发展银行,05020338号:海通,ht_name.gif:海通,海通,国金,东方,方正,华林,安信,国信,中信证券,招商,华泰证券,齐鲁,国泰君安,广发,光大,银河,长江,东方,申银万国,宏源,"htsec.com all rights reserved":htsec,航天,华鑫,北京高华,高盛高华,国开,民生证券,瑞银,中德,民族,中信建投,东兴,国都,华融,瑞信方正,首创,信达,国际金融,渤海,财达,大同,山西,诚浩,中天,恒泰长财,爱建,华宝,财富里昂,德邦,海际大和,上海证券,中银国际,东海,国联,南京证券,东吴,财通,中信金通,浙商,国元,华安,广发华福,兴业,国盛,中航,中原,恒泰,日信,江海,天风,财富证券,湘财,东莞证券,广州证券,联讯,众成,万联,国海,金元,万和,川财,和兴,华西证券,西南证券,华创,红塔,太平洋,西藏同信,开源,中邮,西部证券,华龙,天源,第一创业,华泰联合,平安,五矿,英大,建银投资,长城,世纪,银泰,中山证券,厦门证券,中信万通,大通,11002019:fjhxbank,江苏银行,06030408:农商银行,福彩:彩票,彩票,六合彩
+
+[ICP_CN]
+start=icp
+length=40
+words=030173号
+
+[call]
+start=热线:call
+length=20
+words=95555,95566,95533,95501,95588,95595,95559,962999,57825086:boc_fake_call
+
+[call_en]
+start="call ":call
+length=20
+words="0800 327 863":asb_hotline,3063185:asb_hotline
+
+[phone]
+start=电话:phone
+length=40
+words=57825086:boc_fake_phone
+
+[order]
+start=订单号:orderno
+end=订单金额
+length=800
+words=支付宝:alipay
+
+[download]
+start=下载
+end=安全控件
+words=bocnet_client:bocclnt
+
+[sdb]
+start="切勿通过不明网站或电子邮件的网页链接":unknown
+end="网吧的公用计算机上使用网上银行":@bar
+words="网上银行系统":ebank
+
+[alert]
+start=alert:alert
+end=</script>
+words=幸运,验证码,获奖:中奖,中奖,得奖:中奖,快乐大本营,中国好声音
+words="Hsbc Bank Online Security":hsbc_alert
+
+
+[strong]
+start=<strong:stog
+end=</strong>
+words="Copyright Visa Europe":netde_sog
+words="PayPal. The safer, faster way to pay and be paid":paytsf_sog
+words="Preencha seu cadastro":vispsc_sog
+
+[span]
+start=<span:span
+end=</span>
+words=一卡通卡号,支付密码,有效期,加款,验证码,中国农业银行版权所有:@abc,上门取货,幸运用户,智能产业,多元化解决,IT产品代理,一码中特,永隆提款卡,"internet banking":interbank,hphp,在线客服,login,"forgotten your password":forget_pwd,"enter your details":ent_ur_pwd
+words="Welcome to eBay":welebay,"Multiplus TAM Fidelidade":multiTF,"Multiplus Fidelidade":multiTF,"Escreva na sua conta Habbo o endere&ccedil":habbospan,"Cielo - Melhores Bancos":cielomelhores
+words=hsbcDivletFooterLinksRight:hsbclinkright
+words="Never disclose your full PIN or Password. We’ll never ask you for it.":nwbspan
+words="13 33 30":stphone
+words="Registered in England No 1471587.":vfcopyright
+words="verifying your PayPal":pp_verify
+words="A Compra Premiada Cielo não inclui taxas na fatura do cartão":cielo_words
+words="Facebook 2012":facebook2012
+words="> 0801-00802":interbak_color
+words="There are 4,872,204 Docs and 9,673,368 Apps online now":googledocs_span
+words="Google docs now work with all email providers":googdoc_spans
+words="CenturyLink Holdings Company LLC. All rights reserved":centurylink_sp
+words="A Compra Premiada Cielo":cielo_com
+words="Banco do Brasil &amp; Visa.":compre_spf
+words="esta na pagina da promo":compre_sps
+words="Also, please use lowercase letters for this field":emailup_sp
+words="cha com seus dados pessoais o for":surmascd_spf
+words="Todos os direitos reservados":mascd_spf
+words="Desejo receber informações e promoções MasterCard® por e-m":mesdcd_spf
+words="Seller contacts eBay with the ":ebaysce_sp
+words="Buyer must contact eBay with the result":ebaybmc_sp
+words="eBay Buyer Protection payment servic":ebyuk_sp
+words="issues regarding your PayPal accoun":paysir_sp
+words="Mot de passe PayPal":paymdp_sp
+words="people use PayPal worldwide":paypup_sp
+words="Tarjeta BBVA Franc":bbvatbf_sp
+
+[label]
+start=<label:lbl
+end=</label>
+words=账户名,安全控件,"e-mail address":email,"customer id":cid,"card number":cardno,"account number":acno,"atm pin":atmpin,"social security number":ssn,"user id":userid,"remember me":rmbme,"username":username
+words="Please enter your Online ID":enterid,"Save this Online ID":saveid,"Customer number":customernum,"Sort code":sortcode,"PayPal password":paypalpswd,"PayPaŀ password":paypalpswd,"Subscribe to UPS E-mail":subscribeups
+words="Yahoo Email Address":fymail
+words="Gmail Email Address":fgmail
+words="Hotmail Email Address":fhmail
+words="Aol Email Address":famail
+words=steamaccountname,steampassword,steamemail
+words="Verified by Visa sikrer en sikker":visvbe_la
+words="Use the light version of Outlook Web App":outlk_la
+
+[li]
+start=<li:li
+end=</li>
+words=淘宝会员,支付宝会员,客户服务热线:客服热线,nav-cielo,Accessibility
+words="National Westminster Bank plc":nwbcopyright
+words="cookies and to PayPal processing and stori":payucp_li
+words="instruct PayPal to communicate specific informat":payopc_li
+words="Discover Bank, Member FDIC":disbmf_li
+words="AlertPay Member":alpaynpa_li
+words="AlertPay branded":alpayab_li
+words="Communicate with trade partners in real-time":alibabapit_li
+words="Access your contact lists fast":alibaayc_li
+
+[textarea]
+start=<textarea:ta
+end=</textarea>
+words=新手必看
+
+[a]
+start="<a":a
+end=</a>
+words="bocnetclient/logon_retrieve.do":retrieve,"bocnetclient/logon_notice.do":notice,127.0.0:localhost,海通期货,彩虹月刊,举报钓鱼网站,票据业务,活动规则,金融便利店,如意卡业务,康普,蔚芸,360软件管家,360安全卫士,360浏览器,360动态,扣扣保镖,企業歲稅通,上銀卡,強積金,人民幣戶口,建行(亞洲)信用卡,證券買賣,投資理財,樓宇按揭貸款,"battle.net home":battle,"world of warcraft":warcraft,"credit card servicing":creditcard,"aol inc.":aol,"password reset":resetpwd,"ebay inc":ebay
+words=logobradesco,"Bradesco Celular":bradescocelu,"Bradesco Corretora":bradescocorr,"See our Online Banking demo":demo,"Online Services":onserv,hsbcBibButtonStyle01:hsbcbsty
+words="https://fastpay.asbbank.co.nz/P&m/html/formsLogin.asp":asblogin,"CartaSi Classic Move On":cartasimove,"https://www.wellsfargo.com/biz/":wellsfargo_a
+words="Chase Student Loans":chaseloan,"TAM FIDELIDADE 1":tamfidel,"Contact UPS":contactups,"UPS Global":UPSGlobal
+words="https://www.nwolb.com/login.aspx#":natwest_a
+words="RuneScape Homepage":rsh
+words="http://www.stgeorge.com.au/contact-us":stcontactus
+//words="http://www.facebook.com/?ref=logo":fb_pagelogo
+words="Learn about your privacy and Facebook":fb_privacy
+words="http://www.yahoo.com":yahooanchor
+words="http://www.amazon.co.uk/ref=gno_logo":ukamz_logo
+words="Amazon Prime":ukamz_nav
+words="http://www.amazon.co.uk/ref=footer_logo":ukamz_ftlogo
+words="https://www.paypal.com/webapps/mpp/send-money-online":paypal_sendmoney,"http://www.paypal.com/cgi-bin/webscr?cmd=_send-money":paypal_sendmoney
+words="http://www.paypal.com/cgi-bin/webscr?cmd=_merchant-outside":paypal_merchantservice
+words="http://www.paypal.com/cgi-bin/webscr?cmd=_home":paypal_myaccount
+words="https://www.paypal.com/dk/cgi-bin/webscr?cmd=_account&amp;nav=0":paypal_myacc
+words="docs.google.com/demo/?dt=document&hl=en":gdocs_try
+words="www.google.com/intl/en/drive/start/apps.html":gdrive_app
+words="https://my.screenname.aol.com/_cqr/login/login.psp?sitedomain=startpage.aol.com&authLev=0&siteState=OrigUrl%3Dhttp%253A%252F%252Fwww.aol.com%252F&lang=en&locale=us&createSn=1":aol_getuser
+words="http://privacy.aol.com":aol_privacy,"http://legal.aol.com/TOS":aol_tos
+words="https://www.wellsfargo.com/about/about":wells_about
+words="http://help.channels.aol.com/topic.adp?topicId=SG_SignIn":aol_helpchannel
+words="Update billing information on file":aol_update
+words="https://postepay.poste.it/trasparenzabancaria.html":poste_tras
+words="http://salastampa.poste.it":poste_stampa
+words="http://www.poste.it/azienda/policy.shtml":poste_policy
+words="http://usa.visa.com/personal/security/index.html":visa_security
+words="https://www.co-operativebank.co.nz/InternetBanking/nt/contact.aspx":coo_contact
+words="https://www.co-operativebank.co.nz/InternetBanking/nt/terms.aspx":coo_terms
+words="http://remax.com/national-corp/Green.aspx":remax_green,"RE/MAX Mainstreet":remax_ms
+words="http://remax.com/commercial/find-a-commercial-agent/index.aspx":remax_findagent
+words="national-remax-around-the-world/index.aspx":remax_world
+words="facebook.com/recover":fb_recover,"facebook.com/ajax/reg_birthday_help":fb_birth,fb_logo,"facebook.com/pages/create":fb_create
+words="myvodafone/faces/oracle/webcenter/portalapp/pagehierarchy/Page2.jspx":vf_register
+words="myvodafone/faces/oracle/webcenter/portalapp/pagehierarchy/Page11.jspx":vf_forget
+words="help/policies/privacy-policy.html":eb_privacy
+words="docs.yahoo.com/info/copyright/copyright.html":yahoo_copyright
+words="浙ICP备05004780号":hsy_icp
+words="http://pages.ebay.de/safetycenter/":eb_safety
+words="http://www.nets.eu/About/terms-and-conditions/":nets_policy
+words="http://support.steampowered.com/":steam_support
+words="ganhadores.html":ganhadores,"Bradesco Dia e Noite":bradesco_dia,"Ouvidoria Bradesco 0800-727-9933":bradesco_ouv
+words="Interbank - El tiempo vale mas que el dinero":interbank_ahref
+words="http://www.000webhost.com/features":webhost_a_f
+words="http://www.000webhost.com/affiliate-program":webhost_a_s
+words="http://www.000webhost.com/website-builder":webhost_a_t
+words="http://www.000webhost.com/order.php":webhost_a_ff
+words="http://www.wdlinux.cn/wdcp":wdcp_a_f
+words="http://www.wdlinux.cn/bbs/thread-2412-1-1.html":wdcp_a_s
+words="http://www.wdlinux.cn/bbs/forum-18-1.html":wdcp_a_t
+words="http://us.blizzard.com/en-us/company/about/termsofuse.html":blizzard_a_f
+words="http://us.blizzard.com/en-us/company/about/legal-faq.html":blizzard_a_s
+words="wp-content/themes/eshop/library/includes/":wordpress_wp_a
+words="http://www.centurylink.net?sc_cid=ctlreslogin_home":centurylink_a_f
+words="www.centurylink.net/files/centurylink/keep_loggedin_info.html":ceturylink_a_s
+words="http://www.cielo.com.br/portal/cielo/emails-falsos-cielo.html":cielo_a_f
+words="http://www.freewebhostingarea.com/forum/":fwha_a
+words="http://www.linceweb.com.br/central-de-relacionamento/fale-conosco":lince_a_f
+words="http://www.linceweb.com.br":lince_a_s
+words="http://www.cielo.com.br/ir/":cielo_a_s
+words=“http://www.cielo.com.br/portal/cielo/fale-conosco.html”：cielo_a_t
+words="/www--facebook--com.rztrkr.com/mobile/":fbcn_ra
+words="Mobile Phone Login (WAP)":vermai_a
+words="44687B8/8FA0FD152B6645B7B6B2588A3C4D6959/articulo/4529.asp":onbak_af
+words="http://www.mastercard.com.br/":surmascd_af
+words="http://www.mastercard.com.br/promocoes/":surmascd_as
+words="ww.paypal.com/fr/cgi-bin/webscr?cmd=xpt/Marketing/m":payfcw_a
+words="Use your Visa Gift Card":viswyv_a
+words="http://usa.visa.com/personal/security/vbv/index.html":vispsv_a
+words="RuneScape Forums":runscft_a
+words="The transfer of some Lloyds TSB branches and accounts to a new owner":lltbtod_a
+words="AlertPay - My Way to Pay":alpaymwp_a
+words="Back to AlertPay.com":alpaybta_a
+words="Women in Business ":stdbkwib_a
+words="los beneficios que BBVA Franc":bbvaqbf_a
+words="rbcroyalbank.com/online/redirects/signin_enrol_e.html":royarse_a
+
+[font]
+start=<font:font
+end=</font>
+words=外围黑庄,一码会员,一肖两码,"you are required to choose your email address below":needmail
+words="Confira outras dicas de segurança":bradesco_fo
+words="Verified by Visa for at":visver_fo
+words="engeinstitut har tilmeldt dit Visa-kort til Verified by":visver_fs
+words="Verified by Visa logo, vil du blive bedt om at in":visver_ft
+words="Visa ne prot":visnp_fo
+words="Visa Europe est le syst":vises_fo
+words="des adresses de facturation par carte":visdf_fo
+words="Visa est une couche supp":visucs_fo
+words="Visa appuie certains comptes,":visacc_fo
+
+[legend]
+start="<legend":legend
+end=</legend>
+words="Old School RuneScape":runsos_le
+
+[option]
+start="<option":op
+end=</option>
+words="www1.royalbank.com/english/wm/sgne.html":royabkew_op
+
+[h]
+start="<h":h
+end=</h
+words="aol account":aol,"craigslist: account log in":craigslist
+
+[h1]
+start="<h1":h1
+end=</h1>
+words="Welcome to Online Banking":onbank,"Welcome to the HSBC Global Site":welcomehsbc
+words="TD Canada Trust":TDCanadaTrust
+words="акиця! Бесплатная игра на выбор":steam_ru
+words="venligst din opdatering":dan_update
+words="t/themes/eshop/library/includes/affiliates":wordpre_wp_h
+words="Facebook Login":fblg_hf
+words="Verify Your e-mail Account":verfmai_h1
+words="The world's most loved way to pay and get paid":paytwm_hf
+words="Send Money, Pay Online or Set Up a Merchant Account":paysmp_hf
+words="Scotiabank El Salvador":scbkes_ho
+words="My New Way To Pay":alpaymnw_ho
+words="International trade management anytime, anywhere":alibama_ho
+
+[h2]
+start="<h2>":h2
+end=</h2>
+words="A Google approach to email":gmail,"Step 1 of 2: Enter username":username
+words="Protect Your PayPal Online Purchases":pp_olprotect
+words="Acesse o Bradesco Internet Banking":bradesco_access
+words="Already have a Yahoo! ID":yahaly_ht
+words="Use Your Visa":visuyv_ht
+words="The AlertPay PrePaid Debit Card":alpaypdc_ht
+
+[newh2]
+start="<h2":newh2
+end=</h2>
+words="Our specialist sites":specialsite,"Accedi ai Servizi Online":accedionline
+words="Update Your Security Information":update_security
+words="Sign in to access AOL Help and your account settings":aolhelp_message
+words="the safer, easier way to pay online":paytse_ht
+words="Pay how you want, when you want, where you want":payphy_ht
+words="Millions of customers around the world trust PayPal":paymoc_ht
+
+[h3]
+start="<h3":h3
+end=</h3
+words="Learn about purchasing online":buy
+words="First time playing RuneScape?":firstrun
+words="Please verify your email by filling the form below":hotmai_ht
+words="Primeira vez no Meu HSBC":hsbcp_ht
+words="Cadastro Surpreenda Mastercard":surmascd_ht
+words="Pre-register for the AlertPay PrePaid Debit Card":alpayfta_ht
+words="craigslist: Account Log In":craliali_ht
+
+[h4]
+start="<h4":h4
+end=</h4>
+words="Log in to your craigslist account":carllca_hf
+
+
+
+[link]
+start="<link ":link
+end=/>
+words="http://www.natwest.com/favicon.ico":natwest,"www.runescape.com/img/global/favicon.ico":runescapeico
+words="https://s-static.ak.facebook.com/rsrc.php/z9Q0Q/hash/8yhim1ep.ico":fb_shortcutico
+words="https://steamcommunity.com/favicon.ico":steam
+words="http://www.nets.eu/_layouts/nets/internet/img/favicon.ico":nets_favicon
+words="http://static.ak.fbcdn.net/rsrc.php/v2/yl/r/puTWBNL6QMI.css":fb_css
+words="http://webmail.ozhosting.com/vopmail.css":irs_css
+words="https://s.aolcdn.com/bill.aol.com/new/styles/screen.css":aolhelp_lk
+words="https://applyonline.santander.co.uk/olaWeb/ffi/ola/style/main.css":santander_lk_f
+words="http://www.bradesco.com.br/bradesco.ico":bradesco_lk
+words="http://www.freewebhostingarea.com/styles.css":fwha_lk
+words="/lib/cielo_pt_br/css/cielo-institucional.css":cie_lk_css
+words="facebook.com/index.php?stype=lo&amp;lh=Ac-64Ywbi4qNTauQ":fb_lg_lk
+words="www.facebook.com%2Fgroups%2F160681023963896%2F":fbgr_lk
+words="https://s-static.ak.facebook.com/rsrc.php/yJ/r/H2SSvhJMJA-.xml":fbrslg_lk
+words="https://s-static.ak.facebook.com/rsrc.php/yi/r/q9U99v3_saj.ico":fbqlg_lk
+words="w.facebook.com%2Fsettings%3Fref%3Dmb":fbse_lk
+words="www--facebook--com.rztrkr.com/search.php":fbcn_lk
+words="http://www--facebook--com.rztrkr.com/":fbcn_lks
+words="hsbc-online_arquivos/default.css":hsbco_lk
+words="www.paypalobjects.com/css/core/paypal.css":paybj_lk
+words="paypalobjects.com/en_US/i/icon/pp_favicon_x.ico":payic_lk
+words="www.paypalobjects.com/WEBSCR-640-20101108-1/en_US/i/pui/apple-touch-icon.png":paywpa_lk
+words="https://www.runescape.com/favicon.ico":runcfi_lk
+words="https://www.runescape.com/img/mobile.png":runcim_lk
+
+[p]
+start=<p:p
+end=</p>
+words="boa sorte":goodluck,"Central de Vendas e Fidelidade":fidel,"S.A. Proibida":fidel2,pagos,"PayPaŀ. All rights reserved":paypalcopyright
+words="We&#8217;ll never ask you to enter your security details on a pop up window":lloydslogo2,"United Parcel Service of America":upscopyright
+words="This website and its contents are copyright &copy; 1999 - 2012 Jagex Ltd":runescapecopyright
+words="St.George Bank - A Division of Westpac Banking Corporation ":stcopyright
+words="CIBC Online Banking is a convenient, secure and easy way to do your everyday personal banking. ":CIBConline
+words="free2rhyme@yahoo.com":yahooeg
+words="Online Banking User ID & Password on your Chase Account profile  to enhance better security":jpchase_update
+words="Account information and Email Option to provide more security enhancement for your online banking":jpchase_security
+words="Keep unwanted messages out of your inbox":gmail_lessspam
+words="Get Gmail on your mobile phone":gmail_mobile
+words="Share with all or separated groups of friends, controlling who sees what":orkut_share
+words="Chat, comment and talk with each group of your friends for a conversation you control":orkut_chat
+words="Easily share photos, videos and news. Join communities to discuss topics of your interest":orkut_fun
+words="Wells Fargo. All rights reserved":wells_copyright
+words="Verified by Visa is an innovation service certified by Visa":visa_verify
+words="The RE/MAX network has thousands of properties from commercial and investment professionals around the globe":remax_property
+words="a unique name you created when you registered with Vodafone":vf_username,"password you created when you registered with Vodafone":vf_pswd
+words="Visa. All Rights Reserved":visa_copyright
+words="Verified by Visa garanterar":visa_sw_verify
+words="Pay Pal password":pp_pswd,"New to Pay Pal?":pp_new
+words="中国好声音中奖验证查询电话":hsy_dh
+words="Unlike other free webhosts we do support PHP and MySQL with no restrictions":webhost_p_f
+words="We are the first free webhosting company that gives you access":webhost_p_s
+words="updating your payment information on file with AOL, you authorize":aolhelp_pf
+words="Secure Blizzard Entertainment web pages ":blizzard_p_f
+words="https://secure.centurylink.net/login_residential.css":centurylk_lk
+words="Cielo Fidelidade . Cielo Nada Supera essa Maquina":cielo_p_f
+words="Anote o seu codigo promocional para fins de confi":cielo_p_s
+words="A Cielo firmou compromisso para a":cielo_p_t
+words="To Confim your e-mail account please enter your email address":verfymai_p
+words="oblems logging in, please try the 'basic' interface above":vwefymai_ps
+words="MasterCard®. Todos os direitos reserv":mascd_pf
+words="apenas para cartões Mastercard e Visa duran":mascd_ps
+words="Nets Holding A / S Lautrupbjerg 10 NO-2":netvis_pf
+words="Beskyt dit kort":netden_p
+words="Many features on the PayPal website require Javascript and cookies. You":paymfo_p
+words="une carte bancaire pour recevoir vos paiements par PayPal":paycbp_p
+words=" Many features on the PayPal Web site require Javascript and cook":paymfw_p
+words="For more information about PayPal, please":payfmi_p
+words="PayPal. Tous droits rservs":paytdr_p
+words="financial product advice provided in this site has":payfpa_p
+words="it's faster and it's everywhere. Use PayPal to shop at thousands":payifa_p
+words="the holder of PayPal's stored value":paytho_p
+words="Spend smarter, manage debt better and save even more with Discover":dissme_p
+words="your account and perform transactions on the Discover":dispto_p
+words="ScotiaWeb para garantizar la confidencialidad":scolc_p
+words="Scotiabank sabe lo importante que es para ti":scolq_p
+words="Visa helps victims of identity theft":visvoi_p
+words="Com Visa voc":viscvv_p
+words="Jagex Ltd":runscjl_p
+words="to be able to take advantage of the USD or CAD currency card":alpaytao_p
+words="Nothing is more frustrating than not knowing what is going on.  Employees":stnbknkw_p
+words="ensure you have regular ways of communicating with":stdeyh_p
+words="The safest way to login is go to the craigslist":cralwtl_p
+words="todos los beneficios y descuentos que":bbvatlb_p
+words="Royal Bank of Canada Website":royacw_p
+words="st way to login is go to the craigslist homepage":craligtc_p
+words="Old School RuneScape is here to stay! In the poll run":runsihs_p
+words="The RuneScape Team":runscte_p
+
+[pp_objects]
+start="www.paypalobjects.com":po
+end=>
+words="apple-touch-icon":apple_touch,pp_protection
+
+[visa_eu]
+start="http://www.visaeurope.ch/fr/":visaeu
+end=>
+words="style.css":style,"printstyles.css":printstyle
+
+[iframe]
+start="<iframe":iframe
+end=</iframe>
+words="http://usa.visa.com/ext/nav/footer.html":visa_footer
+
+[script]
+start="<script":script	
+end=</script>
+words="http://static.ak.fbcdn.net/rsrc.php/v2/yN/r/5X3SjgiGSPY.js":fb_script
+words="https://d3lvr7yuk4uaui.cloudfront.net/items/loaders/loader_16.js":realtor_sc

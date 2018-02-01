@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlpattern version="1.00.0000">
+   
+<basic>
+	<baseline>0</baseline>
+	<malicious>50</malicious>
+	<suspicious>20</suspicious>
+</basic>
+
+<rule-set category="Java Dynamic">
+	<rule-set category="Generic">
+		<rule name="JAVA.Trojan.A" weight="0" feedback="1">
+			<search target="method">
+				<match>get_system_property</match>
+			</search>
+			<search target="method">
+				<match>url</match>
+				<search target="param">
+					<regexp>http\:\/\/vidfetch\.com</regexp>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.Security.A" weight="200">
+			<search target="method">
+				<match>class.forname</match>
+				<search target="param">
+					<match>com/ms/security/permissionset</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*com\.ms\.security\.permissiondataset</regexp>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*com\.ms\.vm\.loader\.urlclassloader</regexp>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.JDBC.A" weight="200">
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.util\.serviceloader</regexp>
+				</search>
+			</search>	
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.sql\.drivermanager\.getconnection</regexp>
+				</search>
+			</search>
+			<search target="method">
+				<match>url</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.JDBC.B" weight="200">
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.util\.serviceloader</regexp>
+				</search>
+			</search>	
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.sql\.drivermanager\.getconnection</regexp>
+				</search>
+			</search>
+			<search target="method">
+				<match>file</match>
+			</search>
+		</rule>
+
+		<rule name="JAVA.JDBC.C" weight="200">
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.util\.serviceloader</regexp>
+				</search>
+			</search>	
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.sql\.drivermanager\.getconnection</regexp>
+				</search>
+			</search>
+			<search target="method">
+				<match>exec</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.ForName.A" weight="200">
+			<search target="method">
+				<match>class.forname</match>
+				<search target="param">
+					<regexp>java/(?!.*?appendable)</regexp>
+					<regexp>java/(?!.*?awt/graphics2d)</regexp>
+				</search>
+			</search>
+		</rule>
+	
+		<rule name="JAVA.ElementFromComplex.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>element_from_complex</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.SimilarToCVE20132465or2463.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>multipixelpackedsamplemodel.prototype.iinit</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>raster.createwritableraster</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.awt\.image\.affinetransformop\.prototype\.filter__ljava_awt_image_bufferedimage2</regexp>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.SimilarToCVE20132465or2463.B" weight="0" feedback="1">
+			<search target="method">
+				<pre-match>class.forname</pre-match>
+				<search target="param">
+					<match>java/awt/image/databufferbyte</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>class.forname</pre-match>
+				<search target="param">
+					<match>java/beans/statement</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>class.forname</pre-match>
+				<search target="param">
+					<match>java/awt/image/multipixelpackedsamplemodel</match>
+				</search>
+			</search>			
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>raster.createwritableraster</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.SimilarToCVE20132465or2463.C" weight="200">
+		    <search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.security\.permissions\.prototype\.iinit__v</regexp>
+				</search>
+			</search>
+			<search target="method">
+		        <pre-match>_tmsa_report</pre-match>
+		        <search target="param">
+		         	<match>raster.createwritableraster</match>
+		        </search>
+		    </search>
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java.awt.image.lookupop.filter</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.SimilarToCVE20132471.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>singlepixelpackedsamplemodel.prototype.iinit</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>raster.createwritableraster</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.awt\.compositecontext\.prototype\.compose__ljava_awt_image_raster2_ljava_awt_image_raster2_ljava_awt_image_writableraster2_v</regexp>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.GeneratedClassLoader.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>generated_class_loader</match>
+				</search>
+			</search>
+		</rule>
+	
+		<rule name="JAVA.JavascriptInternalContext.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>javascript_internal_context</match>
+				</search>
+			</search>
+		</rule>		
+		
+		<rule name="JAVA.DeserializeObject.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>deserialize_object</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.DeserializeObject.B" weight="0" feedback="1">
+			<search target="method">
+				<match>deserialize_object</match>
+			</search>
+		</rule>
+
+		<rule name="JAVA.DeserializeObject.C" weight="0" feedback="1">
+			<search target="method">
+				<match>deserialize_object</match>
+			</search>
+			<search target="method">
+				<match>get_parameter</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.MethodHandlesPublicLookup.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>method_handles_public_lookup</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.NewInstance.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>new_instance</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.GeneratedClassLoader.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>generated_class_loader</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.HexEncodeStringJavaLangCalendar.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>hex-encode-string-java-lang-calendar</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.HexEncodeStringAtomicReferenceArray.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>hex-encode-string-atomic-reference-array</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.DoPriviledged.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>do_priviledged</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.AllPermission.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>all_permission</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.AllPermission.B" weight="0" feedback="1">
+			<search target="method">
+				<match>all_permission</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.File.A" weight="0" feedback="1">
+			<search target="method">
+				<match>file</match>
+			</search>
+		</rule>
+
+		<rule name="JAVA.File.B" weight="200">
+			<search target="method">
+				<pre-match>file</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*.exe$</regexp>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.DefineClass.A" weight="200">
+			<search target="method">
+				<match>define_class</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.InvokeMethodWithReflect.A" weight="200">
+			<search target="method">
+				<match>Invoke_method_with_reflect</match>
+			</search>
+		</rule>
+
+		<rule name="JAVA.Exec.A" weight="0" feedback="1">
+			<search target="method">
+				<match>exec</match>
+			</search>
+		</rule>
+
+		<rule name="JAVA.GetSystemProperty.A" weight="0" feedback="1">
+			<search target="method">
+				<match>get_system_property</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.SetSecurityManager.A" weight="0" feedback="1">
+			<search target="method">
+				<match>set_security_manager</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.SetSMandDownload.A" weight="0" feedback="1">
+			<search target="method">
+				<match>get_system_property</match>
+			</search>
+			<search target="method">
+				<match>set_security_manager</match>
+			</search>
+			<search target="method">
+				<match>url</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.GetSecurityManager.A" weight="0" feedback="1">
+			<search target="method">
+				<match>get_security_manager</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.FindStaticSetter.A" weight="0" feedback="1">
+			<search target="method">
+				<match>find_static_setter</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.Url.A" weight="0" feedback="1">
+			<search target="method">
+				<match>url</match>
+			</search>
+		</rule>
+
+		<rule name="JAVA.DownloadFile.A" weight="0" feedback="1">
+			<search target="method">
+				<match>get_parameter</match>
+			</search>
+			<search target="method">
+				<match>file</match>
+			</search>
+			<search target="method">
+				<match>url</match>
+			</search>
+		</rule>
+
+		<rule name="JAVA.DownloadFile.B" weight="0" feedback="1">
+			<search target="method">
+				<match>get_parameter</match>
+			</search>
+			<search target="method">
+				<match>url</match>
+			</search>
+			<search target="method">
+				<match>file</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.OpenUrlStream.A" weight="0" feedback="1">
+			<search target="method">
+				<match>open_url_stream</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.Generic_StaticSetter.A" weight="200">
+			<search target="method">
+				<match>find_static_setter</match>
+			</search>
+			<search target="method">
+				<match>get_security_manager</match>
+			</search>
+			<search target="method">
+				<match>get_parameter</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.Generic_Download_Exec.A" weight="200">
+			<search target="method">
+				<match>url</match>
+			</search>
+			<search target="method">
+				<match>open_url_stream</match>
+			</search>
+			<search target="method">
+				<match>file</match>
+			</search>
+			<search target="method">
+				<match>exec</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.Generic_Exec.A" weight="200">
+			<search target="method">
+				<match>file</match>
+			</search>
+			<search target="method">
+				<match>exec</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.Generic_Exec.B" weight="0" feedback="1">
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>[\s\S]*java\.io\.filewriter</regexp>
+				</search>
+			</search>
+			<search target="method">
+				<match>exec</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.Generic_Exec.C" weight="0" feedback="1">
+			<search target="method">
+				<match>url</match>
+			</search>
+			<search target="method">
+				<match>get_system_property</match>
+			</search>
+			<search target="method">
+				<match>exec</match>
+			</search>
+		</rule>
+
+		<rule name="JAVA.Heu.SecurityManager.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>set_security_manager</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java.beans.statement</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>class.forname</pre-match>
+				<search target="param">
+					<match>java/security/allpermission</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.Heu.SecurityManager.B" weight="200">
+			<search target="method">
+				<match>get_security_manager</match>
+			</search>
+			<search target="method">
+				<match>open_url_stream</match>
+			</search>
+			<search target="method">
+				<pre-match>class.forname</pre-match>
+				<search target="param">
+					<match>java/io/fileoutputstream</match>
+				</search>
+			</search>
+		</rule>
+
+	</rule-set>
+	
+	<rule-set category="Specific">
+		<rule name="JAVA.CVE-2012-5076.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2012-5076</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.CVE-2013-1493.A" weight="200" capture="1">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2013-1493</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.CVE-2012-0507.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2012-0507</match>
+				</search>
+			</search>
+		</rule>	
+
+		<rule name="JAVA.CVE-2012-0507.B" weight="200">
+			<search target="method">
+				<match>deserialize_object</match>
+			</search>
+			<search target="method">
+				<pre-match>class.forname</pre-match>
+				<search target="param">
+					<match>java/util/concurrent/atomic/atomicreferencearray</match>
+				</search>
+			</search>
+		</rule>	
+		
+		<rule name="JAVA.CVE-2012-0507.C" weight="0" feedback="1">
+			<search target="method">
+				<match>deserialize_object</match>
+			</search>
+			<search target="method">
+				<pre-match>jvm_call exception2</pre-match>
+				<search target="param">
+					<regexp>java\.util\.concurrent\.atomic\.atomicreferencearray</regexp>
+				</search>
+			</search>
+		</rule>	
+		
+		<rule name="JAVA.CVE-2008-5353.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2008-5353</match>
+				</search>
+			</search>
+		</rule>	
+		
+		<rule name="JAVA.CVE-2010-0094.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2010-0094</match>
+				</search>
+			</search>
+		</rule>	
+		
+		<rule name="JAVA.CVE-2012-4681.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2012-4681</match>
+				</search>
+			</search>
+		</rule>	
+		
+		<rule name="JAVA.CVE-2011-3544.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2011-3544</match>
+				</search>
+			</search>
+		</rule>	
+		
+		<rule name="JAVA.CVE-2009-3867.A" weight="0" feedback="1">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2009-3867</match>
+				</search>
+			</search>
+		</rule>	
+		
+		<rule name="JAVA.CVE-2012-4681.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2012-4681</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.CVE-2013-0422.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2013-0422</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.CVE-2012-1723.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2012-1723</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.CVE-2013-2463.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2013-2465</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.CVE-2013-2465.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2013-2465</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.CVE-2013-2470.A" weight="0" feedback="1">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2013-2470</match>
+				</search>
+			</search>
+		</rule>
+
+		<rule name="JAVA.CVE-2013-2470.B" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java.beans.statement</match>
+				</search>
+			</search>
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2013-2470</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.CVE-2013-2471.A" weight="200">
+			<search target="method">
+				<pre-match>_tmsa_report</pre-match>
+				<search target="param">
+					<match>java-exploit-cve-2013-2471</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.CVE-2013-2423.A" weight="200">
+			<pre-match>find_static_setter</pre-match>
+			<search target="param">
+				<match>java_lang_double</match>
+			</search>
+			<search target="param">
+				<match>java_lang_integer</match>
+			</search>
+			<search target="method">
+				<match>get_security_manager</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.CVE-2013-2423.B" weight="200">
+			<pre-match>find_static_setter</pre-match>
+			<search target="param">
+				<match>java_lang_double</match>
+			</search>
+			<search target="param">
+				<match>java_lang_integer</match>
+			</search>
+			<search target="method">
+				<match>class.forname</match>
+				<search target="param">
+					<match>java/lang/runtime</match>
+				</search>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.CVE-2013-2423.C" weight="200">
+			<pre-match>find_static_setter</pre-match>
+			<search target="method">
+				<match>get_security_manager</match>
+			</search>
+			<search target="param">
+				<match>java_lang_double</match>
+			</search>
+			<search target="param">
+				<match>java_lang_integer</match>
+			</search>
+		</rule>
+		
+		<rule name="JAVA.CVE-2013-2423.D" weight="200">
+			<search target="method">
+				<match>find_static_setter</match>
+				<search target="param">
+					<match>java_lang_double</match>
+				</search>
+			</search>
+			<search target="method">
+				<match>find_static_setter</match>
+				<search target="param">
+					<match>java_lang_integer</match>
+				</search>
+			</search>
+		</rule>
+	</rule-set>
+</rule-set>
+
+</xmlpattern>

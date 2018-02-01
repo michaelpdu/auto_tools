@@ -1,0 +1,209 @@
+// C++ interface to the pcre regular-expression library.  RE supports
+// Perl-style regular expressions (with extensions like \d, \w, \s,
+// ...).
+//
+// -----------------------------------------------------------------------
+// REGEXP SYNTAX:
+//
+// This module is part of the pcre library and hence supports its syntax
+// for regular expressions.
+//
+// The syntax is pretty similar to Perl's.  For those not familiar
+// with Perl's regular expressions, here are some examples of the most
+// commonly used extensions:
+//
+//   "hello (\\w+) world"  -- \w matches a "word" character
+//   "version (\\d+)"      -- \d matches a digit
+//   "hello\\s+world"      -- \s matches any whitespace character
+//   "\\b(\\w+)\\b"        -- \b matches empty string at a word boundary
+//   "(?i)hello"           -- (?i) turns on case-insensitive matching
+//   "/\\*(.*?)\\*/"       -- .*? matches . minimum no. of times possible
+//
+// -----------------------------------------------------------------------
+// PASSING MODIFIERS TO THE REGULAR EXPRESSION ENGINE
+//
+// PCRE defines some modifiers to change the behavior of the regular
+// expression engine.
+// The C++ wrapper defines an auxiliary class, RE_Options, as a vehicle
+// to pass such modifiers to a RE class.
+//
+// Currently, the following modifiers are supported
+//
+//    modifier              description               Perl corresponding
+//
+//    PCRE_CASELESS         case insensitive match    /i
+//    PCRE_MULTILINE        multiple lines match      /m
+//    PCRE_DOTALL           dot matches newlines      /s
+//    PCRE_DOLLAR_ENDONLY   $ matches only at end     N/A
+//    PCRE_EXTRA            strict escape parsing     N/A
+//    PCRE_EXTENDED         ignore whitespaces        /x
+//    PCRE_UTF8             handles UTF8 chars        built-in
+//    PCRE_UNGREEDY         reverses * and *?         N/A
+//    PCRE_NO_AUTO_CAPTURE  disables matching parens  N/A (*)
+//
+// (For a full account on how each modifier works, please check the
+// PCRE API reference manual).
+//
+// (*) Both Perl and PCRE allow non matching parentheses by means of the
+// "?:" modifier within the pattern itself. e.g. (?:ab|cd) does not
+// capture, while (ab|cd) does.
+//
+// -----------------------------------------------------------------------
+// REPLACING PARTS OF STRINGS
+//
+// You can replace the first match of "pattern" in "str" with
+// "rewrite".  Within "rewrite", backslash-escaped digits (\1 to \9)
+// can be used to insert text matching corresponding parenthesized
+// group from the pattern.  \0 in "rewrite" refers to the entire
+// matching text. 
+// -----------------------------------------------------------------------
+
+// On Error Resume Next
+ON ERROR RESUME Next  -->
+On Error GoTo .* -->
+
+// Set
+\bSET\b --> 
+
+// remove as xxx
+AS +?\w+ --> 
+
+// redim array
+REDIM\s+(\w+)(\(.+\)) --> \1 = new Array(\2 + 1)
+
+// remove Private, public
+PRIVATE -->
+PUBLIC -->
+
+//remove byval
+BYVAL -->
+
+//Comment Symbol
+'(.*) --> \n//\1
+
+// special array definition, eg. Dim Fuo5(0 To 255)
+DIM\s+(\w+)\(0\s+TO\s+(\w+)\) --> var \1 = new Array(\2 + 1)
+
+// noraml array definition
+DIM\s+(\w+)\(\s*\) --> var \1 = new Array()
+DIM\s+(\w+)(\(.+\)) --> var \1 = new Array(\2 + 1)
+
+// variable declaration
+(DIM|CONST)\s+([^\r\n]*) --> var \2
+
+//for loop step
+\bFor\b\s*((\w*)\s*=\s*[^\s]*)\s*To\s*([^\s\r\n]*)\s*Step\s*([^\s\r\n]*)\r? -->  for (\1; \2 < \3; \2+=\4) {\n
+
+// for loop
+\bFor\b\s*((\w*)\s*=\s*.*)\s*To\s*([^\r\n]*)\r? --> for (\1; \2 < \3; \2++) {\n
+
+// for each
+\bFor\b EACH (\w+)\s*IN\s*(\w+) --> for (var \1 in \2) {\n
+
+// next
+\bNEXT.*\b --> }
+
+// Exit For
+\bEXIT \bFor\b --> break
+
+//IF EXIT FUNCTION
+IF(.*?)THEN EXIT FUNCTION --> if (\1){\nreturn ret_val\n}
+
+//Exit Function
+\bEXIT FUNCTION\b --> return ret_val\n
+
+//Exit Sub
+\bEXIT SUB\b --> return\n
+
+//While...Wend
+^\s*WHILE\s*([^\n]*) --> while (\1){\n
+WEND --> }
+
+//Do While ...Loop
+DO WHILE\s*([^\n]*) --> while (\1){\n
+LOOP\s*\n -->}\n
+
+//Do Until...Loop, eg. Do Until CQO8sw >= 53
+DO UNTIL\s*([^\n]*) --> while (!(\1)){\n
+
+// Exit Do
+\bEXIT DO\b --> break
+
+//Do...Loop While
+DO\s*\n --> do{\n
+LOOP WHILE\s*([^\n]*) --> }while (\1)
+
+//DO...Loop Until
+LOOP Until\s*([^\n]*) --> }while (!(\1))
+
+// equal op in if
+\bIF\b +?([^<=>\n]+)=([^=\n]+) --> if \1==\2
+
+// if ... then
+\bIF( +?)(.*?)\bTHEN\b --> if (\2) {\n
+
+// case else
+\bCASE ELSE\b --> default
+
+// else
+\bELSE\b --> } else {\n
+
+// elseif ... then
+\bELSEIF( +?)(.*?)THEN --> } else if (\2) {\n
+
+// end if 
+\bEND IF\b --> }
+
+// select case
+\bSELECT CASE +?(\w+) --> switch (\1) {\n
+
+// end select
+\bEND SELECT\b --> }
+
+// case
+// CASE([^:]+):(.+) --> case : {;break;}
+
+//Array in Function param list  eg. Function Y2L78kpw(G5hNUkH9() As Byte)
+(FUNCTION.+)\((\w+)\(\).*\) --> \1(\2)
+
+// function keywords
+FUNCTION\s+(\w+)(\(.*\)) --> function \1\2 {\nvar ret_val\n
+END FUNCTION --> return ret_val\n}
+SUB\s+(\w+)(\(.*?\)) --> function \1\2 {\n
+END SUB --> }
+EXIT SUB --> return\n
+
+// string concat
+& --> +
+
+//Mid function, eg. Mid( It, InStrRev( It, "/" ) + 1 )
+MID\(([^,]*),([^,]*)\) -->\1.substr(\2 - 1)
+
+//CreateObject
+//CREATEOBJECT --> new ActiveXObject
+
+//operators
+\bAND\b --> &&
+\bOR\b --> ||
+\bNOT\b --> !
+\bXOR\b --> ^
+\bMOD\b --> %
+<> --> !=
+
+//Error
+Err.Raise --> // Err.Raise
+Err.Clear --> 
+
+"\\" --> "\\\\"
+
+//Randomize
+Randomize --> 
+
+//wscript.Echo("error: target folder ! found.")    //absinthe  
+WScript.Echo\((.*)\) -->  console.log(\1)
+
+//err.number
+\berr.number --> 0
+
+//Set input_stream         = Nothing
+\b(\w+)\s*=\s*nothing  --> \1 = null

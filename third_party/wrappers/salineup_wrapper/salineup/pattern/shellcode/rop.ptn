@@ -1,0 +1,70 @@
+//rop instruction define format:  va;type;weight;disasm_string
+
+[rop_module]
+module_hash: a27c32c2a13fba65e8898bc5fbf2c86c5c75ed3e
+module_name: icucnv36_3_6_0_0.dll
+module_base: 4a800000
+module_size: a7000
+instruction begin
+4a801064;1;2; ## ret 
+4a8063a5;1;2; ## pop ecx ## ret 
+4a80a8a6;1;2; ## and [esp+ebx*2],edi ## jnz 0x4a80a8ae ## mov al,0x1 ## ret 
+4a806f29;1;2; ## pop edi ## pop esi ## pop ebp ## retn 0x14
+4a842db2;1;2; ## xchg eax,edi ## ret 
+4a806cef;1;2; ## xchg eax,esp ## shr bl,0x2 ## xor al,al ## pop edi ## pop esi
+4a801f90;1;2; ## pop eax ## ret 
+4a802ab1;1;2; ## pop ebx ## ret 
+4a80b692;1;2; ## jmp [eax]
+4a802196;1;2; ## mov [ecx],eax ## ret 
+4a80a7d8;1;2; ## mov eax,[eax] ## ret 
+4a80aedc;1;2; ## lea edx,[esp+0xc] ## push edx ## push eax ## push dword [esp+0xc] ## push dword [0x4a8a093c]
+4a80d585;1;2; ## add eax,edx ## ret 
+instruction end
+
+
+[rop_module]
+module_hash: a830b332a7c38061706e827bfa35a1607464c9f4
+module_name: icucnv34_3_4_0_0.dll
+module_base: 4a800000
+module_size: 49000
+instruction begin
+4a8200a0;1;2; ## lea edx,[esp+0xc] ## push edx ## push eax ## push dword [esp+0xc] ## push dword [0x4a8457bc]
+4a81e982;1;2; ## pop ebx ## ret 
+4a80eba3;1;2; ## pop eax ## ret 
+4a801705;1;2; ## pop ecx ## ret 
+4a817ec9;1;2; ## pop eax ## ret 
+4a82156a;1;2; ## ret 
+4a803912;1;2; ## push eax ## call 0x4a820828
+4a802f6e;1;2; ## call [eax]
+4a80630f;1;2; ## mov [ecx],eax ## ret 
+4a8217f2;1;2; ## pop ecx ## ret 
+4a81fe83;1;2; ## xchg eax,edi ## ret 
+4a81a649;1;2; ## mov eax,[eax] ## ret 
+4a80795a;1;2; ## add eax,edx ## ret 
+4a8057bc;1;2; ## jmp [eax]
+4a80597d;1;2; ## and [esp+ebx*2],edi ## jnz 0x4a805985 ## mov al,0x1 ## ret 
+instruction end
+
+
+[rop_module]
+module_hash: d5502a1d00787d68f548ddeebbde1eca5e2b38ca
+module_name: msvcr71_7_10_3052_4.dll
+module_base: 7c340000
+module_size: 56000
+instruction begin
+7c354901;1;2; ## pop ebx ## ret 
+7c376402;1;2; ## pop ebp ## ret 
+7c351e05;1;2; ## neg eax ## ret 
+7c344f87;1;2; ## pop edx ## ret 
+7c378c81;1;2; ## pusha  ## add al,0xef ## ret 
+7c34b8d7;1;2; ## pop edi ## ret 
+7c364802;1;2; ## pop esi ## ret 
+7c3415a2;1;2; ## jmp [eax]
+7c345c30;1;2; ## push esp ## ret 
+7c351eb1;1;2; ## neg edx ## ret 
+7c352174;1;2; ## add ebx,eax ## xor eax,eax ## inc eax ## ret 
+7c345255;1;2; ## inc ebx ## fincstp  ## ret 
+7c347f97;1;2; ## pop eax ## ret 
+7c347f98;1;2; ## ret 
+7c34d201;1;2; ## pop ecx ## ret 
+instruction end

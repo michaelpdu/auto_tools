@@ -1,0 +1,10 @@
+var link = "CNMonico.lnk";
+
+var objWshShell = new ActiveXObject("WScript.Shell");
+var fso = new ActiveXObject("Scripting.FileSystemObject");
+
+var startup = objWshShell.SpecialFolders("STARTUP");
+fso.DeleteFile(startup  + "\\" + link , true);
+
+fso = null;
+objWshShell = null;

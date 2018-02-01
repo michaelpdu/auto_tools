@@ -1,0 +1,1 @@
+C:\Users\admin\Desktop\solu>pin -t sulo.dll -- flashplayer11_1r102_62_win_sa_32bit.exe

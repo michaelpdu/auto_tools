@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlpattern version="2.05.0000">
+
+<yara>
+    <import type="java_jnlp_behavior" path="pattern/java/JavaYara/jnlp_behavior.yar" />
+</yara>
+
+
+<!-- Java JNLP Rules -->
+
+<rule name="JAVA.SPEC.CVE-2012-0500.JA" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_JNLP_CVE_2012_0500_A</match>
+</rule>
+
+<rule name="JAVA.SPEC.CVE-2012-1533.JB" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>JAVA_JNLP_CVE_2012_1533_A</match>
+</rule>
+
+
+</xmlpattern>

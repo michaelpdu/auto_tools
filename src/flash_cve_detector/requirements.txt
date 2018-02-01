@@ -1,0 +1,2 @@
+yara-python==3.5
+psutil==5.0

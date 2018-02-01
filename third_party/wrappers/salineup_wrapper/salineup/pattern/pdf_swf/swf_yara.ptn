@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlpattern version="2.05.0000">
+
+<yara>
+    <import type="swf_format" path="pattern/pdf_swf/swf_yara/swf_format.yar" />
+    <import type="swf_behavior" path="pattern/pdf_swf/swf_yara/swf_behavior.yar" />
+    <import type="swf_as2_bytecode" path="pattern/pdf_swf/swf_yara/swf_as2_bytecode.yar" />
+</yara>
+
+<!-- SWF Heuristic Rules -->
+<rule name="SWF.HEU.HeapSpray.A" confidence='heu_midium' fbtype='page' fbrate='1.0' capture='1.0'>
+    <not>
+        <or>
+            <match>SWF_DEBUG_NORMAL_EVIDENCE_IN_CONSTANT_STRING</match>
+            <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+            <match>SWF_DYN_HEAPSPRAY_WHITE_STRING</match>
+        </or>
+    </not>
+    <match>SWF_DYN_HEAPSPRAY</match>
+</rule>
+
+<rule name="SWF.HEU.HeapSpray.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_DYN_HEAPSPRAY_SLICE_CODE</match>
+</rule>
+
+<rule name="SWF.HEU.BigSizeString.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <not>
+        <or>
+            <match>SWF_DEBUG_NORMAL_EVIDENCE_IN_CONSTANT_STRING</match>
+            <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+        </or>
+    </not>
+    <match>SWF_DYN_BIG_SIZE_STRING</match>
+</rule>
+
+<rule name="SWF.HEU.CheckVersion.A" confidence='monitor' fbtype='page' fbrate='0.01' capture='0.01'>
+    <match>SWF_DYN_CHECK_VERSION</match>
+</rule>
+
+<rule name="SWF.HEU.EICallEval.A" confidence='monitor' fbtype='page' fbrate='0.0' capture='0.0'>
+    <match>SWF_DYN_EI_CALL_EVAL</match>
+</rule>
+
+<rule name="SWF.HEU.EICallEval.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_DYN_EI_CALL_EVAL_IN_BINARY</match>
+</rule>
+
+<rule name="SWF.HEU.TooManySetNumbericProperty.A" confidence='heu_midium' fbtype='page' fbrate='1.0' capture='1.0'>
+    <not>
+        <match>SWF_DYN_TOO_MANY_SET_NUMBERIC_PROPERTY_WHITE_STRING</match>
+    </not>
+    <match>SWF_DYN_TOO_MANY_SET_NUMBERIC_PROPERTY</match>
+</rule>
+
+<rule name="SWF.HEU.HiddenIframe.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_DYN_HIDDEN_IFRAME</match>
+</rule>
+
+<rule name="SWF.HEU.CreateElement.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_DYN_CREATE_ELEMENT</match>
+</rule>
+
+
+<!-- SWF Specific Rules -->
+<rule name="SWF.SPEC.CVE-2011-0611.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_CVE_2011_0611</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2014-0499.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_DYN_NEW_REGEXP_PARAM_CVE_2014_0499</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2014-0499.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_DYN_STRING_APPEND_REGEXP_CVE_2014_0499</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2014-0556.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CVE_2014_0556</match>
+    <match>SWF_STATIC_HEU_SUSPICIOUS_NUMBER</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2013-0634.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CVE_2013_0634</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2015-0313.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <not>
+        <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+    </not>
+    <match>SWF_STATIC_CVE_2015_0313</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2015-5119.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CVE_2015_5119</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2015-5122.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <not>
+        <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+    </not>
+    <match>SWF_STATIC_CVE_2015_5122</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2015-5122.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CVE_2015_5122_B</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2016-4117" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CVE_2016_4117</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2010-1297.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CVE_2010_1297</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2012-0779.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CVE_2012_0779</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2009-1862.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_BYTECODE_CVE_2009_1862</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2014-0515.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_FORMAT_CVE_2014_0515</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2014-0499.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CONST_STRING_REGEXP_CVE_2014_0499</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2014-0498.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_CVE_2014_0498</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2014-0502.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CVE_2014_0502</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2007-0071.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_CVE_2007_0071</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2012-1535.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_CVE_2012_1535</match>
+</rule>
+
+<rule name="SWF.SPEC.CVE-2015-0336.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>SWF_CVE_2015_0336_SUBRULE_PACKER</match>
+    <match>SWF_CVE_2015_0336_SUBRULE_EMBEDDED</match>
+</rule>
+
+<!-- SWF Signature Rules -->
+<rule name="SWF.SIG.ROP.A" confidence='heu_midium' fbtype='page' fbrate='1.0' capture='1.0'>
+    <match>SWF_STATIC_HEU_ROP</match>
+</rule>
+
+<rule name="SWF.SIG.DecompiledCode.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <not>
+        <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+    </not>
+    <match>SWF_STATIC_HEU_WRITE</match>
+</rule>
+
+<rule name="SWF.SIG.DecompiledCode.C" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <not>
+        <match>SWF_DEBUG_VALID_METHOD_INFO_COUNT_LARGER_THAN_MAX</match>
+    </not>
+    <match>SWF_STATIC_HEU_WHILE_SETPROPERTY</match>
+</rule>
+
+<!-- Reduce feedback volume
+<rule name="SWF.SIG.DecompiledCode.E" confidence='heu_low' fbtype='page' fbrate='0.01'>
+    <match>SWF_STATIC_HEU_WHILE_WRITEBYTE</match>
+</rule>
+ -->
+
+<!-- Reduce feedback volume
+<rule name="SWF.SIG.DecompiledCode.F" confidence='heu_low' fbtype='page' fbrate='0.01'>
+    <match>SWF_STATIC_HEU_STRANGE_STRING_CONCAT</match>
+</rule>
+-->
+
+<rule name="SWF.SIG.DecompiledCode.G" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <not>
+        <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+    </not>
+    <match>SWF_STATIC_HEU_WHILE_NEW_VECTOR</match>
+</rule>
+
+<rule name="SWF.SIG.DecompiledCode.H" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <not>
+        <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+    </not>
+    <match>SWF_STATIC_HEU_WHILE_WRITEBYTE_MAL</match>
+</rule>
+
+<!-- Reduce feedback volume
+<rule name="SWF.SIG.DecompiledCode.I" confidence='heu_low' fbtype='page' fbrate='0.03'>
+    <match>SWF_STATIC_HEU_STRING_FROMCHARCODE</match>
+</rule>
+-->
+
+<rule name="SWF.SIG.SuspiciousNumber.A" confidence='monitor' fbtype='page' fbrate='1.0' capture='1.0'>
+    <match>SWF_STATIC_HEU_SUSPICIOUS_NUMBER</match>
+</rule>
+
+<rule name="SWF.SIG.MaliciousHex.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_MALICIOUS_HEX_B</match>
+</rule>
+
+<rule name="SWF.SIG.CheckVersion.A" confidence='monitor' fbtype='page' fbrate='0.2' capture='0.2'>
+    <match>SWF_STATIC_CHECK_VERSION</match>
+</rule>
+
+<rule name="SWF.SIG.BigSizeString.A" confidence='monitor' fbtype='page' fbrate='0.01' capture='0.03'>
+    <match>SWF_STATIC_BIG_SIZE_STRING</match>
+</rule>
+
+<rule name="SWF.SIG.EmbedFlash.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_STATIC_EMBEDFLASH</match>
+</rule>
+
+<rule name="SWF.SIG.WhileStringAdd.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_HEU_WHILE_STRING_ADD</match>
+</rule>
+
+<rule name="SWF.SIG.HideHtmlElement.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_HIDE_HTML_ELEMENT</match>
+</rule>
+
+<rule name="SWF.SIG.HiddenIframe.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_HIDDEN_IFRAME</match>
+</rule>
+
+<rule name="SWF.SIG.HiddenElement.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_HIDDEN_ELEMENT</match>
+</rule>
+
+<rule name="SWF.SIG.CreateScriptElement.A" confidence='monitor' fbtype='page' fbrate='0.01'>
+    <match>SWF_STATIC_CREATE_SCRIPT_ELEMENT</match>
+</rule>
+
+<rule name="SWF.SIG.PEInBinaryData.A" confidence='heu_midium' fbtype='page' fbrate='1.0' capture='1.0'>
+    <match>SWF_FORMAT_HEU_PE_IN_BINARY_DATA</match>
+</rule>
+
+<rule name="SWF.SIG.SWFInBinaryData.A" confidence='monitor' fbtype='page' fbrate='0.01' capture='0.1'>
+    <match>SWF_FORMAT_HEU_SWF_IN_BINARY_DATA</match>
+</rule>
+
+<rule name="SWF.SIG.SuspiciousInBinaryData.A" confidence='monitor' fbtype='page' fbrate='0.3'>
+    <match>SWF_FORMAT_HEU_SUSPICIOUS_CODE_IN_BINARY_DATA</match>
+</rule>
+
+<rule name="SWF.SIG.EOEHiddenIframe.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_FORMAT_EOE_HIDDEN_IFRAME</match>
+</rule>
+
+<rule name="SWF.SIG.EOEOuterJavascript.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_FORMAT_EOE_OUTER_JAVASCRIPT</match>
+</rule>
+
+<!-- Reduce feedback volume
+<rule name="SWF.SIG.LocalConnection.A" confidence='monitor' fbtype='page' fbrate='0.01' capture='0.03'>
+    <match>SWF_STATIC_LOCAL_CONNECTION</match>
+</rule>
+-->
+
+ <rule name="SWF.SIG.BehaviorLikeHeapspray.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <not>
+        <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+    </not>
+    <match>SWF_STATIC_LOCALCONNECTION_A</match>
+</rule>
+
+<rule name="SWF.SIG.Payload.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_CHECK_VERSION</match>
+    <match>SWF_STATIC_EMBEDFLASH</match>
+    <match>SWF_STATIC_FIND_PAYLOAD_A</match>
+</rule>
+
+<rule name="SWF.SIG.ShellCode.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_DYN_CHECK_VERSION</match>
+    <match>SWF_STATIC_EMBEDFLASH</match>
+    <match>SWF_STATIC_FIND_ASSEMBLY</match>
+</rule>
+
+<rule name="SWF.SIG.OBFUSCATION.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_OBFUSCATION_A</match>
+</rule>
+
+<rule name="SWF.SIG.MaliciousHex.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>SWF_STATIC_MALICIOUS_HEX_A</match>
+</rule>
+
+<!-- SWF Debug Rules -->
+<rule name="SWF.DBG.DecompiledCode.D" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <not>
+        <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+    </not>
+    <match>SWF_STATIC_HEU_WHILE_PUSH</match>
+</rule>
+
+<rule name="SWF.DBG.ReadTagError.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_DEBUG_READ_TAG_ERROR</match>
+</rule>
+
+<rule name="SWF.DBG.SmallSizeABCCode.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_DEBUG_SMALL_SIZE_ABC_CODE</match>
+</rule>
+
+<rule name="SWF.DBG.MethodInfoCountZero.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_DEBUG_METHOD_INFO_COUNT_ZERO</match>
+</rule>
+
+<rule name="SWF.DBG.ConstantPoolParseError.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_DEBUG_CONSTANT_POOL_PARSE_ERROR</match>
+</rule>
+
+<rule name="SWF.DBG.ValidMethodCountLargerThanMax.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_DEBUG_VALID_METHOD_INFO_COUNT_LARGER_THAN_MAX</match>
+</rule>
+
+<rule name="SWF.DBG.ClassCountLargerThanMax.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+</rule>
+
+<rule name="SWF.DBG.MethodCountLargerThanMax.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_DEBUG_METHOD_INFO_COUNT_LARGER_THAN_MAX</match>
+</rule>
+
+<rule name="SWF.DBG.FamousUrlInConstantString.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_DEBUG_FAMOUS_URL_IN_CONSTANT_STRING</match>
+</rule>
+
+<rule name="SWF.DBG.NormalEvidenceInConstantString.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_DEBUG_NORMAL_EVIDENCE_IN_CONSTANT_STRING</match>
+</rule>
+
+<rule name="SWF.DBG.CrashSample.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>SWF_STATIC_NORMAL_CRASH</match>
+</rule>
+
+<rule name="SWF.DBG.NormalRules.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <or>
+        <match>SWF_DEBUG_CLASS_INFO_COUNT_LARGER_THAN_MAX</match>
+        <match>SWF_DEBUG_METHOD_INFO_COUNT_ZERO</match>
+        <match>SWF_DEBUG_CONSTANT_POOL_PARSE_ERROR</match>
+        <match>SWF_DEBUG_METHOD_INFO_COUNT_LARGER_THAN_MAX</match>
+        <match>SWF_DEBUG_FAMOUS_URL_IN_CONSTANT_STRING</match>
+        <match>SWF_DEBUG_NORMAL_EVIDENCE_IN_CONSTANT_STRING</match>
+        <match>SWF_STATIC_NORMAL_CRASH</match>
+    </or>
+    <not>
+        <match>SWF_STATIC_GRAY_EVIDENCE</match>
+        
+    </not>
+</rule>
+
+</xmlpattern>

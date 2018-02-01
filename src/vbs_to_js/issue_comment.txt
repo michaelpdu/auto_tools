@@ -1,0 +1,73 @@
+vbs 错误：
+1. ADf9s88 = DP(PiO)  DO...Loop没有条件
+
+转换问题：
+1. 等于号的问题
+2. On Error GoTo LHo
+4. LHo:   ：被转化
+
+
+
+12/14
+problem:
+def process_known_api(self, lines)  error
+wscript.sleep(sh)
+wscript.sleep(sh)
+solution:
+update process_known_api(self, lines)
+
+12/13
+problem:
+api caseignore
+solution:
+add api_replace.py/api_names.cfg
+
+problem:
+'\' in str
+solution:
+add def process_backslant_in_str(self, lines)
+
+problem:
+environment["temp"]
+1113vbs\87408596-NR1207.vbs
+solution:
+implement in runtime_win
+
+
+12/12
+problem:
+array in function param
+1027-1109   budget 4CD96D2 xls.vbs    hj
+solution:
+extract all XX() name XX, delete function name,this solution need completed function list
+
+problem:
+# For Each RPn1 in Ar8
+# for (var rpn1 in ar8) {
+# lgd9 = new ActiveXObject(rpn1)  }
+# correct expression is lgd9 = new ActiveXObject(ar8[rpn1])
+solution:
+add def process_array_traversal(self, lines)
+
+
+ - 12/9
+problem:
+nested function
+solution:
+add runtime_for_vbs_api.js
+******remark - is best to implement all vbs_api in .js, not in rules!replace based on rules may bring more problem
+
+problem:
+# Set RutRachel = GetRef("GoBar"), RutRachel need to be put in func_list
+solution:
+update def find_all_function_name(self)
+
+problem:
+# func_name param, eg. F3 "",F3("")
+solution:
+update def process_function_op(self, lines)
+
+problem:
+js is ugly
+solution:
+add def beautify_js(self)

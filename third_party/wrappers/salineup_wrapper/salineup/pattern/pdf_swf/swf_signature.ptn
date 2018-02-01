@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlpattern version="2.0.0.1011">
+
+<rule-set category="pdf-format-exploit">
+    <rule name="swf-exploit-cve-2010-2884" weight="20" description="cve-2010-2884" >
+        <pre-match>
+            <match>setSharedStyle</match>
+        </pre-match>
+        <search>
+            <match-binary>620262061e856305d162055daa</match-binary>
+        </search>
+    </rule>
+
+    <rule name="swf-exploit-cve-2010-3654" weight="20" description="cve-2010-2884" >
+        <pre-match>
+            <match>RadioButtonGroup</match>
+        </pre-match>
+        <search>
+            <match-binary>05130705140701150702070702170706</match-binary>
+        </search>
+    </rule>
+
+    <rule name="swf-exploit-cve-2011-0609" weight="20" description="cve-2011-0609" >
+        <pre-match>
+            <match>com.greensock</match>
+        </pre-match>
+        <search>
+            <match-binary>46696c7465b4506C7567696E2263</match-binary>
+        </search>
+    </rule>
+
+    <rule name="swf-exploit-cve-2012-0779" weight="20" description="cve-2012-0779" >
+        <pre-match>
+            <match>systemMemoryCall</match>
+        </pre-match>
+        <search>
+            <match-binary>72746d70</match-binary>
+        </search>
+    </rule>
+
+    <rule name="swf-exploit-cve-2010-1297" weight="20" description="cve-2010-1297" >
+        <pre-match>
+            <match>ButtonLabelPlacement</match>
+        </pre-match>
+        <search>
+            <match-binary>d104d2603840ba03140e0000609f0266</match-binary>
+        </search>
+    </rule>
+
+    <rule name="swf-exploit-cve-2009-1862" weight="20" description="cve-2009-1862" >
+        <pre-match>
+            <match-binary>a2306001020202020202020202</match-binary>
+        </pre-match>
+    </rule>
+
+    <rule name="action-script-jit-spray" weight="20" description="action-script-jit-spray" >
+        <pre-match>
+            <match>jit_egg</match>
+        </pre-match>
+        <search>
+            <match-binary>427974654172726179</match-binary>
+        </search>
+    </rule>
+	
+	<rule name="swf-shellcode-nop" weight="20" description="shellcode" >
+        <pre-match>
+            <match-binary>9090909090909090</match-binary>
+        </pre-match>
+    </rule>
+	
+	
+</rule-set>
+
+</xmlpattern>

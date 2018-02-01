@@ -1,0 +1,14 @@
+// StackPivot Address
+
+// IMAGEHLP.dll xp sp3 version ??
+// # xchg ecx,esp # or byte ptr [eax],al # add byte ptr [edi+5Eh],bl # ret 8
+76C9B4C2
+
+// comctl32.dll   version ??
+// # xchg eax,esp / ret
+773E3F18
+
+// USER32.dll version ??
+//#xchg eax,esp
+7E45F257
+

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlpattern version="2.05.0000">
+
+<yara>
+    <import type="pdf_behavior" path="pattern/pdf_swf/pdf_yara/pdf_behavior.yar" />
+    <import type="pdf_parser_message" path="pattern/pdf_swf/pdf_yara/pdf_format_message.yar" />
+</yara>
+
+
+<!-- PDF Heuristic Rules -->
+<rule name="PDF.HEU.Heapspray.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_HEAPSPRAY</match>
+</rule>
+
+<rule name="PDF.HEU.Heapspray.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_HEAPSPRAY_B</match>
+</rule>
+
+<rule name="PDF.HEU.Shellcode.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_SHELLCODE_DETECTION</match>
+</rule>
+
+<rule name="PDF.HEU.XrefEval.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_XREF_EVAL</match>
+    <match>PDF_GENERIC_EVAL_ACCESS</match>
+</rule>
+
+<rule name="PDF.HEU.XrefEval.B" confidence='monitor' fbtype='page' fbrate='0.5'>
+    <match>PDF_GENERIC_XREF_EVAL</match>
+</rule>
+
+<rule name="PDF.HEU.AppMethodCall.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_EVAL_APP_METHOD_CALL_A</match>
+</rule>
+
+<rule name="PDF.HEU.AppMethodCall.B" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_EVAL_APP_METHOD_CALL_B</match>
+</rule>
+
+<rule name="PDF.HEU.AppMethodCall.C" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_APP_FUNCTION</match> 
+</rule>
+
+<rule name="PDF.HEU.StackOverflow.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_STACKOVERFLOW</match>
+</rule>
+
+<rule name="PDF.HEU.GetURL.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_GETURL</match>
+</rule>
+
+<rule name="PDF.HEU.GetterViewVersion.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_GETTERVIEWVERSION_EVAL</match>
+    <match>PDF_DOCODE_SHELLCODE_REPORT</match>
+</rule>
+
+<rule name="PDF.HEU.GetterViewVersion.B" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_GETTERVIEWVERSION_EVAL</match>
+    <match>PDF_EXPLOIT_UNESCAPE_NOT_SHELLCODE</match>
+</rule>
+
+
+
+<!-- PDF Signature Rules -->
+<rule name="PDF.SIG.EmbeddedFlash.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_FORMAT_EMBEDDED_FLASH</match>
+</rule>
+
+<rule name="PDF.SIG.EofScript.A" confidence='monitor' fbtype='page' fbrate='0.3'>
+    <match>PDF_FORMAT_EOF_SCRIPT</match>
+</rule>
+
+<rule name="PDF.SIG.EofScript.B" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_EOF_SCRIPT_CHECK_COOKIE</match>
+    <match>PDF_FORMAT_EOF_SCRIPT</match>
+</rule>
+
+<rule name="PDF.SIG.EofScript.C" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_EOF_SCRIPT_CHECK_COOKIE_CTEATE_IFRAME</match>
+    <match>PDF_FORMAT_EOF_SCRIPT</match>
+</rule>
+
+<rule name="PDF.SIG.AnnotScript.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_SCRIPT_IN_ANNOT</match>
+</rule>
+
+<rule name="PDF.SIG.PageScript.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_SCRIPT_IN_PAGE</match>
+</rule>
+
+<rule name="PDF.SIG.PdfInfoScript.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_PDF_INFO_SCRIPT</match>
+</rule>
+
+<rule name="PDF.SIG.OpenactionMalUri.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_OPENACTION_MAL_URI</match>
+</rule>
+
+<rule name="PDF.SIG.VBSRunPEFile.A" confidence='heu_midium' fbtype='page' fbrate='1.0'>
+    <match>PDF_VBS_RUN_PE_FILE</match>
+</rule>
+
+
+
+<!-- PDF CVE Rules -->
+<!-- 2007/2008 -->
+<rule name="PDF.SPEC.CVE-2007-3896.A" confidence='heu_high' fbtype='page' fbrate='0.1'>
+    <match>PDF_EXPLOIT_CVE_2007_3896_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2008-0655.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <or>
+        <match>PDF_EXPLOIT_CVE_2008_0655_A</match>
+        <match>PDF_FORMAT_CVE_2008_0655_A</match>
+    </or>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2008-2992.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2008_2992_A</match>
+</rule>
+
+<!-- 2009 -->
+<rule name="PDF.SPEC.CVE-2009-0927.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2009_0927_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2009-1492.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2009_1492_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2009-1492.B" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2009_1492_B</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2009-3953.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2009_3953_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2009-4324.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2009_4324_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2009-4324.B" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2009_4324_B</match>
+</rule>
+
+<!-- 2010 -->
+<rule name="PDF.SPEC.CVE-2010-0188.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_0188_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-0188.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_0188_B</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-0188.C" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_0188_C</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-0188.D" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_0188_D</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-0188.E" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_0188_E</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-0188.F" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_0188_F</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-0188.G" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_0188_G</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-0188.H" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_0188_H</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-0491.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_0491_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-1240.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_1240_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2010-2883.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2010_2883_A</match>
+</rule>
+
+<!-- 2011/2012 -->
+<rule name="PDF.SPEC.CVE-2011-2462.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2011_2462_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2012-0754.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2012_0754_A</match>
+</rule>
+
+<!-- 2013 -->
+<rule name="PDF.SPEC.CVE-2013-0640.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2013_0640_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2013-2550.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2013_2550_A</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2013-2729.A" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_EXPLOIT_CVE_2013_2729_A</match>
+    <match>PDF_EXPLOIT_CVE_2013_2729_A1</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2013-2729.B" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_JS_NAMESPACE</match>
+    <match>PDF_DOCODE_SHELLCODE_REPORT</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2013-2729.C" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_BEHAVIOR_CVE_2013_2729_C</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2013-3346.A" confidence='monitor' fbtype='page' fbrate='1.0'>
+    <match>PDF_FORMAT_CVE_2013_3346_A</match>
+    <match>PDF_GENERIC_RANGE_ERROR</match>
+</rule>
+
+<rule name="PDF.SPEC.CVE-2013-3346.B" confidence='heu_high' fbtype='page' fbrate='1.0'>
+    <match>PDF_GENERIC_STACKOVERFLOW</match>
+    <match>PDF_GENERIC_EVAL_ACCESS</match>
+    <match>PDF_EXPLOIT_CVE_2013_3346_B</match>
+</rule>
+
+
+<!-- PDF Debug Rules, For Private Debug -->
+<rule name="PDF.DBG.EicarFile.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>PDF_DEBUG_EICAR_FILE</match>
+</rule>
+
+<rule name="PDF.DBG.VirusXfaDataUnsafe.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>PDF_DEBUG_VIRUS_XFA_DATA_UNSAFE</match>
+</rule>
+
+<rule name="PDF.DBG.DateReplace.A" confidence='monitor' fbtype='page' fbrate='0.0'>
+    <match>PDF_DEBUG_DATE_REPLACE</match>
+</rule>
+
+
+</xmlpattern>

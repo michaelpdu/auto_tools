@@ -1,0 +1,1071 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// version = 1.0.1011
+// Global Phishing
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// paypal phishing
+Id = 101
+TargetURL = https://www.paypal.com/
+Target = Paypal
+
+// Facebook
+Id = 102
+TargetURL = https://www.facebook.com/
+Target = facebook
+whitelist = babelfish_translate_url
+
+// Blizzard
+Id = 103
+TargetURL = http://www.blizzard.com/
+Target = blizzard
+
+// VISA
+Id = 104
+TargetURL = http://usa.visa.com/
+Target = visa
+
+// MasterCard
+Id = 105
+TargetURL = http://www.mastercard.com/
+Target = mastercard
+
+// Orkut
+Id = 106
+TargetURL = http://www.orkut.com/
+Target = orkut
+
+// Alliance & Leicester internet banking
+Id = 107
+TargetURL = https://www.mybank.alliance-leicester.co.uk/
+Target = alliance-leicester
+
+// AOL
+Id = 108
+TargetURL = http://www.aol.com/
+Target = aol
+
+// Banco De Brasil
+Id = 109
+TargetURL = http://www.bb.com.br/
+Target = Banco De Brasil
+
+// craigslist
+Id = 110
+TargetURL = http://www.craigslist.com/
+Target = craigslist
+
+// Google
+Id = 111
+TargetURL = http://www.google.com/
+Target = google
+
+// eBay
+Id = 112
+TargetURL = https://signin.ebay.com/
+Target = eBay
+
+// Bank of America
+Id = 113
+TargetURL = https://www.bankofamerica.com/
+Target = bankofamerica
+
+// Santander Online Banking
+Id = 114
+TargetURL = http://www.santander.co.uk/
+Target = santander
+
+// Yahoo! Mail
+Id = 115
+TargetURL = http://mail.yahoo.com/
+Target = Yahoo Mail
+
+// Bradesco
+Id = 116
+TargetURL = http://www.bradesco.com.br/
+Target = Bradesco
+
+// Halifax
+Id = 117
+TargetURL = http://www.halifax.co.uk/
+Target = Halifax
+
+// HSBC
+Id = 118
+TargetURL = http://www.hsbc.com/
+Target = HSBC
+
+// Royal Bank of Scotland
+Id = 119
+TargetURL = http://www.rbs.com/
+Target = RBS
+
+// Co-operative Bank
+Id = 120
+TargetURL = http://www.co-operativebank.co.uk/
+Target = COOBank
+
+// ASB Bank Limited
+Id = 121
+TargetURL = https://www.asb.co.nz/
+Target = ASBBank
+
+// Aol Mail
+Id = 122
+TargetURL = http://mail.aol.com/
+Target = AOLmail
+
+// Cartasi
+Id = 123
+TargetURL = http://www.cartasi.it/
+Target = Cartasi
+
+// Cielo
+Id = 124
+TargetURL = http://www.cielo.com.br/
+Target = cielo
+
+// TAM Fidelidade
+Id = 125
+TargetURL = http://www.tam.com.br/
+Target = tam
+
+// habbo
+Id = 126
+TargetURL = http://www.habbo.com/
+Target = habbo
+
+// Wells Fargo
+Id = 127
+TargetURL = https://www.wellsfargo.com/
+Target = wellsfargo
+
+// JPMorgan Chase
+Id = 128
+TargetURL = http://chase.com/
+Target = chase
+
+// Nets
+Id = 129
+TargetURL = http://www.nets.eu/
+Target = nets
+
+// Poste Italiane
+Id = 130
+TargetURL = http://www.posteitaliane.it/
+Target = Poste Italiane
+
+// lloyds TSB
+Id = 131
+TargetURL = http://online.lloydstsb.co.uk/
+Target = Lloyds TSB
+
+// UPS
+Id = 132
+TargetURL = http://www.ups.com/
+Target = UPS
+
+// RunEscape
+Id = 133
+TargetURL = http://www.runescape.com/
+Target = runescape
+
+// TDCanadaTrust
+Id = 134
+TargetURL = http://www.tdcanadatrust.com/
+Target = easyweb
+
+// St.George Internet Banking
+Id = 135
+TargetURL = http://www.stgeorge.com.au/
+Target = stgeorge
+
+// Vodafone
+Id = 136
+TargetURL = https://online.vodafone.uk.co/
+Target = Vodafone
+
+// CIBC
+Id = 137
+TargetURL = https://www.cibc.com/
+Target = CIBC
+
+// Amazon
+Id = 138
+TargetURL = http://www.amazon.co.uk/
+Target = Amazon
+
+// Gmail
+Id = 139
+TargetURL = http://www.gmail.com/
+Target = gmail
+
+// GoogleDocs
+Id = 140
+TargetURL = https://docs.google.com/
+Target = googledocs
+
+// Remax
+Id = 141
+TargetURL = http://www.remax.com/
+Target = remax
+
+// AolHelp
+Id = 142
+TargetURL = http://help.aol.com/
+Target = aolhelp
+
+// Steam
+Id = 143
+TargetURL = http://steamcommunity.com/
+Target = Steam
+
+// Coldwellbanker
+Id = 144
+TargetURL = http://www.coldwellbanker.com/
+Target = Coldwellbanker
+
+// Trulia
+Id = 145
+TargetURL = http://www.trulia.com/
+Target = Trulia
+
+// Chase online
+Id = 146
+TargetURL = https://chaseonline.chase.com/
+Target = ChaseOnline
+
+// InterBank
+Id = 147
+TargetURL = http://www.interbankus.com/
+Target = interbankus
+
+// IRS
+Id = 148
+TargetURL = http://www.irs.gov/
+Target = IRS
+
+// Webhost
+Id = 149
+TargetURL = http://www.webhost.com/
+Target = Webhost
+
+// Outlander Inc
+Id = 150
+TargetURL = http://outlanderinc.com/
+Target = Outlander Inc
+
+// Wdlinux
+Id = 151
+TargetURL = http://www.wdlinux.cn/
+Target = wdlinux
+
+// Wordpress
+Id = 152
+TargetURL = http://wordpress.org/
+Target = wordpress
+
+// Centurylink
+Id = 153
+TargetURL = http://www.centurylink.com/
+Target = centurylink
+
+// Freewebhostingarea
+Id = 154
+TargetURL = http://www.freewebhostingarea.com/
+Target = freewebhostingarea
+
+// Lince.in
+Id = 155
+TargetURL = http://whois.domaintools.com/lince.in/
+Target = lince.in
+
+// Hotmail
+Id = 156
+TargetURL = https://login.live.com/
+Target = Hotmail
+
+// Itau
+Id = 157
+TargetURL = http://www.itau.com.br/
+Target = itau
+
+// Netbank
+Id = 158
+TargetURL = https://netbank.nedsecure.co.za/
+Target = netbank
+
+// Discover
+Id = 159
+TargetURL = https://www.discover.com/
+Target = discover
+
+// Scotiaweb
+Id = 160
+TargetURL = https://www.scotiaweb.com.mx/inverweb/
+Target = scotiaweb
+
+// Scotiabank
+Id = 161
+TargetURL = http://www.scotiabank.com.sv/
+Target = scotiabank
+
+// Alertpay
+Id = 163
+TargetURL = www.alertpay.com/
+Target = alertpay`
+
+// Alibaba
+Id = 164
+TargetURL = http://www.alibaba.com/
+Target = alibaba
+
+// Standardchartered
+Id = 165
+TargetURL = http://www.standardchartered.com/
+Target = standardchartered
+
+// Bancofrances
+Id = 166
+TargetURL = https://www.bancofrances.com.ar/
+Target = bancofrances
+
+// Rbcroyalbank
+Id = 167
+TargetURL = http://www.rbcroyalbank.com/
+Target = rbcroyalbank
+
+// Outlook
+Id = 168
+TargetURL = https://login.live.com/
+Target = outlook
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Lottery Phishing
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Yahoo! mail lottery
+Id = 201
+TargetURL = http://www.yahoo.com/
+Target = Yahoo
+
+// QQ lottery
+Id = 202
+TargetURL = http://www.qq.com/
+Target = QQ
+
+// Hunan TV, happy camp
+Id = 203
+TargetURL = http://www.hunantv.com/
+Target = Hunan TV
+
+// Taobao
+Id = 204
+TargetURL = http://www.taobao.com/
+Target = Taobao
+
+// Sina Weibo
+Id = 205
+TargetURL = http://www.weibo.com/
+Target = Sina Weibo
+
+// CCTV 6+1
+Id = 206
+TargetURL = http://www.cntv.cn/
+Target = CCTV 6+1
+
+// Lottery
+Id = 207
+TargetURL = http://www.zhcw.com/
+Target = zhcw
+
+// 六合彩
+Id = 208
+TargetURL = http://www.zhcw.com/
+Target = lhc
+
+// 中国好声音
+Id = 209
+TargetURL = http://www.zjstv.com/
+Target = zjstv
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Bank Phishing
+//////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+// BOC
+Id = 301
+TargetURL = http://www.boc.cn/
+Target = Bank of China
+
+// CMB
+Id = 302
+TargetURL = http://www.cmbchina.com/
+Target = China Merchants Bank
+
+// ICBC
+Id = 303
+TargetURL = http://www.icbc.com.cn/
+Target = icbc
+
+// SDB
+Id = 304
+TargetURL = http://www.sdb.com.cn/
+Target = Shenzhen Development Bank
+
+// CCB
+Id = 305
+TargetURL = http://www.ccb.com/
+Target = China Construction Bank
+
+// GDB
+Id = 306
+TargetURL = http://www.gdb.com.cn/
+Target = Guangdong Development Bank
+
+// ABC
+Id = 307
+TargetURL = http://www.abchina.com/
+Target = Agricultural Bank of China
+
+// General Bank
+Id = 308
+TargetURL = http://www.ccb.com/
+Target = China Construction Bank
+
+// Alipay
+Id = 309
+TargetURL = http://www.alipay.com/
+Target = Alipay
+
+// CEBBANK-中国光大银行
+Id = 310
+TargetURL = http://www.cebbank.com/
+Target = cebbank
+
+// CMBC-中国民生银行
+Id = 311
+TargetURL = http://www.cmbc.com.cn/
+Target = cmbc
+
+// 福建海峡银行
+Id = 312
+TargetURL = http://www.fjhxbank.com/
+Target = fjhxbank
+
+// 江苏银行
+Id = 313
+TargetURL = http://www.jsbchina.cn/
+Target = jsbchina
+
+// 南京银行
+Id = 314
+TargetURL = http://www.njcb.com.cn/
+Target = njcb
+
+// 上海农商银行
+Id = 315
+TargetURL = http://www.srcb.com/
+Target = srcb
+
+// 上海商業銀行
+Id = 316
+TargetURL = http://www.shacombank.com.hk/
+Target = shacombank
+
+// 永隆銀行
+Id = 317
+TargetURL = http://www.winglungbank.com/
+Target = winglungbank
+
+// 創興銀行
+Id = 318
+TargetURL = http://www.chbank.com/
+Target = chbank
+
+//中國建設銀行 (亞洲) 股份有限公司
+Id = 319
+TargetURL = http://www.asia.ccb.com/
+Target = asiaccb
+
+Id = 320
+TargetURL = http://www.hncb.com.tw/
+Target = hncb
+
+
+//交通银行
+Id = 321
+TargetURL = http://www.bankcomm.com/
+Target = bankcomm
+
+//中信银行
+Id=322
+TargetURL = http://bank.ecitic.com/
+Target = bankcitic
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// 证券钓鱼
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// General Securities
+Id = 401
+TargetURL = http://www.htsec.com/
+Target = Securities
+
+// 海通证券
+Id = 402
+TargetURL = http://www.htsec.com/
+Target = htsec
+
+// 国金证券
+Id = 403
+TargetURL = http://www.gjzq.com.cn/
+Target = gjzq
+
+// 方正证券
+Id = 404
+TargetURL = http://www.foundersc.com/
+Target = Foundersc
+
+// 华林证券
+Id = 405
+TargetURL = http://www.chinalions.com/
+Target = Chinalions
+
+// 安信证券
+Id = 406
+TargetURL = http://www.essence.com.cn/
+Target = Essence
+
+// 国信证券
+Id = 407
+TargetURL = http://www.guosen.com.cn/
+Target = Guosen
+
+// 中信证券
+Id = 408
+TargetURL = http://www.cs.ecitic.com/
+Target = CITIC
+
+// 招商证券
+Id = 409
+TargetURL = http://www.newone.com.cn/
+Target = Newone
+
+// 华泰证券
+Id = 410
+TargetURL = http://www.htsc.com.cn/
+Target = htsc
+
+// 齐鲁证券
+Id = 411
+TargetURL = http://www.qlzq.com.cn/
+Target = qlzq
+
+// 国泰君安证券
+Id = 412
+TargetURL = http://www.gtja.com/
+Target = gtja
+
+// 广发证券
+Id = 413
+TargetURL = http://www.gf.com.cn/
+Target = gfzq
+
+// 光大证券
+Id = 414
+TargetURL = http://www.ebscn.com/
+Target = ebscn
+
+// 银河证券
+Id = 415
+TargetURL = http://www.chinastock.com.cn/
+Target = Chinastock
+
+// 长江证券
+Id = 416
+TargetURL = http://www.cjsc.com.cn/
+Target = cjsc
+
+// 东方证券
+Id = 417
+TargetURL = http://www.dfzq.com.cn/
+Target = dfzq
+
+// 申银万国证券
+Id = 418
+TargetURL = http://www.sw2000.com.cn/
+Target = sw2000
+
+// 宏源证券
+Id = 419
+TargetURL = http://www.hysec.com/
+Target = hysec
+
+// 东北证券股份有限公司
+Id = 420
+TargetURL = http://www.nesc.cn/
+Target = nesc
+
+// 航天证券有限责任公司
+Id = 421
+TargetURL = http://www.casstock.com/
+Target = casstock
+
+// 华鑫证券有限责任公司
+Id = 422
+TargetURL = http://www.cfsc.com.cn/
+Target = cfsc
+
+// 北京高华证券有限责任公司
+Id = 423
+TargetURL = http://www.gaohuasecurities.cn/
+Target = gaohuasecurities
+
+// 高盛高华证券有限责任公司
+Id = 424
+TargetURL = http://www.gsgh.cn/
+Target = gsgh
+
+// 国开证券有限责任公司
+Id = 425
+TargetURL = http://www.gkzq.com.cn/
+Target = gkzq
+
+// 民生证券有限责任公司
+Id = 426
+TargetURL = http://www.mszq.com/
+Target = mszq
+
+// 瑞银证券有限责任公司
+Id = 427
+TargetURL = http://www.ubssecurities.com/
+Target = ubssecurities
+
+// 新时代证券有限责任公司
+Id = 428
+TargetURL = http://www.xsdzq.cn/
+Target = xsdzq
+
+// 中德证券有限责任公司
+Id = 429
+TargetURL = http://www.zdzq.com.cn/
+Target = zdzq
+
+// 中国民族证券有限责任公司
+Id = 430
+TargetURL = http://www.e5618.com/
+Target = e5618
+
+// 中信建投证券有限责任公司
+Id = 431
+TargetURL = http://www.csc108.com/
+Target = csc108
+
+// 东兴证券股份有限公司
+Id = 432
+TargetURL = http://www.dxzq.net/
+Target = dxzq
+
+// 国都证券有限责任公司
+Id = 433
+TargetURL = http://www.guodu.com/
+Target = guodu
+
+// 华融证券股份有限公司
+Id = 434
+TargetURL = http://www.hrsec.com.cn/
+Target = hrsec
+
+// 瑞信方正证券有限责任公司
+Id = 435
+TargetURL = http://www.csfounder.com/
+Target = csfounder
+
+// 首创证券有限责任公司
+Id = 436
+TargetURL = http://www.sczq.com.cn/
+Target = sczq
+
+// 信达证券股份有限公司
+Id = 437
+TargetURL = http://www.cindasc.com/
+Target = cindasc
+
+// 中国国际金融有限公司
+Id = 438
+TargetURL = http://www.cicc.com.cn/
+Target = cicc
+
+// 渤海证券股份有限公司
+Id = 439
+TargetURL = http://www.ewww.com.cn/
+Target = ewww
+
+// 财达证券有限责任公司
+Id = 440
+TargetURL = http://www.s10000.com/
+Target = s10000
+
+// 大同证券经纪有限责任公司
+Id = 441
+TargetURL = http://www.dtsbc.com.cn/
+Target = dtsbc
+
+// 山西证券股份有限公司
+Id = 442
+TargetURL = http://www.i618.com.cn/
+Target = i618
+
+// 诚浩证券有限责任公司
+Id = 443
+TargetURL = http://www.chstock.com/
+Target = chstock
+
+// 中天证券有限责任公司
+Id = 444
+TargetURL = http://www.stockren.com/
+Target = stockren
+
+// 恒泰长财证券有限责任公司
+Id = 445
+TargetURL = http://www.cczq.net/
+Target = cczq
+
+// 爱建证券有限责任公司
+Id = 446
+TargetURL = http://www.ajzq.com/
+Target = ajzq
+
+// 华宝证券有限责任公司
+Id = 447
+TargetURL = http://www.cnhbstock.com/
+Target = cnhbstock
+
+// 财富里昂证券有限责任公司
+Id = 448
+TargetURL = http://www.cf-clsa.com/
+Target = cf-clsa
+
+// 德邦证券有限责任公司
+Id = 449
+TargetURL = http://www.tebon.com.cn/
+Target = tebon
+
+// 海际大和证券有限责任公司
+Id = 450
+TargetURL = http://www.dssc2004.com/
+Target = dssc2004
+
+// 上海证券有限责任公司
+Id = 451
+TargetURL = http://www.shzq.com/
+Target = shzq
+
+// 中银国际证券有限责任公司
+Id = 452
+TargetURL = http://www.bocichina.com/
+Target = bocichina
+
+// 东海证券有限责任公司
+Id = 453
+TargetURL = http://www.longone.com.cn/
+Target = longone
+
+// 国联证券股份有限公司
+Id = 454
+TargetURL = http://www.glsc.com.cn/
+Target = glsc
+
+// 南京证券有限责任公司
+Id = 455
+TargetURL = http://www.njzq.com.cn/
+Target = njzq
+
+// 东吴证券股份有限公司
+Id = 456
+TargetURL = http://www.dwzq.com.cn/
+Target = dwzq
+
+// 财通证券有限责任公司
+Id = 457
+TargetURL = http://www.ctsec.com/
+Target = ctsec
+
+// 中信金通证券有限责任公司
+Id = 458
+TargetURL = http://www.bigsun.com.cn/
+Target = bigsun
+
+// 浙商证券有限责任公司
+Id = 459
+TargetURL = http://www.stocke.com.cn/
+Target = stocke
+
+// 国元证券股份有限公司
+Id = 460
+TargetURL = http://www.gyzq.com.cn/
+Target = gyzq
+
+// 华安证券有限责任公司
+Id = 461
+TargetURL = http://www.hazq.com/
+Target = hazq
+
+// 广发华福证券有限责任公司
+Id = 462
+TargetURL = http://www.gfhfzq.com.cn/
+Target = gfhfzq
+
+// 兴业证券股份有限公司
+Id = 463
+TargetURL = http://www.xyzq.com.cn/
+Target = xyzq
+
+// 国盛证券有限责任公司
+Id = 464
+TargetURL = http://www.gsstock.com/
+Target = gsstock
+
+// 中航证券有限公司
+Id = 465
+TargetURL = http://www.avicsec.com/
+Target = avicsec
+
+// 中原证券股份有限公司
+Id = 466
+TargetURL = http://www.ccnew.com/
+Target = ccnew
+
+// 恒泰证券股份有限公司
+Id = 467
+TargetURL = http://www.cnht.com.cn/
+Target = cnht
+
+// 日信证券有限责任公司
+Id = 468
+TargetURL = http://www.rxzq.com.cn/
+Target = rxzq
+
+// 江海证券有限公司
+Id = 469
+TargetURL = http://www.jhzq.com.cn/
+Target = jhzq
+
+// 天风证券有限责任公司
+Id = 470
+TargetURL = http://www.tfzq.com/
+Target = tfzq
+
+// 财富证券有限责任公司
+Id = 471
+TargetURL = http://www.cfzq.com/
+Target = cfzq
+
+// 湘财证券有限责任公司
+Id = 472
+TargetURL = http://www.xcsc.com/
+Target = xcsc
+
+// 东莞证券有限责任公司
+Id = 473
+TargetURL = http://www.dgzq.com.cn/
+Target = dgzq
+
+// 广州证券有限责任公司
+Id = 474
+TargetURL = http://www.gzs.com.cn/
+Target = gzs
+
+// 联讯证券有限责任公司
+Id = 475
+TargetURL = http://www.lxzq.com.cn/
+Target = lxzq
+
+// 众成证券经纪有限公司
+Id = 476
+TargetURL = http://www.zczq.com/
+Target = zczq
+
+// 万联证券有限责任公司
+Id = 477
+TargetURL = http://www.wlzq.com.cn/
+Target = wlzq
+
+// 国海证券有限责任公司
+Id = 478
+TargetURL = http://www.ghzq.com.cn/
+Target = ghzq
+
+// 金元证券股份有限公司
+Id = 479
+TargetURL = http://www.jyzq.cn/
+Target = jyzq
+
+// 万和证券经纪有限公司
+Id = 480
+TargetURL = http://www.wanhesec.com.cn/
+Target = wanhesec
+
+// 川财证券经纪有限责任公司
+Id = 481
+TargetURL = http://www.cczq.com/
+Target = cczq
+
+// 和兴证券经纪有限责任公司
+Id = 482
+TargetURL = http://www.hx818.com/
+Target = hx818
+
+// 华西证券有限责任公司
+Id = 483
+TargetURL = http://www.hx168.com.cn/
+Target = hx168
+
+// 西南证券股份有限公司
+Id = 484
+TargetURL = http://http//www.swsc.com.cn/
+Target = swsc
+
+// 华创证券有限责任公司
+Id = 485
+TargetURL = http://www.hczq.com/
+Target = hczq
+
+// 红塔证券股份有限公司
+Id = 486
+TargetURL = http://www.hongtazq.com/
+Target = hongtazq
+
+// 太平洋证券股份有限公司
+Id = 487
+TargetURL = http://www.tpyzq.com/
+Target = tpyzq
+
+// 西藏同信证券有限责任公司
+Id = 488
+TargetURL = http://www.xzsec.com/
+Target = xzsec
+
+// 开源证券有限责任公司
+Id = 489
+TargetURL = http://www.sxkyzq.com/
+Target = sxkyzq
+
+// 中邮证券有限责任公司
+Id = 490
+TargetURL = http://www.cnpsec.com/
+Target = cnpsec
+
+// 西部证券股份有限公司
+Id = 491
+TargetURL = http://www.westsecu.com/
+Target = westsecu
+
+// 华龙证券有限责任公司
+Id = 492
+TargetURL = http://www.hlzqgs.com/
+Target = hlzqgs
+
+// 天源证券经纪有限公司
+Id = 493
+TargetURL = http://www.tyzq.com.cn/
+Target = tyzq
+
+// 第一创业证券有限责任公司
+Id = 494
+TargetURL = http://www.firstcapital.com.cn/
+Target = firstcapital
+
+// 华泰联合证券有限责任公司
+Id = 495
+TargetURL = http://www.lhzq.com/
+Target = lhzq
+
+// 平安证券有限责任公司
+Id = 496
+TargetURL = http://www.stock.pingan.com/
+Target = stock
+
+// 五矿证券有限公司
+Id = 497
+TargetURL = http://www.wkzq.com.cn/
+Target = wkzq
+
+// 英大证券有限责任公司
+Id = 498
+TargetURL = http://www.ydsc.com.cn/
+Target = ydsc
+
+// 中国建银投资证券有限责任公司
+Id = 499
+TargetURL = http://www.cjis.cn/
+Target = cjis
+
+// 长城证券有限责任公司
+Id = 4100
+TargetURL = http://www.cgws.com/
+Target = cgws
+
+// 世纪证券有限责任公司
+Id = 4101
+TargetURL = http://www.csco.com.cn/
+Target = csco
+
+// 银泰证券有限责任公司
+Id = 4102
+TargetURL = http://www.ytzq.net/
+Target = ytzq
+
+// 中山证券有限责任公司
+Id = 4103
+TargetURL = http://www.zszq.com.cn/
+Target = zszq
+
+// 厦门证券有限公司
+Id = 4104
+TargetURL = http://www.xmzq.com.cn/
+Target = xmzq
+
+// 大通证券股份有限公司
+Id = 4105
+TargetURL = http://www.estock.com.cn/
+Target = estock
+
+// 中信万通证券有限责任公司
+Id = 4106
+TargetURL = http://www.zxwt.com.cn/
+Target = zxwt
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// AirLine Phishing
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// General Air Ticket
+Id = 501
+TargetURL = http://www.airchina.com.cn/
+Target = Air Ticket
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Other
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express
+Id = 601
+TargetURL = http://www.ems.com.cn/
+Target = Express
+
+// EMS
+Id = 602
+TargetURL = http://www.ems.com.cn/
+Target = EMS
+
+// Online-Game Transaction
+Id = 603
+TargetURL = http://www.5173.com/
+Target = 5173.com

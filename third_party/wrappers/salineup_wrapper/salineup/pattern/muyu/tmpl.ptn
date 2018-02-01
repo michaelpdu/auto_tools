@@ -1,0 +1,924 @@
+﻿////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// version = 1.0.1011
+// 编号格式：大类(1位)+小类(3位)
+// NO_ACTION = 0,
+// MUYU_WHITELIST = 1,
+// MUYU_FEEDBACK = 5,
+// MUYU_BLOCK = 7,
+// MUYU_RECOMMEND = 9
+//
+// Log Format:
+// category, action, similar[:similar2], keyword[ keyword1 ...][:exception1 exception2],ptn
+// 
+// For example:
+// 102,5,75:65,hphp facebook:proxy,tt:facebook;im:fb_logo;in:nmail;in:pswd;td:newpwd;in:pswd;in:pswd;span:hphp
+//	category:	102	// define target of phishing site at desp.$000
+//	action	:	5	// action: feedback|block|abc
+//	similar	:	75	// Largest common string is longer than 75% of pattern string
+//	similar2:	65	// LCS is longer than 65% of dump string, by default is 70
+//	pattern :	tt:facebook;im:fb_logo;in:nmail;in:pswd;td:newpwd;in:pswd;in:pswd;span:hphp
+// 	keyword :	hphp, facebook   // the keywords should be one of pattern string
+//					 // at least, one of keywords should be seached in the <title> with 2048 char. (UTF-16)
+//	exception:	proxy
+//
+//	pattern created by mapping string, is retrieve from muyu.log
+//	the algorithm is Largest Common String
+//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Global Phishing
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// PayPal
+101,7,70,paypal,tt:paypalprivatkunden paypal;in:lmail email lmail email;in:pswd;im:logo_paypal;cpy@:paypal
+//101,5,70,paypal,tt:paypalPrivatkunden paypal;im:paypal_logo;in:email;in:pswd;in:LGIN;im:vpwht;cpy@:paypal
+101,7,70,paypal,tt:paypal;im:paypal_logo;in:email;in:pswd;in:LGIN;im:vpwht;cpy@:paypal
+101,7,70,paypal,tt:paypal_words paypal;po:apple_touch;im:logo_paypal;a:paypal_sendmoney;a:paypal_myaccount;a:paypal_sendmoney;a:paypal_merchantservice;cpy@:paypal
+101,7,70,paypal,tt:paypal;im:paypal_logo;in:email nmail;in:pswd pswd pswd;lbl:acno;in:cvv cvv;lbl:sortcode;cpy@:paypal;frm:payment
+101,7,70,paypal,tt:paypal;im:paypal_logo;in:lmail email;in:pswd;in:lgin;div:mastercard;im:vpwht;cpy@:paypal;h3:buy
+101,7,70,loginpaypal,tt:loginpaypal;po:apple_touch;im:paypal_logo;im:securelock;in:lmail email;lbl:paypalpswd;in:lgin;im:vpwht;p:paypalcopyright
+101,7,70,paypal,tt:paypal;in:cvv;in:lmail email;in:pswd;in:lgin;a:paypal_sendmoney;cpy2:paypal
+101,7,70,paypal,tt:paypal;im:paypal_logo;a:paypal_myacc;cpy@paypal;a:paypal_myacc
+101,7,70,paypal,tt:paypal;im:paypal_logo;span:login;im:securelock;in:lmail email;lbl:paypalpswd;in:pswd
+//101,7,70,paypal,tt:paypal;po:apple_touch;in:email;in:pswd;im:logo_paypal;cpy@paypal
+101,7,70,paypal,tt:paypal_words paypal;po:apple_touch;in:email;lbl:paypalpswd;in:pswd;im:pp_image2
+101,7,70,paypal,tt:paypal;po:apple_touch;im:paypal_logo;in:emial;div:mastercard;lbl:cardno;in:cvv;cpy@:paypal
+101,7,70,paypal,po:apple_touch;span:pp_verify;in:nmail;in:pswd;td:pp_stip;cpy@:paypal
+101,7,70,paypal,po:pp_protection;h2:pp_olprotect;div:mastercard;lbl:cardno;im:vpwht;cpy@:paypal
+101,7,70,paypal,tt:paypal_words paypal;po:apple_touch;in:email;in:pswd;in:lgin;im:logo_paypal;a:paypal_sendmoney;cpy@:paypal
+101,7,70,paypal,tt:paypal_words paypal;po:apple_touch;im:paypal_logo;in:email;lbl:paypalpswd;in:pswd;im:pp_image2;im:vpwht;cpy@:paypal
+101,7,70,paypal,po:apple_touch;im:paypal_logo;email;lbl:paypalpswd;in:pswd;in:lgin;cpy@:paypal
+101,7,70,paypal,tt:login paypal;po:apple_touch;im:paypal_logo;im:securelock;in:email;lbl:paypalpswd;in:pswd;in:lgin;im:vpwht;cpy@:paypal
+101,7,70,paypal,tt:paypal;po:apple_touch;im:paypal_logo;in:cvv cvv;in:pswd;cpy@:paypal;a:paypal_myacc
+101,7,70,paypal,tt:paypal;po:apple_touch;im:paypal_logo;frm:payment;in:email;in:pswd;lbl:acno;lbl:sortcode;lbl:cardno;lbl:cardno;in:cvv cvv;cpy@:paypal
+101,7,70,paypal,tt:paypal;po:apple_touch;in:lmail;in:pswd;im:logo_paypal;in:lmail;in:pswd;cpy@:paypal
+101,7,70,paypal,tt:paypal;po:apple_touch;im:paypal_logo;in:email;in:nmail;lbl:paypalpswd;in:pswd;lbl:cardno;in:cvv;lbl:acno;lbl:sortcode;in:pswd;cpy@:paypal
+101,7,70,paypal,tt:paypal;im:paypal_logo;im:secure_lock;lbl:cardno;div:mastercard;in:cvv;lbl:atmpin;in:pswd;cpy@:paypal
+101,7,70,paypal,tt:paypal;po:apple_touch;im:logo_paypal;lbl:cardno;div:mastercard;in:cvv cvv;lbl:ssn;lbl:sortcode;cpy@:paypal
+101,7,70,paypal,tt:paypal;im:paypal_logo;im:secure_lock;lbl:cardno;div:mastercard;in:cvv cvv;lbl:acno;in:pswd;lbl:ssn;in:email;in:pswd;cpy@:paypal
+101,7,70,pp_search,nfrm:pp_search;im:paypallogo;in:email;p:pp_pswd;in:lgin;p:pp_new;im:vpwht
+101,7,70,paypal,tt:paypal;im:paypal_logo;a:paypal_myaccount;a:paypal_sendmoney;a:paypal_merchantservice;cpy@:paypal
+101,7,70,paypal,tt:paypal;a:paypal_myaccount;im:paypal_logo;a:paypal_myaccount;in:email;in:pswd pswd;in:cvv;in:cvv pswd;in:pswd;cpy@:paypal
+101,5,70,ebabp_tt,tt:ebabp_tt;im:ebaybfe_im;span:ebaysce_sp;span:ebaybmc_sp;td:ebayeu_t
+101,5,70,ebyuk_tt,tt:ebyuk_tt;im:ebyuk_im;div:ebyuk_div;span:ebyuk_sp;td:ebyuk_td;cpy@:ebay
+101,5,70,paypal,tt:paypal;div:paypre_div;in:nmail email;lbl:cardno
+101,5,70,paypal,tt:paypal;link:paybj_lk;link:payic_lk;po:apple_touch;im:paypal_logo;im:secure_lock securelock;in:email;span:paysir_sp;lbl:cardno;in:pswd;im:vpwht
+101,5,70,paypal,tt:paypal;link:paywpa_lk;po:apple_touch;p:paymfo_p;in:cvv cvv;li:payucp_li
+101,5,70,paypal,tt:paypal;link:payic_lk;po:apple_touch;im:paypal_logo;in:lmail email;p:paycbp_p;div:mastercard;a:payfcw_a;cpy@:paypal
+101,5,70,paypal,tt:paypal;link:paywpa_lk;po:apple_touch;p:paymfw_p;a:paycuc_a;im:ebypei_im;lbl:ssn;span:paysir_sp;cpy@:paypal paypal
+101,5,70,paypal,tt:paypal;link:payic_lk;po:apple_touch;p:paymfo_p;im:paypal_logo;in:email nmail;in:pswd;lbl:cardno;div:mastercard;in:cvv;p:payfmi_p;li:payopc_li;cpy@:paypal
+101,5,70,paymdp_sp,span:paymdp_sp;in:cvv;p:paytdr_p;cpy@:paypal
+101,5,70,payic_lk,tt:login;link:payic_lk;po:apple_touch;p:paymfo_p;im:paypal_logo;im:secure_lock securelock;in:lmail email;in:pswd;in:lgin;im:vpwht;p:payfpa_p;cpy@:paypal
+101,5,70,paypal,tt:paypal online;link:payic_lk;im:paypal_logo;span:login;newh2:paytse_ht;p:payifa_p;im:vpwht;cpy@:paypal
+101,5,70,payotm_tt,tt:payotm_tt online paypal;link:payic_lk;po:apple_touch;p:paymfw_p;in:lmail;im:logo_paypal;newh2:payphy_ht;cpy@:paypal
+101,5,70,paypal,tt:paypal;po:apple_touch;link:payic_lk;p:paymfw_p;im:payitc_im;lbl:paypalpswd;h1:paytwm_hf;span:paypup_sp;div:mastercard;cpy@:paypal
+101,5,70,paypal,tt:paypal;po:apple_touch;link:payic_lk;p:paymfw_p;im:ebypei_im;lbl:paypalpswd;in:pswd;im:payapp_im;im:vpwht;p:paytho_p;cpy@:paypal
+101,5,70,paypal_words,tt:paypal_words;link:payic_lk;po:apple_touch;p:paymfw_p;span:login;in:lmail;span:login;im:logo_paypal;h1:paysmp_hf;newh2:paymoc_ht;cpy@:paypal
+101,5,70,paypal,tt:paypal;po:apple_touch;p:paymfo_p;im:paypal_logo;im:payeii_im;stog:paytsf_sog
+101,5,70,paymfw_p,p:paymfw_p;in:lmail email;span:paymdp_sp;in:pswd;div:paymdp_div;cpy@:paypal
+
+// Facebook
+102,7,75,facebook,tt:facebook;im:fb_logo;in:nmail;in:pswd;td:newpwd;in:pswd;in:pswd;span:hphp
+102,7,75,facebook,tt:facebook;im:fb_logo;in:nmail;in:pswd;in:LGIN;span:hphp
+//102,5,70,facebook,tt:facebook;a:fb_pagelogo;a:fb_privacy;div:fb_payment
+102,7,70,facebook,tt:facebook;link:fb_shortcutico;div:fb_payment;in:pswd pswd
+102,7,70,facebook,tt:facebook;link:fb_shortcutico;newh2:update_security;im:fb_secure
+102,7,70,facebook,tt:facebook;a:fb_logo;in:email;in:pswd;a:fb_create;a:fb_recover;a:fb_privacy
+102,7,70,facebook,tt:facebook;a:fb_logo;in:email;in:pswd;in:lgin email;a:fb_recover;a:fb_birth;in:pswd;a:fb_create;a:fb_create;a:fb_privacy
+102,7,70,facebook,tt:facebook;a:fb_logo;im:fb_logo;in:email;in:pswd;a:fb_recover;in:email;in:pswd;in:pswd;span:hphp
+102,7,70,facebook,tt:facebook;link:fb_shortcutico;a:fb_logo fb_logo;im:fb_logo;in:email;in:pswd;span:login;span:hphp
+102,7,70,facebook,tt:facebook;link:fb_css;in:nmail email;in:pswd pswd;span:login;span:facebook2012;script:fb_script
+102,7,70,facebook,tt:facebook;a:fb_logo;im:fb_logo;in:nmail email;in:pswd;in:lgin;a:fb_recover;in:email email;td:newpwd;in:pswd;in:pswd;span:hphp;a:fb_create;a:fb_privacy
+102,7,70,facebook,tt:facebook;im:fbimg1;im:fbimg3;im:fbimg5;in:pswd;in:email;im:fbimg8
+102,5,70,fb_lg_lk,link:fb_lg_lk;meta:fb_lg_me;a:fb_logo;in:email nmail;in:pswd;a:fb_recover;a:fb_create;a:fb_privacy
+102,5,70,fb_lg_me,meta:fb_lg_me;tt:facebook;a:fb_logo;in:nmail email;in:pswd;a:fb_recover;in:email;in:pswd;div:cielo_birthdate;in:email;in:pswd;a:fb_create
+102,5,70,fb_lg_me,meta:fb_lg_me;a:fb_logo;in:nmail email;in:pswd;in:lgin;a:fb_recover;in:email;in:pswd;in:email;in:pswd;a:fb_create;a:fb_privacy
+102,5,70,fbgr_lg,meta:fbgr_lg;meta:fbgr_lg;link:fbgr_lk;a:fb_logo;in:email nmail;in:pswd;in:lgin;a:fb_recover;a:fb_create;a:fb_privacy
+102,5,70,fb_lg_tts,tt:fb_lg_tts;a:fb_logo;in:nmail email;in:pswd;in:lgin;a:fb_recover;td:newpwd;in:pswd;a:fb_birth;in:pswd;a:fb_create;a:fb_create;a:fb_privacy
+102,5,70,fb_lg_tt,tt:fb_lg_tt;a:fb_logo;im:fb_logo fblog_imf;in:nmail email;in:lgin;a:fb_recover;td:newpwd;in:pswd;in:pswd;div:fblg_divf;span:hphp;a:fb_create;a:fb_privacy
+102,5,70,facebook,tt:facebook;link:fbrslg_lk;link:fbqlg_lk;h1:fblg_hf;in:email nmail;in:pswd;a:fb_recover;in:lgin
+102,5,70,fbcon_sp,span:login fbcon_sp;span:login login login login;span:login;span:login login login login;span:login;span:login login login login;span:login;span:login;span:login;lbl:username;in:pswd pswd;span:login;in:lgin
+102,5,70,fbse_me,meta:fbse_me;link:fbse_lk;a:fb_logo;in:email nmail;in:pswd;in:lgin;a:fb_create;a:fb_privacy
+102,5,70,fbcn_lk,link:fbcn_lk;a:fb_logo;frm:fbcn_fo;in:nmail email;in:fbcn_in;a:fbcn_ra
+102,5,70,fbcn_lks,link:fbcn_lks;a:fb_logo;frm:fbcn_fo;in:nmail email;in:fbcn_in;div:fbcn_div;a:fbcn_ra
+102,5,70,fb_lg_me,meta:fb_lg_me;im:fbfdak_im;in:email;in:pswd pswd pswd pswd;a:fb_recover;in:email;in:email;in:pswd;in:pswd;div:fblg_divf;a:fb_create;a:fb_privacy
+
+// Blizzard Entertainment--World of Warcraft
+103,7,70,blizzard,lbl:email;in:pswd pswd pswd;in:pswd pswd;a:battle;a:warcraft;div:blizzard;im:esrb
+//103,5,80,warcraft,tt:warcraft login;lbl:email;in:pswd pswd pswd
+103,7,70,blizzard_words,tt:lgin;meta:olgames_words;meta:blizzard_words;meta:runescape13_icon;im:quantserve_gif
+103,7,70,blizzard_words,meta:blizzard_words;tt:login;lbl:email;in:pswd;span:login;a:battle;a:warcraft;div:blizzard
+103,5,70,blizzard_lo_tt,tt:blizzard_lo_tt login;div:blizzard;p:blizzard_p_f;a:blizzard_a_f;a:blizzard_a_s
+
+// VISA
+104,7,80,visa,tt:visa;im:visahome;im:visa;in:pswd;in:cvv
+104,7,70,visa_cc_update,tt:visa_cc_update;a:visa_security;im:visa_logo;p:visa_verify;a:visa_security;iframe:visa_footer
+104,7,70,visa,tt:visa;visaeu:style;visaeu:printstyle;im:visa_mastercard;div:mastercard mastercard;td:newpwd;in:pswd;td:newpwd;in:pswd;p:visa_copyright
+104,7,70,visa,tt:visa;visaeu:style;visaeu:printstyle;im:visa-vbv;div:mastercard mastercard;p:visa_sw_verify
+104,5,70,visumv_me,meta:visumv_me;tt:visa;im:visa_logo;a:viswyv_a;div:vispaa_div
+104,5,70,visrl_tt,tt:visrl_tt;in:nmail;in:pswd;font:visnp_fo;font:visdf_fo;font:vises_fo;b:visqe_b
+104,5,70,visrl_tt,tt:visrl_tt;in:pswd;in:pswd;in:pswd;in:pswd;in:pswd;in:pswd;font:visucs_fo;font:vises_fo;b:visqe_b;div:mastercard;font:visacc_fo visacc_fo
+104,5,70,visa,tt:visa;im:visa_logo;a:visa_security;a:vispsv_a;im:visa_logo;in:cvv;p:visvoi_p
+104,5,70,visa,tt:visa;in:email;span:login;in:pswd;p:viscvv_p;stog:vispsc_sog;p:sorteios
+
+// MasterCard
+//105,5,70,mastercard,tt:mastercard;in:pswd;div:mastercard;in:cvv cvv;in:nmail;in:pswd;div:mastercard
+105,5,70,mastertitle,tt:mastertitle;im:logo_Bradesco1 logo_Caixa logo_Citibank logo_BancoIbi logo_Santander
+105,5,70,suscd_tt,tt:suscd_tt;im:visa_mastercard;in:cvv;in:pswd;td:newpwd;td:newpwd
+105,5,70,mastercard,tt:mastercard;div:mastercard;a:surmascd_af;a:surmascd_af surmascd_as;in:pswd;div:mastercard;h3:surmascd_ht;in:cvv;in:nmail email;in:pswd;im:susmascd_imf
+105,5,70,mastercard,tt:mastercard;a:ganhadores;im:sumascd_imt;span:surmascd_spf;in:nmailemail;in:pswd;in:buttonsignup
+105,5,70,mastercard,tt:mastercard;a:surmascd_af;in:pswd;a:surmascd_af surmascd_af;div:mastercard;span:mascd_spf;emb:mascd_emb
+105,5,70,mastercard,tt:mastercard;span:mesdcd_spf;p:mascd_ps mascd_pf
+// Orkut
+106,5,60,orkut,tt:orkut;tt:orkut login;in:nmail;in:pswd;p:orkut_share;p:orkut_chat;p:orkut_fun;cpy@:google
+
+// Alliance & Leicester
+107,5,70,leicester,tt:leicester;im:interbank;span:interbank;lbl:cid;lbl:cid;a:creditcard
+
+// AOL
+//108,5,70,aol_tt,tt:aol_tt;im:aol_im;in:pswd pswd;lbl:ssn;lbl:rmbme;a:aol;cpy@:aol_cpy
+108,5,70,ssn,lbl:ssn;lbl:cardno;in:pswd cvv cvv;lbl:acno;in:acno;lbl:atmpin;in:pswd pswd pswd
+108,5,70,aolcom,tt:aolcom;lbl:username;in:pswd pswd;lbl:rmbme;a:aol_getuser;a:aol;a:aol_privacy;a:aol_tos;cpy@:aol_cpy
+108,5,70,aolcom,tt:aolcom;lbl:username;in:pswd pswd;a:aol_privacy;a:aol_tos
+108,5,70,standard_lif_logf,tt:login;font:needmail;im:email;lbl:fymail;in:pswd;lbl:fgmail;in:pswd;lbl:fhmail;in:pswd;lbl:famail;in:pswd;in:pswd;im:standard_lif_logf;im:standard_lif_logs
+108,5,70,realtor_tt,tt:realtor_tt;script:realtor_sc;im:realtor_imgf;im:realtor_imgt;im:realtor_imgs email;im:realtor_imgt;lbl:fgmail;in:pswd;lbl:fhmail;in:pswd;im:realtor_imgs
+108,5,70,realtor_sc,script:realtor_sc;im:realtor_im_ya;im:email;im:realtor_im_ya;p:yahooeg;in:pswd;lbl:username;in:pswd
+108,5,70,aol,h:aol;a:aol_hat_logo;a:aol_helpchannel;a:aol_help;im:aol_im;div:aol;h:aol;span:login;lbl:username;in:pswd pswd;cpy@:aol_cpy
+108,5,70,login,tt:login;script:realtor_sc;font:needmail;im:email;lbl:fymail;in:pswd;lbl:fgmail;in:pswd;lbl:fhmail;in:pswd;in:pswd;lbl:famail;in:pswd;
+
+
+// Banco De Brasil
+109,5,70,brbanktitle,tt:brbanktitle;im:brbanklogo;div:bancoVoceInterno;frm:formContaBrasil
+
+// craigslist
+110,5,80,craigslist,tt:craigslist;h:craigslist;a:resetpwd;in:pswd;in:LGIN
+110,5,70,craigslist,h:craigslist;tt:craigslist;in:email;im:crailf_im;p:cralwtl_p;h4:carllca_hf;in:pswd
+110,5,70,craigslist,h:craigslist;tt:craigslist;h:craigslist;h3:craliali_ht;b:cralifcl_b;p:cralwtl_p craligtc_p;a:resetpwd;in:email;in:pswd;in:lgin
+
+// Google
+//111,5,70,google,tt:google;im:google;in:nmail;in:pswd;cpy@:google google;im:google
+//111,5,85,google,tt:google;in:nmail email;in:pswd;h2:gmail
+111,5,70,goodoc_tt,tt:goodoc_tt;im:email;lbl:fymail;in:pswd;lbl:fgmail;lbl:fhmail;in:pswd;lbl:famail;in:pswd
+
+// eBay
+112,5,70,ebay,tt:ebay;im:ebsy;span:welebay;lbl:userid;in:pswd;a:ebay;im:verisign;cpy@:ebay;a:eb_privacy
+112,5,70,ebay,tt:ebay;span:welebay;span:login;in:pswd;im:eb_protect;cpy@:ebay;a:eb_privacy
+112,5,70,ebay,tt:ebay;im:ebsy;in:pswd;a:ebay_safety;cpy@:ebay;a:eb_privacy;im:verisign
+112,5,70,ebay,tt:ebay;in:nmail;b:ebap_b;im:payepn_im
+
+// Bank of America
+113,7,70,bankofamerica,tt:bankofamerica;in:pswd;in:pswd;lbl:cardno;in:pswd;lbl:acno;in:acno;lbl:email;lbl:ssn;lbl:ssn;lbl:ssn
+113,7,80,bankofamerica,tt:bankofamerica;lbl:enterid;in:onlineid;lbl:saveid
+
+// Santander Online Banking
+114,5,80,santander,tt:santander;im:santander;lbl:cardno cid cardno;im:flow;span:login
+114,5,80,santander,tt:santander online banking;im:santander;lbl:cardno cid cardno;im:flow;span:login
+114,5,70,santander_tt,tt:online santander_tt;link:santander_lk_f;im:santander_img_s;in:pswd;in:pswd;in:email nmail;in:santander_in_f
+
+// Yahoo! Mail
+//115,5,70,yahoo!,tt:yahoo!;tt:yahoo!;in:email;in:pswd;im:signyahoo
+//115,5,70,yahoo!,tt:yahoo!;lbl:username;in:pswd;im:yahoologo
+115,7,70,yahoo!,tt:yahoo!;a:yahooanchor;im:yahoologo;in:email;lbl:username;p:yahooeg;in:pswd;div:notyahooid;a:yahoo_copyright
+115,7,70,yahoo!,tt:yahoo!;im:yahoologo;a:yahooanchor;div:notyahooid;in:email;lbl:username
+115,7,70,yahoo!,tt:yahoo!;a:yahooanchor;div:notyahooid;in:email;lbl:username;p:yahooeg;in:pswd;in:email
+115,7,70,yahoo!,tt:yahoo!;a:yahooanchor;im:yahoologo;a:yahooanchor;div:notyahooid;span:login;in:email;in:pswd
+//115,5,70,yahoo!,tt:yahoo!;in:email;in:pswd;div:notyahooid;a:yahoo_copyright
+115,7,70,yahoo!,tt:yahoo!;im:yahoologo;a:yahooanchor;div:notyahooid;in:email;in:pswd;im:signyahoo;a:yahoo_copyright
+115,5,70,yahver_tt,tt:yahver_tt;in:email;im:yahtcl_im;div:yahdbt_div;in:pswd
+115,5,70,yahm_tt,tt:yahoo! yahm_tt;a:yahooanchor;in:email;lbl:username;in:pswd;div:notyahooid;in:email;im:yahycl_im
+
+// Bradesco
+116,5,70,bradesco,tt:bradesco;a:logobradesco;a:bradescocelu bradescocelu;a:bradescocorr bradescocorr
+116,5,70,bradesco,tt:bradesco;h2:bradesco_access;a:bradesco_dia;span:interbank;a:bradesco_ouv
+116,5,70,bradesco_tt,link:bradesco_lk;tt:bradesco_tt;in:pswd;im:bradesco_im_s;im:bradesco_im_f
+116,5,70,bradesco_tt,tt:bradesco bradesco_tt;in:pswd;td:bradesco_td;font:bradesco_fo
+
+// Halifax
+117,7,70,halifax,tt:halifax;h1:onbank;in:pswd pswd;im:halifaxlogo;a:demo demo
+117,5,70,halifax,tt:halifax;im:halifase_ims;in:onlineid;in:onlineid;in:onlineid;in:onlineid;in:onlineid nmail;in:pswd email;in:onlineid;td:haliseu_td;im:halifase_im
+
+// HSBC
+118,5,70,hsbc,tt:hsbc;a:onserv;h2:username;a:hsbcbsty;div:hsbcfooter;div:hsbcfooter
+118,5,70,hsbc,tt:hsbc;h1:welcomehsbc;newh2:specialsite
+118,5,70,hsbclogon,tt:hsbclogon;span:interbank;im:hsbcheader;div:hsbcContentHeader1;span:hsbclinkright
+118,5,70,hsbc,alert:hsbc_alert;tt:hsbc;in:email;lbl:username;in:pswd;im:hsbcimg;div:hsbc_pay
+118,5,70,hsbco_lk,link:hsbco_lk;tt:hsbc;im:hsbco_img;im:hsbco_img2;h3:hsbcp_h3;in:hsbco_in
+
+// RBS
+119,5,70,natwest,link:natwest;a:onserv;lbl:customernum;in:lgin
+119,5,70,natwest,tt:natwest;a:natwest_a;a:natwest_a;a:natwest_a;im:nwbgif;a:onserv;span:nwbspan;li:nwbcopyright
+119,5,70,natwest,link:natwest;tt:natwest;a:natwest_a;a:natwest_a;im:nwbgif;a:onserv;lbl:customernum;in:lgin
+119,5,70,natwest,tt:natwest banking;link:natwest;a:natwest_a;a:natwest_a;a:natwest_a;im:nwbgif;a:onserv;lbl:customernum;in:lgin;li:nwbcopyright
+
+// COOBank
+120,5,70,coobank,tt:coobank;im:coop_logo;span:interbank;lbl:sortcode;lbl:acno;in:acno;lbl:cardno
+120,5,70,coobank,tt:coobank;im:coop_logo;in:accno;td:coo_sc;td:coo_verify
+120,5,70,coobank,tt:coobank banking;im:coop_logo;a:coo_terms;a:coo_contact;lbl:customernum;in:pswd
+
+// ASB Bank Limited
+121,5,70,asb,tt:asb;span:ent_ur_pwd;in:pswd pswd pswd;span:forget_pwd;span:login
+121,5,70,asb,tt:asb;a:asblogin;in:pswd pswd pswd;div:footerASB;div:asbcopyright
+
+// AOLmail
+122,7,70,aolmail,tt:aolmail;div:aolmaillink;span:aol;in:pswd;div:aolmailaddl_promo;a:aol
+122,7,70,aolmail,tt:aolmail;im:aol_im;in:pswd pswd;lbl:ssn;lbl:rmbme;a:aol;cpy@:aol_cpy
+122,7,70,aolmail,tt:aolmail;span:lgin;lbl:username;in:pswd;lbl:rmbme;div:aolmailaddl_promo;a:aol;cpy@:aol_cpy
+122,7,70,aolmail,tt:aolmail;div:aolmailaddl_promo;span:lgin;lbl:username;in:pswd;lbl:rmbme;div:aolmailaddl_promo;div:aolmailaddl_promo;a:aol
+122,7,70,aolmail,tt:aolmail;lbl:username;in:pswd pswd;lbl:rmbme;div:aolmailaddl_promo;a:aol;a:aol_privacy;a:aol_tos;cpy@aol_cpy
+122,7,70,aolmail,tt:aolmail;a:aol_hat_logo;a:aol_help;lbl:username;in:pswd pswd;lbl:rmbme
+122,5,70,aol_help,tt:aol_help aolhelp;link:aolhelp_lk;lbl:cardno;lbl:cardno;p:aolhelp_pf
+
+// Cartasi
+123,5,70,cartasi,tt:cartasi;im:cartasilogo;a:cartasimove;div:mastercard;div:cartasicopyright
+
+// Cielo
+124,5,70,premiadacielo,tt:premiadacielo;im:cielologo1;p:goodluck;in:nmail email;in:pswd;in:buttonsignup;im:cielologo2;p:pagos
+124,5,70,premiadacielo,tt:premiadacielo vendascielo;im:cielologo1;im:cielologo2;in:nmail;in:ncep;p:pagos
+124,5,70,vendascielo,tt:premiadacielo vendascielo;in:nmail email;in:pswd;div:mastercard;im:logo_cielo;li:nav-cielo;im:maquina_cielo_com_logo
+124,5,70,cielocompra,tt:cielocompra;span:cielomelhores;im:cielopng;p:sorteios
+124,5,70,premiadacielo,tt:premiadacielo;a:ganhadores ganhadores;div:cielo_birthdate;in:nmail;in:pswd;div:cielo_copyright;span:cielo_words
+124,5,70,premiadacielo,tt:premiadacielo;a:ganhadores;im:cielologo1;p:sorteios goodluck;div:cielo_birthdate;in:ncep;in:email;in:buttonsignup;im:cielologo2
+124,5,70,cielo_tt_f,tt:cielo_tt_f;div:cielo_div_f;p:cielo_p_s;a:cielo_a_f;p:cielo_p_f
+124,5,70,cielo_tt_f,tt:cielo_tt_f;im:cielo_img_s;im:cielo_img_t;in:cvv;in:ncep;in:pswd
+124,5,70,ciena_tt,tt:ciena_tt;link:cie_lk_css;a:cielo_a_s;im:cielo_im_fi;im:cielo_im_s;p:cielo_p_t
+124,5,70,premiadacielo,tt:premiadacielo;a:ganhadores;div:cielo_copyright;span:cielo_com cielo_words
+124,5,70,premiadacielo,tt:premiadacielo;span:compre_sps;span:compre_spf;div:cielo_birthdate;in:ncep;in:nmail;in:pswd pswd
+
+// TAM Fidelidade
+125,5,70,tam,tt:tam;span:multitf;span:multitf;in:pswd pswd;in:pswd pswd;im:fidel_gif
+125,5,70,tam,tt:tam;in:pswd;in:pswd;in:email;in:pswd email email;im:fidel_gif;im:fidel_gif
+125,5,70,tam,tt:tam;in:pswd pswd;in:email nmail;in:pswd pswd email email;im:tamimg;a:tamfidel;p:fidel fidel2;div:tamcopyright
+125,5,70,tam,tt:tam;a:tamfidel;im:tamimg;in:pswd pswd;in:email nmail;in:pswd pswd email email;in:pswd pswd;p:fidel;p:fidel2;in:pswd;div:tamcopyright
+
+// Habbo
+126,5,70,Habbo,tt:Habbo sulakett;in:habboinput;span:habbospan;in:email email;in:pswd;div:sulake-logo
+
+// Wells Fargo
+127,7,70,Wells,tt:Wells wellsfargo;im:wellsfargo_gif;a:wellsfargo_a;frm:wellsfargo_frm;in:pswd pswd pswd;lbl:atmpin;in:pswd;a:wellsfargo_a;a:wells_about;p:wells_copyright
+127,7,70,Wells,tt:Wells wellsfargo;im:wellsfargo_gif;frm:wellsfargo_frm;lbl:username;in:pswd pswd pswdf
+127,7,70,Wells,tt:Wells wellsfargo;im:wellsfargo_gif;lbl:username;in:pswd pswd pswd;a:wells_about;p:wells_copyright
+
+// JPMorgan Chase
+128,5,70,chaseinvest,newtt:chaseinvest;im:chaselogo;im:chaseregion;a:chaseloan;in:pswd;lbl:userid
+128,5,70,chaseinvest,tt:chaseinvest;im:chaselogo;im:chaseregion;in:pswd;lbl:userid;a:chaseloan
+128,5,70,chaseinvest,tt:chaseinvest;a:resetpwd;p:jpchase_update;lbl:userid;p:pswd;p:jpchase_security;in:email;in:email;in:email;in:email;in:email email;in:pswd email;in:email;lbl:cardno;in:email;in:cvv email
+128,5,70,banking,tt:banking banking;im:chase_img_f;lbl:userid;in:pswd;lbl:rmbme;lbl:userid;in:pswd pswd;lbl:rmbme;in:lgin;lbl:userid;
+
+
+// Nets
+129,5,70,updateaccount,tt:updateaccount;im:netslogo;in:submit;td:activeaccount;in:pswd;in:cvv
+129,5,70,netdan,tt:netdan;link:nets_favicon;im:nets_logo;im:logo_pbs;td:security_pin;td:ssn_last4;in:pswd;a:nets_policy
+129,5,70,updateaccount,tt:updateaccount;im:netslogo;td:activeaccount;in:pswd;td:ssn_last4;in:pswd;td:security_pin;in:submit
+129,5,70,dan_update,tt:netdan;h1:dan_update;im:cb_visa_msc;td:crypt;im:vbv_msc;td:ssn_last4;in:pswd
+129,5,70,visa,tt:visa;im:visaver_imf;im:visaver_ims;font:visver_fo;td:ssn_last4
+129,5,70,netpbs_ttf,tt:updateaccount netpbs_ttf;div:netpbs_divf;div:netpbs_divs
+129,5,70,netpbs_tts,tt:netpbs_tts;div:netpbs_divt;in:cvv cvv;in:submit;p:netvis_pf
+129,5,70,visa,tt:visa;font:visver_fs visver_ft;in:pswd
+129,5,70,netden_p,im:logo_pbs;p:netden_p;in:pswd;stog:netde_sog
+
+// Poste Italiane
+//130,5,70,posteitaliane,tt:posteitaliane;a:loginPrivati
+130,5,70,posteitaliane,tt:posteitaliane;newh2:accedionline,in:accedipng;in:pswd;div:poste_copyright;a:poste_tras
+130,5,70,posteitaliane,tt:posteitaliane;im:postelogo;in:pswd;in:cvv;h4:poste italiane
+130,5,70,posteitaliane,tt:posteitaliane;a:poste_stampa;a:poste_policy;div:poste_copyright;h4:poste italiane
+
+// lloyds TSB
+131,5,70,Lloyds TSB,tt:Lloyds TSB;im:lloydslogo;lbl:userid;in:pswd;p:lloydslogo2
+131,5,70,interbank,tt:lloyds lloyds tsb TSB banking;im:lltbmnf_im;span:interbank;span:interbank;im:lltbnsp_im;a:lltbtod_a
+
+// UPS
+132,5,70,UPS,tt:UPS;im:upsgif;a:contactups;lbl:subscribeups;in:email;a:contactups;a:upsglobal;p:upscopyright
+
+// RuneScape
+133,5,70,RuneScape,tt:RuneScape;link:runescapeico;link:runescapeico;im:runescapepng;span:login;lbl:username username username;in:email;in:pswd;im:runescapepng;p:runescapecopyright 
+133,5,70,RuneScape,meta:runescape_words;link:runescapeico;link:runescapeico;tt:RuneScape;im:run_fadeblack;span:login;span:login;span:login;span:login;span:login;in:pswd pswd pswd;h3:firstrun;span:login;a:rsh
+133,5,70,RuneScape,tt:RuneScape;meta:olgames_words;meta:runescape_words;meta:runescape13_icon;im:quantserve_gif
+133,5,70,runcfi_lk,link:runcfi_lk;link:runcim_lk;meta:runescape_words;tt:RuneScape online;lbl:username;in:pswd;span:login
+133,5,70,RuneScape online,tt:RuneScape online;span:login;lbl:username username;in:email;in:pswd;span:login;span:login;im:runscapn_im;a:runscft_a;p:runscjl_p
+133,5,70,RuneScape online,tt:RuneScape online;link:runescapeico;link:runescapeico;span:login;in:pswd;legend:runsos_le;p:runsihs_p;p:runscte_p;p:runscjl_p
+
+// TDCanadaTrust
+134,5,70,easyweb,tt:easyweb;h1:TDCanadaTrust;in:pswd pswd;span:login;im:ciponlinelogo;div:tdcopyright
+
+// stgeorge
+135,5,70,stgeorge,tt:stgeorge;span:interbank;in:pswd;a:stcontactus;span:stphone;p:stcopyright
+
+// Vodafone
+136,5,70,Vodafone,tt:Vodafone;im:vflogo;a:onserv;lbl:username;in:pswd;span:vfcopyright;im:vftst1
+136,5,70,Vodafone,tt:Vodafone;im:vflogo;in:pswd pswd;span:vfcopyright;im:vftst1
+136,5,70,Vodafone,tt:login;a:vf_register;im:vflogo;h1:Vodafone;span:login;lbl:username;p:vf_username;in:pswd;p:vf_pswd;a:vf_forget;a:vf_register;span:vfcopyright;im:vftst1
+
+// CIBC
+137,5,70,CIBConline,tt:online banking;im:cibc_logo;lbl:cardno;p:CIBConline;im:cibc_security;p:CIBConline
+
+// Amazon
+138,5,70,Amazon,tt:Amazon;a:ukamz_logo;a:ukamz_nav;in:email;in:pswd;span:forget_pwd;div:ukamz_fnav;a:ukamz_ftlogo
+
+// Gmail
+139,5,70,goomail,tt:goomail;td:gmail_welcome;im:google;in:email;in:pswd;div:gmail_create;div:googlecopy_2010
+139,5,70,goomail,tt:goomail;lbl:username;in:email;in:pswd;h2:gmail;p:gmail_lessspam;p:gmail_mobile
+
+// GoogleDocs
+140,5,70,googledocs,tt:googledocs;in:email;in:pswd;div:gdocs_words;a:gdocs_try;a:gdrive_app
+140,5,70,goodoc_tt,tt:goodoc_tt;span:googledocs_span;im:email aol_im email;im:email email;span:googdoc_spans;lbl:username;in:email;in:pswd email pswd;in:submit
+
+// Remax
+//141,5,70,remax,tt:remax;in:email email;in:pswd;div:access_words;in:email;in:pswd;td:trusted_words
+141,7,70,remax,tt:remax;font:needmail;lbl:fymail;in:pswd;lbl:fgmail;in:pswd;lbl:fhmail;in:pswd;lbl:famail;in:pswd;in:pswd
+141,7,70,remax,tt:remax;a:remax_findagent;a:remax_findagent;span:login;in:email email email;span:login login login;in:pswd;p:remax_property;div:remax_copyright;a:remax_ms;remax_world;a:remax_green
+
+// AOL Help
+142,5,70,aolhelp,tt:aolhelp;im:aol_im;newh2:aolhelp_message;lbl:username;in:pswd;cpy@:aol_cpy
+
+// Steam
+143,5,70,steam_c,tt:steam_c;link:steam;im:steam_logo;div:steamname;lbl:steamaccountname;lbl:steampassword;lbl:steamemail;in:email;cpy@:valve
+143,5,70,steam_c,tt:steam_c;link:steam;a:steam_support;h1:steam_ru;lbl:username;in:pswd;div:valve
+143,5,70,steam_c,tt:steam_c;im:steam;a:steam_support;in:email;in:pswd;cpy@:valve
+
+// Coldwellbanker
+144,7,70,cwb,tt:cwb;font:needmail;lbl:fymail;in:pswd;lbl:fgmail;in:pswd;lbl:fhmail;in:pswd;lbl:famail;in:pswd;in:pswd
+144,5,70,cwb,tt:cwb;div:clweklpc_div;in:email;b:coldwebsr_b;in:email;in:pswd;in:email;div:clwekrbi_div;b:coldwebsr_b
+
+// Trulia
+145,7,70,trulia,tt:trulia;font:needmail;lbl:fymail;in:pswd;lbl:fgmail;in:pswd;lbl:fhmail;in:pswd;lbl:famail;in:pswd;in:pswd
+
+// Chase Online
+146,7,70,chaselogon,tt:chaselogon;im:chaselogo;in:pswd pswd;in:logonbutton;td:chasefootertext;td:chasecopyright
+146,5,70,chase_onlinelog,tt:chase_onlinelog;im:chase_img_s chaselogo;im:chase_img_t;in:pswd;in:logonbutton;td:chasecopyright
+
+//InterBank
+147,5,70,interbank_el,tt:interbank_el;a:interbank_ahref interbank_ahref;im:interbank_img_f;im:interbank_img_s;span:interbak_color
+
+//irs
+148,5,70,irs_css,link:irs_css;im:irs_img_f;im:irs_img_s
+
+//Webhost
+149,5,70,webhost_tit,tt:webhost_tit;a:webhost_a_f;a:webhost_a_ff;a:webhost_a_s;a:webhost_a_t;a:webhost_a_s;a:webhost_a_ff;a:webhost_a_ff;a:webhost_a_ff;p:webhost_p_f;p:webhost_p_s
+
+//Outlander Inc
+150,5,70,outlandinc_tt,tt:outlandinc_tt;im:outladinc_img;span:login;in:email;in:pswd
+
+//wdlinux
+151,5,70,wdcp_tt,tt:wdcp_tt;a:wdcp_a_s;a:wdcp_a_f;a:wdcp_a_t
+
+//wordpress
+152,5,70,wordpre_wp_tt,tt:wordpre_wp_tt;h1:wordpre_wp_h;im:wordpre_wp_img;a:wordpress_wp_a
+
+//centurylink
+153,5,70,centurylink_a_f,tt:login;a:centurylink_a_f;span:login;im:centurylink_imgf;im:centurylink_imgs;lbl:username username;span:centurylink_sp
+153,5,70,centurylk_up_tt,tt:centurylk_up_tt;span:login;in:pswd;in:centurylink_in_f;a:ceturylink_a_s;im:centurylink_imgt
+
+//freewebhostingarea
+154,5,70,fwha_tt,tt:fwha_tt;meta:feha_meta;link:fwha_lk;td:fwha_td;im:fwha_img_f;im:fwha_img_s;a:fwha_a;im:fwha_img_f
+154,5,70,feha_meta,meta:feha_meta;link:fwha_lk;td:fwha_td;im:fwha_img_f;im:fwha_img_s;a:fwha_a;im:fwha_img_f
+
+//lince.in
+155,5,70,lince_tt,tt:lince_tt;a:lince_a_s lince_a_f;im:lince_img_f;a:lince_a_s
+
+//Hotmail
+156,5,70,hotmai_tt,tt:hotmai_tt;h3:hotmai_h3;in:pswd pswd;in:pswd pswd;td:hotmai_aptd
+156,5,70,homail_tt,tt:homail_tt;cen:hotmai_ce;in:pswd pswd;in:pswd
+156,5,70,emailup_tt,tt:emailup_tt;div:hotmai_vedi;lbl:username username;in:pswd;span:emailup_sp
+156,5,70,updaup_tt,tt:updaup_tt;im:ipdatup_img;td:updaty_tds;in:nmail;in:pswd;td:updaty_td
+156,5,70,verymai_tt,tt:verymai_tt;h1:verfmai_h1;p:verfymai_p;p:vwefymai_ps;a:vermai_a
+
+//itau
+157,5,70,banking,tt:banking;im:onbak_im1;a:onbak_af;in:pswd;im:onbak_im2;div:onbak_div
+157,5,70,assde_tt,tt:assde_tt;im:assde_imf;td:assde_td;in:pswd;in:pswd;in:assde_in
+157,5,70,bemv_tt,tt:bemv_tt;im:bemvi_imf;im:bemvi_ims;in:pswd;in:pswd;in:bemvi_inf
+
+//netbank
+158,5,70,natbklg_tt,tt:natbklg_tt;im:netbknli_im;;span:login;in:pswd;span:login;in:pswd;span:login;im:nebkism_im;td:netbknay_td
+
+//discover
+159,5,70,disccr_tt,tt:disccr_tt;p:dissme_p;in:pswd;lbl:userid userid;li:disbmf_li;p:dispto_p
+
+//scotiaweb
+160,5,70,scow_tt,tt:scow_tt;in:pswd;in:pswd;p:scolc_p;im:scoit_im;im:scoilm_im
+
+//scotiabank
+161,5,70,scobk_tt,tt:scobk_tt;im:scobkipl_im;p:scolq_p;in:pswd;h1:scbkes_ho
+161,5,70,scotsal_im,tt:online;im:scotsal_im;lbl:username;in:pswd;lbl:cardno;div:scofs_div;div:scotiop_div
+
+//alertpay
+163,5,70,alpayapd_tt,tt:alpayapd_tt;a:alpaymwp_a;a:alpaybta_a;im:alpaydcp_im;p:alpaytao_p
+163,5,70,online,tt:online;a:alpaymwp_a;a:alpaybta_a;h1:alpaymnw_ho;h2:alpaypdc_ht;h3:alpayfta_ht;p:alpaytao_p
+163,5,70,online,tt:online;a:alpaymwp_a;a:alpaybta_a;li:alpaynpa_li;li:alpayab_li
+
+//alibaba
+164,5,70,alibamaf_tt,tt:alibamaf_tt;in:pswd;h1:alibama_ho;li:alibaayc_li;li:alibabapit_li;a:yahooanchor
+
+//standardchartered
+165,5,70,stdbkwi_tt,tt:stdbkwi_tt;a:stdbkwib_a;p:stnbknkw_p;p:stdeyh_p
+
+//bancofrances
+166,5,70,bbvaf_tt,tt:bbvaf_tt;in:pswd;span:login;p:bbvatlb_p;span:bbvatbf_sp
+
+//rbcroyalbank
+167,5,70,roybk_me,tt:online;meta:roybk_me;h1:onbank;a:royarse_a;op:royabkew_op;lbl:username;in:pswd;p:royacw_p
+
+//outlook
+168,5,70,outlk_tt,tt:outlk_tt;div:outlk_div;td:outlk_td;lbl:outlk_la;lbl:username;in:pswd
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Lottery Phishing
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Yahoo!
+201,5,60,雅虎,alert:验证码 获奖;tt:雅虎;alert:验证码;in:pswd;mq:名单 名单;td:二等奖;td:二等奖
+
+// QQ
+202,5,60,qq,alert:幸运 验证码 中奖;tt:qq 周年;a:活动规则;in:pswd;cpy@:qq
+202,5,60,qq,tt:qq 周年;alert:验证码;span:幸运用户 验证码;td:二等奖;span:验证码;a:活动规则;cpy@:qq
+202,5,50,qq,cpy@:qq;tt:qq;alert:中奖;span:幸运用户;a:活动规则 活动规则;cpy@:qq
+
+// Hunan TV
+203,5,60,快乐大本营,tt:快乐大本营;alert:快乐大本营;span:验证码;span:验证码 验证码;span:验证码;in:pswd
+
+// Taobao
+204,5,65,taobao,tt:淘宝 淘我喜欢;li:淘宝会员;li:支付宝会员 支付宝会员;lbl:账户名;in:pswd;lbl:安全控件;cpy@:taobao;cpy@:taobao;cpy@:taobao
+204,5,65,taobao,tt:淘宝 周年;alert:验证码 获奖;span:验证码;cpy@:taobao;cpy@:taobao
+
+// Sina Weibo
+205,5,60,新浪,alert:幸运 验证码 获奖;tt:新浪;span:验证码;span:验证码
+205,5,60,新浪,tt:新浪;alert:验证码;in:pswd;mq:名单 名单;td:二等奖;td:二等奖
+
+// CCTV 6+1
+206,5,60,非常6+1,alert:验证码 获奖;tt:非常6+1;td:二等奖;td:二等奖;td:领取验证码;in:pswd;td:二等奖
+206,5,60,非常6+1,tt:非常6+1;span:验证码;in:pswd;span:幸运用户;span:幸运用户;span:幸运用户 验证码;td:二等奖;td:二等奖;td:二等奖
+
+// 彩票
+207,5,60:50,彩票,tt:彩票;td:addfav;in:pswd;td:客服人员;td:addfav;td:工商银行;td:客服人员;ICP:彩票;td:客服人员;im:315c
+
+// 六合彩
+208,5,65,六合彩,tt:六合彩;font:一码会员;span:一码中特;font:一码会员;font:一码会员;font:一肖两码
+208,5,65,外围黑庄,tt:六合彩;td:addfav;span:一码中特;font:外围黑庄;font:外围黑庄;font:外围黑庄;font:一码会员;span:一码中特;td:addfav
+208,5,65,一码中特,td:addfav;font:一码会员;font:外围黑庄;span:一码中特;td:addfav;td:addfav;td:addfav;span:一码中特
+
+// 中国好声音
+209,5,65,中国好声音,tt:中国好声音;td:二等奖;span:幸运用户 验证码 幸运用户;td:二等奖 二等奖 二等奖 二等奖;span:幸运用户
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Bank Phishing
+//////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+// BOC official site
+301,5,70,boclogo,tt:中国银行;im:boclogo;frm:bocsrch bocsrch;im:boclogin;im:boclogin boclogin;im:95566;cpy@:BOCCC;im:boclogo
+// BOC online-pay
+301,5,60,中国银行,tt:中国银行 网上支付;orderno:alipay;下载:bocclnt;下载:bocclnt;call:95566
+301,5,75,boclogo,tt:中国银行;im:boclogo;frm:bocsrch bocsrch;cpy@:BOCCC;im:boclogo
+301,5,75,boc_logo,im:boc_logo;in:pswd;in:pswd;a:retrieve;a:notice
+//BOC help
+301,5,70,中国银行,tt:中国银行 网上银行 登陆;im:boclogo;phone:boc_fake_phone;phone:boc_fake_phone;call:boc_fake_call;call:boc_fake_call;cpy@:2011boc;icp:030173号
+
+
+// 招行
+302,5,70,cmb,tt:CMB;im:cmblogo;icp:cmb
+302,5,60,一卡通卡号,span:一卡通卡号;span:支付密码;in:pswd;span:有效期;li:客服热线
+
+// ICBC
+303,9,60,工商银行 网上银行,tt:网上银行 网上支付;td:支付卡;td:支付卡;td:网银登陆密码;in:pswd;td:验证码;td:工商银行;td:支付卡;td:工商银行
+303,9,70,工商银行 验证码,tt:工商银行 网上银行 网上支付;alert:验证码 验证码;in:pswd;td:支付密码;td:工商银行
+303,9,75,appicarnumber 工商银行,tt:工商银行,td:工商银行;im:个人网上银行登录;in:appicarnumber appicarnumber;in:pswd;td:工商银行;ICP:icbc
+
+// SDB
+304,5,60,95501,tt:深圳发展银行;im:sdblogo;alert:验证码;alert:验证码;in:pswd pswd pswd;ICP:深圳发展银行;call:95501
+304,5,80,95501,tt:深圳发展银行;im:sdblogo;ICP:深圳发展银行;call:95501
+
+// CCB
+305,5,75,建设银行,tt:建设银行 个人客户;li:客服热线;call:95533;call:95533;in:isearch;im:ccblogo;ICP:建设银行 建设银行;ICP:建设银行;tt:建设银行
+305,5,70,建设银行,tt:建设银行 网上银行;call:95533;div:ccbright;frm:jhform ccbver
+
+
+// GDB
+306,5,60,广东发展银行,tt:广东发展银行 网上支付;orderno:alipay;td:支付账号;td:支付密码;td:支付密码 支付密码
+
+// ABC
+307,5,60,农业银行,tt:网上支付;td:交易金额;span:@abc;ICP:农业银行
+
+// online-pay
+//308,5,60,grwy,tt:grwy;td:zfk;td:mm;in:pswd;td:yzm
+
+// 支付宝
+309,5,75,taobao,tt:tb twxh;li:tbhy;li:zfbhy;lbl:zhm;lbl:aqkj;in:pswd;cpy@:taobao;cpy@:taobao
+
+// CEBBANK
+310,5,70,光大银行,tt:光大 光大银行;call:95595;ICP:光大银行
+
+// 中国民生银行
+311,5,70,民生银行,tt:民生银行 网上支付;in:pswd;in:nmail
+
+// 福建海峡银行
+312,5,70,福建海峡银行,tt:福建海峡银行;a:举报钓鱼网站;div:要闻快报;a:票据业务;im:中国人民银行;ICP:fjhxbank
+
+// 江苏银行
+313,5,80,江苏银行,tt:江苏银行;div:江苏银行信用卡;div:聚宝借记卡;im:96098;ICP:江苏银行 江苏银行
+
+// 南京银行
+314,5,80,南京银行,tt:南京银行;im:商易贷;im:信易贷;im:96400
+
+// 上海农商银行
+315,9,70,上海农商银行,tt:上海农商银行;a:金融便利店;a:如意卡业务;a:金融便利店;a:票据业务;ICP:农商银行;call:962999
+315,9,70,上海农商银行,tt:上海农商银行 网上银行;in:acno;td:notebank;call:962999;ICP:农商银行
+
+// 上海商業銀行
+316,5,70,上海商業銀行,tt:上海商業銀行;a:證券買賣;a:證券買賣;td:茁苗計劃;a:上銀卡;a:企業歲稅通;a:上銀卡;cpy@:上海商業銀行
+
+// 永隆銀行
+317,5,70,永隆銀行,tt:永隆銀行;im:永隆銀行;a:強積金;a:樓宇按揭貸款;a:強積金;span:永隆提款卡;a:投資理財;a:證券買賣
+
+// 創興銀行
+318,5,70,創興銀行,tt:創興銀行;a:強積金;a:強積金;div:創興咭;div:創興咭;div:創興保險;div:創興保險;cpy@:創興銀行
+
+// 中國建設銀行 (亞洲) 股份有限公司
+319,5,80,建設銀行,tt:建設銀行;td:銀聯雙幣;a:人民幣戶口;a:建行(亞洲)信用卡;a:證券買賣;a:樓宇按揭貸款;cpy@:建設銀行
+
+// 華南網路銀行
+320,5,80,華南網路銀行,tt:華南網路銀行;im:hn_logo.gif;td:身分證字號;in:pswd pswd pswd;td:2181-0101;td:hncbcpy
+
+//交通银行
+321,5,70,交通银行,tt:交通银行;span:在线客服;a:票据业务;im:24hrhotline;im:icp_logo.gif;call:95559
+
+//中信银行
+322,5,70,中信银行,tt:中信银行;im:citicjr;im:citicbar;im:小企业;im:私人银行;im:汽车金融
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// 证券钓鱼
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// General Stock
+401,5,60:50,客服人员,td:提前布局;td:全额赔偿;in:pswd;td:客服人员;td:客服人员;td:工商银行;im:315c
+401,5,60:50,客服人员,td:addfav;in:pswd;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;im:315c
+
+// 海通证券
+402,5,50,海通,tt:海通;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:海通;im:315c
+402,5,70,海通,tt:海通;td:addfav;in:pswd;td:客服人员;ICP:海通;im:315c
+402,5,80:75,海通,tt:海通;im:knowhtsec;im:95553;a:彩虹月刊;div:海通新兴成长;a:海通期货;ICP:htsec
+402,5,60,海通,tt:海通;in:pswd;td:客服人员;td:工商银行;td:客服人员;td:提前布局;td:全额赔偿;mq:名单;td:提前布局;td:客服人员;ICP:海通;im:315c
+
+// 国金证券
+403,5,50,国金,tt:国金;td:addfav;in:pswd;td:工商银行;td:客服人员;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国金;im:315c
+403,5,50,国金,tt:国金;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国金;im:315c
+
+// 方正证券
+404,5,50,方正,tt:方正;td:addfav;in:pswd;td:客服人员;mq:名单;td:工商银行;td:客服人员;td:提前布局;td:全额赔偿;td:客服人员;ICP:方正;im:315c
+404,5,50,方正,tt:方正;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:方正;im:315c
+
+// 华林证券
+405,5,50,华林,tt:华林;td:addfav;in:pswd;td:客服人员;td:工商银行;td:提前布局;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华林;im:315c
+405,5,50,华林,tt:华林;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华林;im:315c
+
+// 安信证券
+406,5,60,安信,tt:安信;td:addfav;in:pswd;td:客服人员;td:工商银行;td:全额赔偿;td:客服人员;ICP:安信;im:315c
+406,5,50,安信,tt:安信;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:安信;im:315c
+
+// 国信证券
+407,5,60,国信,tt:国信;td:addfav;in:pswd;td:客服人员;td:工商银行;td:客服人员;td:提前布局;td:全额赔偿;ICP:国信;im:315c
+407,5,50,国信,tt:国信;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国信;im:315c
+
+// 中信证券
+408,5,50,中信证券,tt:中信证券;in:pswd;td:客服人员;td:工商银行;mq:名单;td:客服人员;td:提前布局;td:全额赔偿;td:客服人员;ICP:中信证券;im:315c
+408,5,50,中信证券,tt:中信证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中信证券;im:315c
+
+// 招商证券
+409,5,60,招商,tt:招商;td:addfav;in:pswd;td:客服人员;mq:名单;td:工商银行;td:客服人员;ICP:招商;im:315c
+409,5,50,招商,tt:招商;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:招商;im:315c
+
+// 华泰证券
+410,5,60,华泰证券,tt:华泰证券;td:addfav;in:pswd;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;td:客服人员;ICP:华泰证券;im:315c
+410,5,50,华泰证券,tt:华泰证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华泰证券;im:315c
+
+// 齐鲁证券
+411,5,60,齐鲁,tt:齐鲁;td:addfav;in:pswd;td:客服人员;td:全额赔偿;mq:名单;td:工商银行;td:客服人员;ICP:齐鲁;im:315c
+411,5,50,齐鲁,tt:齐鲁;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:齐鲁;im:315c
+
+// 国泰君安证券
+412,5,50,国泰君安,tt:国泰君安;td:addfav;in:pswd;td:客服人员;td:工商银行;mq:名单;td:提前布局;td:全额赔偿;td:客服人员;ICP:gtja;im:315c
+412,5,50,国泰君安,tt国泰君安;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国泰君安;im:315c
+
+// 广发证券
+413,5,60,广发,tt:广发;td:addfav;in:pswd;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:广发;im:315c
+413,5,50,广发,tt:广发;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:广发;im:315c
+
+// 光大证券
+414,5,50,光大,tt:光大;td:addfav;in:pswd;td:客服人员;td:工商银行;td:客服人员;td:提前布局;td:全额赔偿;td:客服人员;ICP:光大;im:315c
+414,5,50,光大,tt:光大;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:光大;im:315c
+
+// 银河证券
+415,5,50,银河,tt:银河;td:addfav;in:pswd;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:银河;im:315c
+415,5,50,银河,tt:银河;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:银河;im:315c
+
+// 长江证券
+416,5,50,长江,tt:长江;td:addfav;in:pswd;td:客服人员;td:工商银行;mq:名单;td:提前布局;td:全额赔偿;td:客服人员;ICP:长江;im:315c
+416,5,50,长江,tt:长江;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:长江;im:315c
+
+// 东方证券
+417,5,50,东方,tt:东方;in:pswd;td:addfav;in:pswd;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:东方;im:315c
+417,5,50,东方,tt:东方;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:东方;im:315c
+
+// 申银万国证券
+418,5,50,申银万国,tt:申银万国;td:addfav;in:pswd;td:客服人员;td:工商银行;mq:名单;td:提前布局;td:全额赔偿;td:客服人员;ICP:申银万国;im:315c
+418,5,50,申银万国,tt:申银万国;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:申银万国;im:315c
+
+// 宏源证券
+419,5,60,宏源,tt:宏源;in:pswd;td:客服人员;td:客服人员;td:工商银行;td:提前布局;td:客服人员;ICP:宏源;im:315c
+419,5,50,宏源,tt:宏源;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:宏源;im:315c
+
+// 东北证券
+420,5,50,东北,tt:东北;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:东北;im:315c
+
+// 航天证券
+421,5,50,航天,tt:航天;in:pswd;td:addfav;td:客服人员;td:客服人员;td:提前布局;td:全额赔偿;td:工商银行;td:客服人员;ICP:航天;im:315c
+
+// 华鑫证券
+422,5,50,华鑫,tt:华鑫;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华鑫;im:315c
+
+// 北京高华证券
+423,5,50,北京高华,tt:北京高华;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:北京高华;im:315c
+
+// 高盛高华证券
+424,5,50,高盛高华,tt:高盛高华;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:高盛高华;im:315c
+
+// 国开证券
+425,5,50,国开,tt:国开;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国开;im:315c
+
+// 民生证券
+426,5,50,民生证券,tt:民生证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:民生证券;im:315c
+
+// 瑞银证券
+427,5,50,瑞银,tt:瑞银;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:瑞银;im:315c
+
+// 新时代证券
+428,5,50,新时代,tt:新时代;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:新时代;im:315c
+
+// 中德证券
+429,5,50,中德,tt:中德;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中德;im:315c
+
+// 中国民族证券
+430,5,50,民族,tt:民族;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:民族;im:315c
+
+// 中信建投证券
+431,5,50,中信建投,tt:中信建投;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中信建投;im:315c
+
+// 东兴证券
+432,5,50,东兴,tt:东兴;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:东兴;im:315c
+
+// 国都证券
+433,5,50,国都,tt:国都;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国都;im:315c
+
+// 华融证券
+434,5,50,华融,tt:华融;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华融;im:315c
+
+// 瑞信方正证券
+435,5,50,瑞信方正,tt:瑞信方正;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:瑞信方正;im:315c
+
+// 首创证券
+436,5,50,首创,tt:首创;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:首创;im:315c
+
+// 信达证券
+437,5,50,信达,tt:信达;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:信达;im:315c
+
+// 中国国际金融有限公司
+438,5,50,国际金融,tt:国际金融;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国际金融;im:315c
+
+// 渤海证券
+439,5,50,渤海,tt:渤海;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:渤海;im:315c
+
+// 财达证券
+440,5,50,财达,tt:财达;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:财达;im:315c
+
+// 大同证券
+441,5,50,大同,tt:大同;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:大同;im:315c
+
+// 山西证券
+442,5,50,山西,tt:山西;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:山西;im:315c
+
+// 诚浩证券
+443,5,50,诚浩,tt:诚浩;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:诚浩;im:315c
+
+// 中天证券
+444,5,50,中天,tt:中天;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中天;im:315c
+
+// 恒泰长财证券
+445,5,50,恒泰长财,tt:恒泰长财;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:恒泰长财;im:315c
+
+// 爱建证券
+446,5,50,爱建,tt:爱建;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:爱建;im:315c
+
+// 华宝证券
+447,5,50,华宝,tt:华宝;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华宝;im:315c
+
+// 财富里昂证券
+448,5,50,财富里昂,tt:财富里昂;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:财富里昂;im:315c
+
+// 德邦证券
+449,5,50,德邦,tt:德邦;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:德邦;im:315c
+
+// 海际大和证券
+450,5,50,海际大和,tt:海际大和;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:海际大和;im:315c
+
+// 上海证券
+451,5,50,上海证券,tt:上海证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:上海证券;im:315c
+
+// 中银国际证券
+452,5,50,中银国际,tt:中银国际;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中银国际;im:315c
+
+// 东海证券
+453,5,50,东海,tt:东海;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:东海;im:315c
+
+// 国联证券
+454,5,50,国联,tt:国联;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国联;im:315c
+
+// 南京证券
+455,5,50,南京证券,tt:南京证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:南京证券;im:315c
+
+// 东吴证券
+456,5,50,东吴,tt:东吴;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:东吴;im:315c
+
+// 财通证券
+457,5,50,财通,tt:财通;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:财通;im:315c
+
+// 中信金通证券
+458,5,50,中信金通,tt:中信金通;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中信金通;im:315c
+
+// 浙商证券
+459,5,50,浙商,tt:浙商;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:浙商;im:315c
+
+// 国元证券
+460,5,50,国元,tt:国元;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国元;im:315c
+
+// 华安证券
+461,5,50,华安,tt:华安;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华安;im:315c
+
+// 广发华福证券
+462,5,50,广发华福,tt:广发华福;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:广发华福;im:315c
+
+// 兴业证券
+463,5,50,兴业,tt:兴业;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:兴业;im:315c
+
+// 国盛证券
+464,5,50,国盛,tt:国盛;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国盛;im:315c
+
+// 中航证券
+465,5,50,中航,tt:中航;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中航;im:315c
+
+// 中原证券
+466,5,50,中原,tt:中原;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中原;im:315c
+
+// 恒泰证券
+467,5,50,恒泰,tt:恒泰;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:恒泰;im:315c
+
+// 日信证券
+468,5,50,日信,tt:日信;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:日信;im:315c
+
+// 江海证券
+469,5,50,江海,tt:江海;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:江海;im:315c
+
+// 天风证券
+470,5,50,天风,tt:天风;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:天风;im:315c
+
+// 财富证券
+471,5,50,财富证券,tt:财富证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:财富证券;im:315c
+
+// 湘财证券
+472,5,50,湘财,tt:湘财;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:湘财;im:315c
+
+// 东莞证券
+473,5,50,东莞证券,tt:东莞证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:东莞证券;im:315c
+
+// 广州证券
+474,5,50,广州证券,tt:广州证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:广州证券;im:315c
+
+// 联讯证券
+475,5,50,联讯,tt:联讯;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:联讯;im:315c
+
+// 众成证券
+476,5,50,众成,tt:众成;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:众成;im:315c
+
+// 万联证券
+477,5,50,万联,tt:万联;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:万联;im:315c
+
+// 国海证券
+478,5,50,国海,tt:国海;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:国海;im:315c
+
+// 金元证券
+479,5,50,金元,tt:金元;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:金元;im:315c
+
+// 万和证券
+480,5,50,万和,tt:万和;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:万和;im:315c
+
+// 川财证券
+481,5,50,川财,tt:川财;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:川财;im:315c
+
+// 和兴证券
+482,5,50,和兴,tt:和兴;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:和兴;im:315c
+
+// 华西证券
+483,5,50,华西证券,tt:华西证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华西证券;im:315c
+
+// 西南证券
+484,5,50,西南证券,tt:西南证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:西南证券;im:315c
+
+// 华创证券
+485,5,50,华创,tt:华创;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华创;im:315c
+
+// 红塔证券
+486,5,50,红塔,tt:红塔;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:红塔;im:315c
+
+// 太平洋证券
+487,5,50,太平洋,tt:太平洋;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:太平洋;im:315c
+
+// 西藏同信证券
+488,5,50,西藏同信,tt:西藏同信;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:西藏同信;im:315c
+
+// 开源证券
+489,5,50,开源,tt:开源;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:开源;im:315c
+
+// 中邮证券
+490,5,50,中邮,tt:中邮;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中邮;im:315c
+
+// 西部证券
+491,5,50,西部证券,tt:西部证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:西部证券;im:315c
+
+// 华龙证券
+492,5,50,华龙,tt:华龙;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华龙;im:315c
+
+// 天源证券
+493,5,50,天源,tt:天源;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:天源;im:315c
+
+// 第一创业证券
+494,5,50,第一创业,tt:第一创业;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:第一创业;im:315c
+
+// 华泰联合证券
+495,5,50,华泰联合,tt:华泰联合;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:华泰联合;im:315c
+
+// 平安证券
+496,5,50,平安,tt:平安;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:平安;im:315c
+
+// 五矿证券
+497,5,50,五矿,tt:五矿;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:五矿;im:315c
+
+// 英大证券
+498,5,50,英大,tt:英大;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:英大;im:315c
+
+// 中国建银投资证券
+499,5,50,建银投资,tt:建银投资;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:建银投资;im:315c
+
+// 长城证券
+4100,5,50,长城,tt:长城;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:长城;im:315c
+
+// 世纪证券
+4101,5,50,世纪,tt:世纪;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:世纪;im:315c
+
+// 银泰证券
+4102,5,50,银泰,tt:银泰;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:银泰;im:315c
+
+// 中山证券
+4103,5,50,中山证券,tt:中山证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中山证券;im:315c
+
+// 厦门证券
+4104,5,50,厦门证券,tt:厦门证券;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:厦门证券;im:315c
+
+// 大通证券
+4105,5,50,大通,tt:大通;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:大通;im:315c
+
+// 中信万通证券
+4106,5,50,中信万通,tt:中信万通;td:addfav;td:客服人员;td:工商银行;td:提前布局;td:全额赔偿;mq:名单;td:客服人员;ICP:中信万通;im:315c
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// AirLine Phishing
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// General
+501,5,60,南航,tt:南航;td:南航;td:南航;td:特价机票;in:pswd pswd;td:国航;td:南航;td:东航;td:国航;td:南航;td:东航;td:南航
+501,5,60,东方航空,tt:东方 东方航空;td:addfav;td:特价机票;td:特价机票;td:南方航空;td:南航;td:南航;td:国航;td:国航;td:南航;td:东航;td:特价机票;td:东方航空
+501,5,60,国航,tt:国航;td:国航;td:国航;td:特价机票;in:pswd pswd;td:国航;td:南航;td:东航;td:国航;td:南航;td:东航;td:国航
+501,5,60,特价机票,td:特价机票;in:pswd pswd;in:pswd;td:东方航空;td:东航;td:国航;td:南航;td:东航
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// Other
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Express
+//601,5,65,express,tt:express;td:danbao;ta:fakemsg
+
+// EMS
+//602,5,65,ems,tt:ems;ta:fakemsg;span:homedlv
+
+// Online-Game Transaction
+//603,5,65,localhost,tt:游戏;alert:验证码;in:pswd;td:担保;a:localhost;a:localhost;a:localhost;a:localhost;a:localhost;a:localhost;a:localhost;a:localhost;a:localhost;a:localhost;a:localhost;a:localhost;td:工商银行;a:localhost,td:担保;
+
+// Page jump
+//604,5,80,360浏览器,a:360浏览器;a:360动态;a:扣扣保镖;a:360安全卫士;a:360软件管家
+//605,5,80,蔚芸,span:智能产业;span:多元化解决;div:推荐产品;a:康普;a:蔚芸
