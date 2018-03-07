@@ -6,16 +6,19 @@ def classify(action, name_list, input_dir, output_dir):
         os.makedirs(output_dir)
     with open(name_list, "r") as list_handle:
         for name in list_handle.readlines():
-            print name.rstrip()
-            for item_name in os.listdir(input_dir):
-                if name.rstrip() == item_name:
-                    if action == "--move":
-                        shutil.move(os.path.join(input_dir, item_name), os.path.join(output_dir, item_name))
-                    elif action == "--copy":
-                        if os.path.isfile(os.path.join(input_dir, item_name)):
-                            shutil.copy(os.path.join(input_dir, item_name), os.path.join(output_dir, item_name))
-                        elif os.path.isdir(os.path.join(input_dir, item_name)):
-                            shutil.copytree(os.path.join(input_dir, item_name), os.path.join(output_dir, item_name))
+            # print name.rstrip()
+            for root, dirs, files in os.walk(input_dir):
+                for item_name in files:
+                    if name.rstrip() == item_name:
+                        file_path = os.path.join(root,item_name)
+                        print('Find file: ' + file_path)
+                        if action == "--move":
+                            shutil.move(file_path, output_dir)
+                        elif action == "--copy" and os.path.isfile(file_path):
+                            shutil.copy2(file_path, output_dir)
+                        else:
+                            print(help_msg)
+                            exit(-1)
 
 
 
@@ -31,15 +34,8 @@ Note:
             ...
             file_name_n
 
-    2. input_dir does not contain sub-directory, and structure looks like:
-        input_dir
-            |- file_name_1
-            |- file_name_2
-            |- ...
-            |- file_name_m
-
+    2. input_dir is a directory which includes samples
 """
-
 
 if __name__ == "__main__":
     print "length of sys.argv = " + str(len(sys.argv))
